@@ -44,7 +44,7 @@
 - Ad: GA- Photoshop görüntü düzenleme
 - Kısa açıklama : Siyah-beyaz atmosfer üzerinde seçili karakterlerin renkli bırakıldığı dramatik sahne düzenleme çalışmasıdır. Geçmiş fırçası ve ton düzenlemeleriyle odak noktasının güçlendirilmesi sağlanmıştır.
 - Kullanılan araçlar: Adobe Photoshop 8, History Brush (Geçmiş Fırçası) 9, Siyah-Beyaz / Tonlama Ayarları 8, Fırça (Brush) Aracı 8, Katmanlar ve Maskeler 7, Zoom / Yakınlaştırma Aracı 7
-- Görsel dosya adı: pig15.jpeg
+- Görsel dosya adı: pic15.jpeg
 
 
 

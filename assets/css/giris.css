@@ -82,10 +82,3 @@ html,body{height:100%}
 /* Çadır kapısı üstündeki görünmez link: yalnızca klavye odağında halka görünür */
 .giris-kapi{position:absolute;display:block;border-radius:50% 50% 0 0/40% 40% 0 0}
 .giris-kapi:focus-visible,.giris-bar a:focus-visible{outline:3px solid #FFE7A3;outline-offset:4px}
-
-/* tr/index.html: base.css'teki "svg{max-width:100%}" reset'i 2560px zemini sıkıştırmasın */
-#sahne svg{max-width:none}
-
-/* tr/index.html: sitenin ortak navbar'ı (components.js) sahnenin üstünde yüzer,
-   referanstaki gibi sahneyi aşağı itmez */
-body[data-sayfa="index"] > .ust-bar{position:fixed;left:0;right:0}

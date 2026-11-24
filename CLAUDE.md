@@ -38,7 +38,7 @@ content/ICERIK.md          → tüm metinler buradan alınır (kendin metin uydu
 ## Konsept
 Ziyaretçi, bir bilgisayarın içindeki dijital bir sirke giriyor. Görünüm: **animasyon filmi gibi akıcı 2D** — gradyanlı ışık, hacim veren gölgeler, parlama, sürekli ama yumuşak hareket. Düz/çocukça "sticker" görünümü, kalın siyah kenarlıklar ve düz tek renk alanlar YASAK. Maskot SADECE `assets/img/maskot/` içindeki kullanıcının kendi karakteri; başka dizi/çizgi film karakteri, logo veya isim kullanılmaz.
 
-Görsel referans: `referans/giris-sahnesi.html` — onaylanmış giriş sahnesinin BİREBİR kodu. Bu sahne yeniden çizilmez, kopyalanır; içindeki renk, ölçü, açı, koordinat ve süre değerleri değiştirilmez. Diğer sayfalar bu dosyadaki gradyanları, ışıkları, fontları ve zemini aynen kullanır. `referans/` içinde onaylı bir kod varsa her zaman o kopyalanır.
+Görsel referanslar: `referans/anasayfa.html` (giriş + kaydırma + sirkin içi, ONAYLI) ve `referans/giris-sahnesi.html` — onaylanmış giriş sahnesinin BİREBİR kodu. Bu sahne yeniden çizilmez, kopyalanır; içindeki renk, ölçü, açı, koordinat ve süre değerleri değiştirilmez. Diğer sayfalar bu dosyadaki gradyanları, ışıkları, fontları ve zemini aynen kullanır. `referans/` içinde onaylı bir kod varsa her zaman o kopyalanır.
 
 Mekân eşlemesi: Anasayfa = çadırın girişi → içi · Hakkımda = sanatçı afişi + cambaz ipi · Projeler = karo zeminli sahnede döner podyum · Galeri = karo duvar · Blog = duyuru panosu · İletişim = gişe.
 
@@ -54,6 +54,9 @@ Mekân eşlemesi: Anasayfa = çadırın girişi → içi · Hakkımda = sanatç�
 **Tipografi**
 - Büyük başlıklar: **Alfa Slab One** (sade kalın slab serif, katman/gölge yığını YOK). Dolgu `linear-gradient(180deg,#FFF6D6 10%,#FFC24B 50%,#FF5A6E 95%)` + `background-clip:text`; parlama `drop-shadow(0 6px 0 #3A0B52) drop-shadow(0 0 26px rgba(255,170,80,.55))`.
 - Ad-soyad başlığında 2–3 harfte bordo leke: düzensiz oval, bir ucu fırça gibi çekilmiş sivri iz, yanında küçük damla, hafif açık iç ışık; her harfte değil. Inline SVG, harfe göre konumlu.
+- Bölüm başlıkları (Merhaba ben…, Galeri vb.): **Abril Fatface** (kalın gövde, ince serif), aynı altın→pembe gradyan dolgu ve parlama. Üstünde küçük tema etiketi (ör. "KARO DUVAR").
+- Projeler ile ilgili her yazı: pikselli fontlar — başlık/ad **Pixelify Sans**, etiket/açıklama **VT323** (`> PROJELER.EXE_` gibi komut satırı etiketleri).
+- Footer: "roze's world" **Rubik Beastly** (şekilsiz, absürt harfler), gradyanlı; altında © satırı. Footer'da link YOK.
 - Küçük başlık/etiket: Bungee, geniş harf aralığı, pembe parlama.
 - Gövde: Space Grotesk.
 
@@ -68,11 +71,12 @@ Mekân eşlemesi: Anasayfa = çadırın girişi → içi · Hakkımda = sanatç�
 **Hareket**: akıcı ve sürekli ama sakin; ease-in-out, sahne geçişleri 600–900ms, UI 200–400ms. Sert/zıplayan "oyuncak" hareketleri yok. `prefers-reduced-motion`'da sürekli animasyonlar durur.
 
 ## Global bileşenler
-- **Maskot (kullanıcının karakteri)**: `assets/img/maskot/on.png`, `yan.png`, `arka.png` (şeffaf, ≤160px, WebP'ye çevrilir). Navbarda yaşar: boştayken önden süzülür; imleç yaklaşınca / mobilde dokununca yan görünüme geçip gideceği yöne çevrilir ve navbar boyunca kaçar, durunca önden döner; ara sıra logonun arkasına saklanır (arka görünüm). Linke tıklanınca linke uçup yazıyı "yer" ve geri "kusar" (≤700ms, navigasyonu engellemez).
+- **Maskot (kullanıcının karakteri)**: `assets/img/maskot/` görselleri (şeffaf, ≤160px, WebP). Ekrana sabit (`position:fixed`), kaydırırken hep görünür; birkaç saniyede bir ekranın alt kısmında yeni bir yere yürür (gittiği yöne yan görünüm), durunca önden görünür; imleç üstüne gelince/mobilde dokununca hızla ekranın öbür yanına kaçar. Davranış kodu `referans/anasayfa.html` içinde; sadece yer tutucu daire görsellerle değiştirilir.
+- **Logo**: `assets/img/logo/` (SVG tercih, yoksa şeffaf PNG); navbardaki "[ADIN] SİRKİ" yazısının yerine.
 - **Mobil menü**: tam ekran perde iner, linkler sırayla düşer.
 - **Perde geçişi**: iç linke tıklayınca kadife perde kapanır → sayfa değişir → yeni sayfada açılır.
 - **Dil değiştirici**: navbarda TR · EN hap butonu (pembe→turuncu gradyan); aynı dosyayı diğer klasörde açar. `<html lang>` doğru.
-- **Footer**: ampul şeridi + sosyal linkler, gün batımı tonlarında.
+- **Footer**: karo zeminden gradyanla geçilen koyu mor alan, "roze's world" + © 2026 satırı. Link yok.
 
 ## Çalışma kuralları (token tasarrufu)
 - Sadece görevde adı geçen dosyaları oku/düzenle. Tüm projeyi tarama.

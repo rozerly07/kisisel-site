@@ -13,7 +13,7 @@
 
 ## Anasayfa
 - Hoş geldin cümlesi: İNANILMAZ DİJİTAL SİRKE HOŞGELDİNİZ
-- Hakkımda özeti: Ben Roze, İsmimin anlamı güneş ışığı demektir. Sinemaya gitmeye bayılırım. Ama her filmi izlemem, sinmada izlenecek filmler ve evde izlenecek filmler vardır. Filmler konusunda en sevdiğim şey referans yapabilmektir. En sevdiğim anime Jojo, en sevdiğim manga Veil, en sevdiğim sanatçılar; van gogh, monet ve salvador dali. Sevmediğim şeyler ise tekdüzelik, moduma uymayan şarkıları sonun kadar dinlemek zorunda olmak, istemediğim gürültüye mağruz kalmak.  
+- Hakkımda özeti: Ben Roze, İsmimin anlamı güneş ışığı demektir. Sinemaya gitmeye bayılırım. Ama her filmi izlemem, sinemada izlenecek filmler ve evde izlenecek filmler vardır. Filmler konusunda en sevdiğim şey referans yapabilmektir. En sevdiğim anime Jojo, en sevdiğim manga Veil, en sevdiğim sanatçılar; van gogh, monet ve salvador dali. Sevmediğim şeyler ise tekdüzelik, moduma uymayan şarkıları sonun kadar dinlemek zorunda olmak, istemediğim gürültüye maruz kalmak.  
 
 ## Hakkımda
 - Vesikalık dosya adı : vesika.png
@@ -53,7 +53,7 @@
 - love.jpg — Kalabalık ve ruhsuz bir şehirde bile içinizi ısıtabilecek soğuk olan ama sıcak hissettiren şeyler görebilirsiniz. Bakmayı bilirseniz.
 - milliphoto.jpg — LA ya da hawai vibe'larına bayılırım. Bu yerlerde takılmak harika hissettiriyor. 
 - gunesdio.jpg — Adımın anlamı olan güneş ışığı ve en sevdiğim animenin bir karakteri. Harika bir kare ヾ(≧▽≦*)o
-- photohyun.jpg — En sevdeğim şeylerden biri de anı yakalamıktır. Gülümseyin!
+- photohyun.jpg — En sevdiğim şeylerden biri de anı yakalamıktır. Gülümseyin!
 - roses.jpg — İsmimin fransızca karşılığını sanırım herkes biliyordur. Benim en sevdiğim çiçeklerden biridir kendisi
 
 ## Blog (3 yazı)

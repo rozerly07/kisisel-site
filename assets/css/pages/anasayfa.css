@@ -86,7 +86,7 @@ html{background:#140629}
 .vt{font-family:VT323,monospace}
 @keyframes walk{0%{transform:translateX(0) scaleX(1)}46%{transform:translateX(calc(100vw - 180px)) scaleX(1)}50%{transform:translateX(calc(100vw - 180px)) scaleX(-1)}96%{transform:translateX(0) scaleX(-1)}100%{transform:translateX(0) scaleX(1)}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes step{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-10px) rotate(5deg)}}
+/* @keyframes step → assets/css/giris.css (maskot iki sayfada ortak) */
 .lb{font-family:Bungee,Impact,sans-serif;letter-spacing:6px;color:#FFE7C2;text-shadow:0 0 16px rgba(255,120,160,.7)}
 /* kaydırma hareketi bitince sirkin içi, son karenin üstüne aşağıdan kayarak gelir: ek yer görünmez */
 #giris-iz{z-index:1}

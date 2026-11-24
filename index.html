@@ -10,19 +10,21 @@
 <link rel="alternate" hreflang="tr" href="tr/index.html">
 <link rel="alternate" hreflang="en" href="en/index.html">
 <!-- ONAYLI TASARIM: referans/giris-sahnesi.html'in birebir kopyası. Görünümü DEĞİŞTİRME. -->
+<link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/giris.css">
+<link rel="stylesheet" href="assets/css/menu-perde.css">
+<!-- components.js: yalnızca mobil menü + perde geçişi (data-bilesen="menu-perde") -->
+<script src="assets/js/components.js"></script>
 </head>
-<body>
+<body data-bilesen="menu-perde" data-menu-kok="tr/" data-menu-gise="yok">
 <div id="sahne-kap">
-  <header class="giris-bar" style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 22px;border-radius:999px;background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(14px);box-shadow:0 10px 40px rgba(10,0,40,.45)">
-    <a href="#" style="font-family:Bungee,Impact,sans-serif;font-size:18px;text-decoration:none;background:linear-gradient(90deg,#FFD36B,#FF6FA3);-webkit-background-clip:text;background-clip:text;color:transparent"><img src="assets/img/logo/logo.webp" alt="Rozerin AKTAŞ" width="52" height="36" style="display:block;height:36px;width:auto"></a>
+  <header class="giris-bar" data-menu-dugme-yeri style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 22px;border-radius:999px;background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(14px);box-shadow:0 10px 40px rgba(10,0,40,.45)">
+    <a href="index.html" style="font-family:Bungee,Impact,sans-serif;font-size:18px;text-decoration:none;background:linear-gradient(90deg,#FFD36B,#FF6FA3);-webkit-background-clip:text;background-clip:text;color:transparent"><img src="assets/img/logo/logo.webp" alt="Rozerin AKTAŞ" width="52" height="36" style="display:block;height:36px;width:auto"></a>
     <nav aria-label="Ana menü" style="display:flex;gap:28px;font-weight:500;font-size:15px">
-      <a href="#" style="text-decoration:none">Anasayfa</a><a href="#" style="text-decoration:none">Hakkımda</a><a href="#" style="text-decoration:none">Projeler</a><a href="#" style="text-decoration:none">Galeri</a><a href="#" style="text-decoration:none">Blog</a><a href="#" style="text-decoration:none">İletişim</a>
+      <a href="tr/index.html" style="text-decoration:none">Anasayfa</a><a href="tr/about.html" style="text-decoration:none">Hakkımda</a><a href="tr/projects.html" style="text-decoration:none">Projeler</a><a href="tr/gallery.html" style="text-decoration:none">Galeri</a><a href="tr/blog.html" style="text-decoration:none">Blog</a><a href="tr/contact.html" style="text-decoration:none">İletişim</a>
     </nav>
     <span style="font-size:14px;font-weight:700;padding:6px 14px;border-radius:999px;background:linear-gradient(90deg,#FF4D6D,#FF9A3D)"><a href="tr/index.html" hreflang="tr" lang="tr" style="text-decoration:none">TR</a> <span aria-hidden="true" style="color:#FFF3DD">·</span> <a href="en/index.html" hreflang="en" lang="en" style="text-decoration:none">EN</a></span>
   </header>
-  <!-- MASKOT YERİ: Claude Code bu kutuyu assets/img/maskot/ görselleriyle değiştirecek -->
-  <div style="position:absolute;top:66px;left:50%;margin-left:50px;z-index:6;width:76px;height:76px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.9),rgba(190,230,255,.35) 45%,rgba(120,180,255,.15) 70%);border:2px dashed rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;text-align:center;font-size:10px;font-weight:700;color:#1A0B33;animation:bob 2.6s ease-in-out infinite">SENİN<br>KARAKTERİN</div>
 <div id="sahne" style="width:1280px;height:800px;position:absolute;left:50%;top:0;transform-origin:50% 0;overflow:visible;font-family:'Space Grotesk',system-ui,sans-serif;color:#FFF3DD;">
 
   <!-- yıldız tozu -->
@@ -106,6 +108,13 @@
   <a class="giris-kapi" href="tr/index.html" hreflang="tr" aria-label="Sirke gir" style="left:586px;top:604px;width:108px;height:137px"></a>
 </div>
 </div>
+<!-- MASKOT (assets/img/maskot): ekrana sabit, kendi dolaşır, imleç dokununca kaçar -->
+  <div id="maskot" style="position:fixed;left:12vw;top:85vh;width:90px;height:90px;margin:-45px 0 0 -45px;z-index:20;cursor:pointer;transition:left 2.8s cubic-bezier(.3,.8,.3,1),top 2.8s cubic-bezier(.3,.8,.3,1)" aria-hidden="true">
+    <div class="maskot-yon" style="width:90px;height:90px;transition:transform .25s">
+      <img class="maskot-gorsel" src="assets/img/maskot/on.webp" alt="" width="90" height="90" style="display:block;width:90px;height:90px;object-fit:contain;animation:step .6s ease-in-out infinite">
+    </div>
+  </div>
 <script src="assets/js/giris.js"></script>
+<script src="assets/js/maskot.js"></script>
 </body>
 </html>

@@ -133,16 +133,48 @@
       '</div>';
   }
 
+  function menuDugmeHTML(m) {
+    return '<button class="menu-dugme" type="button" aria-expanded="false" aria-controls="mobil-menu" aria-label="' + m.menuAc + '">' +
+      '<span class="menu-dugme__cubuk" aria-hidden="true"></span>' +
+      '<span class="menu-dugme__cubuk" aria-hidden="true"></span>' +
+      '<span class="menu-dugme__cubuk" aria-hidden="true"></span>' +
+    '</button>';
+  }
+
+  /* Mobil menü perdesi.
+     s.kok: linklerin önüne eklenecek klasör (kök gişede "tr/")
+     s.gise: false → "Gişeye dön" linki yok (zaten gişedeyken)
+     s.kapat: true → menünün içinde kendi kapatma butonu (navbar menünün
+              altında kalan sayfalar: giriş sahnesi + anasayfa) */
+  function mobilMenuHTML(m, aktif, s) {
+    s = s || {};
+    var kok = s.kok || '';
+    var mobilLinkler = '';
+    SAYFALAR.forEach(function (id, i) {
+      var akim = id === aktif ? ' aria-current="page"' : '';
+      mobilLinkler += '<li style="--i:' + i + '"><a class="mobil-menu__link" href="' + kok + id + '.html"' + akim + '>' + kacis(m.nav[i]) + '</a></li>';
+    });
+    return '<div class="mobil-menu kadife" id="mobil-menu" hidden>' +
+        (s.kapat
+          ? '<button class="menu-dugme menu-kapat" type="button" aria-label="' + m.menuKapat + '">' +
+              '<span class="menu-dugme__cubuk" aria-hidden="true"></span>' +
+              '<span class="menu-dugme__cubuk" aria-hidden="true"></span>' +
+            '</button>'
+          : '') +
+        '<nav aria-label="' + m.anaMenu + '"><ul class="mobil-menu__liste">' + mobilLinkler + '</ul></nav>' +
+        (s.gise === false ? '' : '<p class="mobil-menu__alt"><a href="../index.html">' + m.gise + '</a></p>') +
+        '<div class="sacak" aria-hidden="true"></div>' +
+      '</div>';
+  }
+
   function ustBarHTML(m, d, aktif) {
     var linkler = '';
-    var mobilLinkler = '';
     SAYFALAR.forEach(function (id, i) {
       var etiket = m.nav[i];
       var akim = id === aktif ? ' aria-current="page"' : '';
       linkler += '<li><a class="ana-nav__link" href="' + id + '.html"' + akim + '>' +
         '<span class="gizli">' + kacis(etiket) + '</span>' +
         '<span class="harfler" aria-hidden="true">' + harfleriBol(etiket) + '</span></a></li>';
-      mobilLinkler += '<li style="--i:' + i + '"><a class="mobil-menu__link" href="' + id + '.html"' + akim + '>' + kacis(etiket) + '</a></li>';
     });
 
     return '<a class="atla-link" href="#icerik">' + m.atla + '</a>' +
@@ -153,20 +185,11 @@
           '</a>' +
           '<nav class="ana-nav" aria-label="' + m.anaMenu + '"><ul class="ana-nav__liste">' + linkler + '</ul></nav>' +
           dilAnahtariHTML(m, d) +
-          '<button class="menu-dugme" type="button" aria-expanded="false" aria-controls="mobil-menu">' +
-            '<span class="gizli">' + m.menuAc + '</span>' +
-            '<span class="menu-dugme__cubuk" aria-hidden="true"></span>' +
-            '<span class="menu-dugme__cubuk" aria-hidden="true"></span>' +
-            '<span class="menu-dugme__cubuk" aria-hidden="true"></span>' +
-          '</button>' +
+          menuDugmeHTML(m) +
         '</div>' +
         maskotHTML() +
       '</header>' +
-      '<div class="mobil-menu kadife" id="mobil-menu" hidden>' +
-        '<nav aria-label="' + m.anaMenu + '"><ul class="mobil-menu__liste">' + mobilLinkler + '</ul></nav>' +
-        '<p class="mobil-menu__alt"><a href="../index.html">' + m.gise + '</a></p>' +
-        '<div class="sacak" aria-hidden="true"></div>' +
-      '</div>';
+      mobilMenuHTML(m, aktif);
   }
 
   function footerHTML(m) {
@@ -449,7 +472,9 @@
   var menuGizleZamani = null;
 
   function menuOdaklanabilir() {
-    return [menuDugme].concat(Array.from(menu.querySelectorAll('a[href]')));
+    var ic = Array.from(menu.querySelectorAll('button, a[href]'));
+    // menünün kendi kapatma butonu varsa navbar butonu perdenin altında kalır: döngüye alma
+    return menu.querySelector('.menu-kapat') ? ic : [menuDugme].concat(ic);
   }
 
   function menuTus(e) {
@@ -469,7 +494,7 @@
     void menu.offsetWidth;
     menu.classList.add('is-acik');
     menuDugme.setAttribute('aria-expanded', 'true');
-    menuDugme.querySelector('.gizli').textContent = m.menuKapat;
+    menuDugme.setAttribute('aria-label', m.menuKapat);
     html.classList.add('menu-acik');
     document.addEventListener('keydown', menuTus);
     var ilkLink = menu.querySelector('a[href]');
@@ -481,22 +506,24 @@
     var m = METIN[dil()];
     menu.classList.remove('is-acik');
     menuDugme.setAttribute('aria-expanded', 'false');
-    menuDugme.querySelector('.gizli').textContent = m.menuAc;
+    menuDugme.setAttribute('aria-label', m.menuAc);
     html.classList.remove('menu-acik');
     document.removeEventListener('keydown', menuTus);
     menuGizleZamani = setTimeout(function () { menu.hidden = true; }, azHareket() ? 0 : 720);
     if (odakGeri) menuDugme.focus();
   }
 
-  function menuKur() {
+  function menuKur(genisSorgu) {
     menu = document.getElementById('mobil-menu');
-    menuDugme = document.querySelector('.menu-dugme');
+    menuDugme = document.querySelector('.menu-dugme:not(.menu-kapat)');
     if (!menu || !menuDugme) return;
     menuDugme.addEventListener('click', function () {
       if (menuDugme.getAttribute('aria-expanded') === 'true') menuKapat(true);
       else menuAc();
     });
-    window.matchMedia('(min-width: 960px)').addEventListener('change', function (q) {
+    var kapat = menu.querySelector('.menu-kapat');
+    if (kapat) kapat.addEventListener('click', function () { menuKapat(true); });
+    window.matchMedia(genisSorgu || '(min-width: 960px)').addEventListener('change', function (q) {
       if (q.matches) menuKapat(false);
     });
   }
@@ -798,6 +825,25 @@
   function kur() {
     var body = document.body;
     var sayfa = body.getAttribute('data-sayfa') || '';
+
+    /* Yalnızca mobil menü + perde (giriş sahnesi ve anasayfa: kendi navbar,
+       maskot ve footer'ları referans koddan gelir).
+       <body data-bilesen="menu-perde" data-menu-kok="tr/" data-menu-gise="yok">
+       Menü butonu [data-menu-dugme-yeri] öğesinin sonuna eklenir. */
+    if (body.getAttribute('data-bilesen') === 'menu-perde') {
+      var mm = METIN[dil()];
+      var yer = document.querySelector('[data-menu-dugme-yeri]');
+      if (yer) yer.insertAdjacentHTML('beforeend', menuDugmeHTML(mm));
+      var kok = body.getAttribute('data-menu-kok') || '';
+      body.insertAdjacentHTML('beforeend', mobilMenuHTML(mm, kok ? '' : aktifSayfa(), {
+        kok: kok,
+        gise: body.getAttribute('data-menu-gise') !== 'yok',
+        kapat: true
+      }));
+      menuKur('(min-width: 761px)');
+      perdeKur();
+      return;
+    }
 
     if (sayfa !== 'gise') {
       var d = dil();

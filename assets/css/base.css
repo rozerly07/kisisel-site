@@ -203,21 +203,6 @@ input, textarea { caret-color: var(--altin); accent-color: var(--altin); }
 }
 .atla-link:focus { transform: none; color: var(--gece-mor); }
 
-/* ---------- Perde ön kapağı ----------
-   components.js <head> içinde html'e .perde-kapali ekler; perde DOM'a
-   basılana kadar sayfa kadifenin arkasında kalır (titreme olmaz). */
-html.perde-kapali body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: var(--z-perde);
-  background:
-    linear-gradient(180deg, rgba(107, 15, 36, 0) 50%, rgba(58, 11, 82, 0.5) 100%),
-    repeating-linear-gradient(90deg,
-      var(--bordo) 0, var(--cadir-koyu) 2.2rem,
-      var(--cadir-acik) 3rem, var(--cadir-koyu) 3.8rem, var(--bordo) 6rem);
-}
-
 /* ---------- Az hareket ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

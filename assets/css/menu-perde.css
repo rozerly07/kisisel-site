@@ -1,0 +1,196 @@
+/* ==========================================================================
+   menu-perde.css — mobil menü (tam ekran perde) + perde sayfa geçişi
+   components.css bunu @import eder; giriş/anasayfa (index.html, tr/index.html)
+   yalnızca tokens.css + bunu yükler (navbar/maskot/footer stilleri olmadan).
+   Değerler components.css/base.css'ten AYNEN taşındı.
+   ========================================================================== */
+
+/* ---------- Kadife (perde + mobil menü yüzeyi): kıvrımlı, hacimli ---------- */
+.kadife {
+  background-color: var(--cadir-koyu);
+  background-image:
+    radial-gradient(120% 60% at 50% 0%, rgba(255, 138, 61, 0.18), transparent 60%),
+    linear-gradient(180deg, rgba(107, 15, 36, 0) 50%, rgba(58, 11, 82, 0.55) 100%),
+    repeating-linear-gradient(90deg,
+      var(--bordo) 0, var(--cadir-koyu) 2.2rem,
+      var(--cadir-acik) 3rem, var(--cadir-koyu) 3.8rem, var(--bordo) 6rem);
+}
+
+/* Çadır saçağı: gradyanlı yarım daire dilimler, altın kordon, püsküller.
+   SVG karo; renkler tokens ile aynı (data-URI içinde değişken kullanılamaz). */
+.sacak {
+  height: 36px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='36' viewBox='0 0 56 36'%3E%3Cdefs%3E%3ClinearGradient id='r'%3E%3Cstop offset='0' stop-color='%236B0F24'/%3E%3Cstop offset='.22' stop-color='%23A3122A'/%3E%3Cstop offset='.5' stop-color='%23FF5A66'/%3E%3Cstop offset='.78' stop-color='%23A3122A'/%3E%3Cstop offset='1' stop-color='%236B0F24'/%3E%3C/linearGradient%3E%3ClinearGradient id='k'%3E%3Cstop offset='0' stop-color='%23BE9870'/%3E%3Cstop offset='.25' stop-color='%23F3DEC0'/%3E%3Cstop offset='.5' stop-color='%23FFF7E8'/%3E%3Cstop offset='.78' stop-color='%23E7C7A0'/%3E%3Cstop offset='1' stop-color='%23BE9870'/%3E%3C/linearGradient%3E%3ClinearGradient id='s' x2='0' y2='1'%3E%3Cstop offset='.45' stop-color='%233A0B52' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%233A0B52' stop-opacity='.4'/%3E%3C/linearGradient%3E%3ClinearGradient id='a' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFE7A3'/%3E%3Cstop offset='.5' stop-color='%23FFC24B'/%3E%3Cstop offset='1' stop-color='%23B9771A'/%3E%3C/linearGradient%3E%3Cpath id='p' d='M0 4H28V6C28 17 22 24 14 24C6 24 0 17 0 6Z'/%3E%3Cpath id='c' fill='none' d='M0 6C0 17 6 24 14 24C22 24 28 17 28 6'/%3E%3Cg id='t'%3E%3Cpath d='M0 4V19' stroke='%23B9771A' stroke-width='1.2'/%3E%3Ccircle cy='20' r='2.4' fill='url(%23a)'/%3E%3Cpath d='M-2.6 22H2.6L3.6 33Q0 35 -3.6 33Z' fill='url(%23a)'/%3E%3C/g%3E%3C/defs%3E%3Cuse href='%23p' fill='url(%23r)'/%3E%3Cuse href='%23p' fill='url(%23s)'/%3E%3Cg transform='translate(28)'%3E%3Cuse href='%23p' fill='url(%23k)'/%3E%3Cuse href='%23p' fill='url(%23s)'/%3E%3C/g%3E%3Cuse href='%23c' stroke='%23FFC24B' stroke-opacity='.7' stroke-width='1.2'/%3E%3Cuse href='%23c' x='28' stroke='%23FFC24B' stroke-opacity='.7' stroke-width='1.2'/%3E%3Crect width='56' height='4.5' fill='url(%23a)'/%3E%3Cuse href='%23t'/%3E%3Cuse href='%23t' x='28'/%3E%3Cuse href='%23t' x='56'/%3E%3C/svg%3E") 0 0 / 56px 36px repeat-x;
+  filter: drop-shadow(0 6px 6px rgba(58, 11, 82, 0.5));
+  pointer-events: none;
+}
+
+/* ---------- Hamburger ---------- */
+.menu-dugme {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: none;
+  border-radius: 50%;
+  color: var(--krem-acik);
+  background: rgba(255, 255, 255, 0.08);
+  transition: background-color var(--d-ui) var(--ease);
+}
+.menu-dugme:hover { background: rgba(255, 255, 255, 0.16); }
+.menu-dugme__cubuk {
+  position: absolute;
+  left: 0.8rem;
+  right: 0.8rem;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform var(--d-ui) var(--ease), opacity var(--d-ui) var(--ease);
+}
+/* buton etiketi aria-label'da (eski .gizli span yok): çubuklar 1–3. çocuk */
+.menu-dugme__cubuk:nth-child(1) { transform: translateY(-6px); }
+.menu-dugme__cubuk:nth-child(3) { transform: translateY(6px); }
+.menu-dugme[aria-expanded="true"] .menu-dugme__cubuk:nth-child(1) { transform: rotate(45deg); }
+.menu-dugme[aria-expanded="true"] .menu-dugme__cubuk:nth-child(2) { opacity: 0; }
+.menu-dugme[aria-expanded="true"] .menu-dugme__cubuk:nth-child(3) { transform: rotate(-45deg); }
+/* menünün kendi kapatma butonu (X) */
+.menu-kapat .menu-dugme__cubuk:nth-child(1) { transform: rotate(45deg); }
+.menu-kapat .menu-dugme__cubuk:nth-child(2) { transform: rotate(-45deg); }
+@media (min-width: 960px) {
+  .menu-dugme { display: none; }
+}
+
+/* ==========================================================================
+   Mobil menü: tam ekran perde, linkler sırayla düşer
+   ========================================================================== */
+.mobil-menu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-menu);
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--ust-bar-y) + var(--b-7)) var(--kenar) var(--b-7);
+  overflow-y: auto;
+  transform: translateY(-100%);
+  transition: transform 0.7s var(--ease-perde);
+}
+.mobil-menu[hidden] { display: none; }
+.mobil-menu.is-acik { transform: none; }
+.mobil-menu .sacak {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+}
+.mobil-menu__liste {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--b-3);
+  margin-block: auto;
+}
+.mobil-menu__liste li {
+  opacity: 0;
+  transform: translateY(-2rem);
+  transition:
+    transform 500ms var(--ease-cikis),
+    opacity 400ms var(--ease);
+}
+.mobil-menu.is-acik .mobil-menu__liste li {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(260ms + var(--i, 0) * 70ms);
+}
+.mobil-menu__link {
+  display: inline-block;
+  padding-block: var(--b-1);
+  font-family: var(--font-baslik);
+  font-size: var(--fs-2xl);
+  line-height: 1.15;
+  color: var(--krem-acik);
+  text-decoration: none;
+  text-shadow: 0 4px 14px rgba(58, 11, 82, 0.5);
+  transition: color var(--d-ui) var(--ease), text-shadow var(--d-ui) var(--ease);
+}
+.mobil-menu__link:hover,
+.mobil-menu__link[aria-current="page"] {
+  color: var(--isik);
+  text-shadow: 0 0 22px rgba(255, 194, 75, 0.6), 0 4px 14px rgba(58, 11, 82, 0.5);
+}
+.mobil-menu__alt {
+  margin-top: var(--b-6);
+  font-size: var(--fs-sm);
+  color: var(--krem-acik);
+}
+.mobil-menu__alt a { color: var(--krem-acik); }
+
+html.menu-acik { overflow: hidden; }
+
+/* ==========================================================================
+   Perde geçişi
+   ========================================================================== */
+.perde {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-perde);
+  pointer-events: none;
+  overflow: hidden;
+}
+.perde.is-kapali,
+.perde.is-engel { pointer-events: auto; }
+
+/* Varsayılan = açık: kumaş yanlara toplanmış (scaleX) ve ekran dışında.
+   Hareket components.js'te WAAPI ile: toplanma + etek gecikmesi (skewX). */
+.perde__kanat {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 51%;
+  will-change: transform;
+}
+.perde__kanat--sol {
+  left: 0;
+  transform-origin: 0 0;
+  transform: translateX(-100%) scaleX(0.2) skewX(0deg);
+  box-shadow: 18px 0 40px rgba(107, 15, 36, 0.6);
+}
+.perde__kanat--sag {
+  right: 0;
+  transform-origin: 100% 0;
+  transform: translateX(100%) scaleX(0.2) skewX(0deg);
+  box-shadow: -18px 0 40px rgba(107, 15, 36, 0.6);
+}
+.perde__kanat::after { /* toplanma kıvrımlarında derinlik */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(58, 11, 82, 0.35), transparent 20%, transparent 80%, rgba(58, 11, 82, 0.35));
+}
+.perde__ust {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3.5rem;
+  transform: translateY(calc(-100% - 2.5rem));
+  box-shadow: 0 6px 18px rgba(58, 11, 82, 0.5);
+}
+.perde__ust .sacak { position: absolute; left: 0; right: 0; top: 100%; }
+.perde.is-kapali .perde__kanat,
+.perde.is-kapali .perde__ust { transform: none; }
+
+/* ---------- Perde ön kapağı ----------
+   components.js <head> içinde html'e .perde-kapali ekler; perde DOM'a
+   basılana kadar sayfa kadifenin arkasında kalır (titreme olmaz). */
+html.perde-kapali body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-perde);
+  background:
+    linear-gradient(180deg, rgba(107, 15, 36, 0) 50%, rgba(58, 11, 82, 0.5) 100%),
+    repeating-linear-gradient(90deg,
+      var(--bordo) 0, var(--cadir-koyu) 2.2rem,
+      var(--cadir-acik) 3rem, var(--cadir-koyu) 3.8rem, var(--bordo) 6rem);
+}

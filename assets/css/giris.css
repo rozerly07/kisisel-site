@@ -82,3 +82,20 @@ html,body{height:100%}
 /* Çadır kapısı üstündeki görünmez link: yalnızca klavye odağında halka görünür */
 .giris-kapi{position:absolute;display:block;border-radius:50% 50% 0 0/40% 40% 0 0}
 .giris-kapi:focus-visible,.giris-bar a:focus-visible{outline:3px solid #FFE7A3;outline-offset:4px}
+
+/* ---------- Mobil menü (components.js "menu-perde" modu) ---------- */
+/* Menü butonu yalnızca 760px altında; masaüstü navbar aynen kalır */
+.giris-bar .menu-dugme{display:none}
+@media (max-width:760px){
+  .giris-bar .menu-dugme{display:grid}
+  .giris-bar > span{margin-left:auto} /* TR · EN hapı menü butonunun yanına */
+}
+/* Menünün kendi kapatma butonu: navbar'daki menü butonunun tam yerinde
+   (bar top 18 + kenarlık 1 + padding 12 · sağ 12 + 1 + 22) */
+.mobil-menu .menu-kapat{position:absolute;top:31px;right:35px}
+
+/* ---------- Maskot (kök index + tr/index ortak; referans/anasayfa.html'den) ---------- */
+@keyframes step{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-10px) rotate(5deg)}}
+@media (prefers-reduced-motion:reduce){#maskot *{animation:none!important;transition:none!important}}
+/* body'de font yok (sahne kendi fontunu taşır): menü sitenin gövde fontunu kullansın */
+.mobil-menu{font-family:var(--font-govde)}

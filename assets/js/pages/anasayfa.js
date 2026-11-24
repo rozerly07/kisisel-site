@@ -27,25 +27,7 @@
   }
   if (!azHareket) { addEventListener('scroll', kaydir, { passive: true }); addEventListener('resize', kaydir); kaydir(); }
 
-  /* ---------- 3. Maskot: ekrana sabit, kendi dolaşır, imleç dokununca kaçar ---------- */
-  var mk = document.getElementById('maskot'), yon = mk.querySelector('.maskot-yon');
-  var mkImg = mk.querySelector('.maskot-gorsel'), MK_ON = '../assets/img/maskot/on.webp', MK_YAN = '../assets/img/maskot/yan-sag.webp', mkt;
-  new Image().src = MK_YAN; // yan görünümü önceden yükle
-  var m = { x: 12, y: 85 }, kaciyor = false, kt;
-  function git(x, y, sure) {
-    yon.style.transform = 'scaleX(' + (x < m.x ? -1 : 1) + ')';
-    mk.style.transition = 'left ' + sure + ' cubic-bezier(.3,.8,.3,1),top ' + sure + ' cubic-bezier(.3,.8,.3,1)';
-    mk.style.left = x + 'vw'; mk.style.top = y + 'vh'; m = { x: x, y: y };
-    mkImg.src = MK_YAN; clearTimeout(mkt); mkt = setTimeout(function () { mkImg.src = MK_ON; }, parseFloat(sure) * 1000);
-  }
-  if (!azHareket) {
-    setInterval(function () { if (!kaciyor) git(8 + Math.random() * 84, 72 + Math.random() * 18, '2.8s'); }, 4200);
-    mk.addEventListener('mouseenter', function () {
-      var x = m.x < 50 ? 55 + Math.random() * 35 : 8 + Math.random() * 35;
-      kaciyor = true; git(x, 20 + Math.random() * 65, '.45s');
-      clearTimeout(kt); kt = setTimeout(function () { kaciyor = false; }, 1500);
-    });
-  }
+  /* ---------- 3. Maskot: assets/js/maskot.js (kök index ile ortak) ---------- */
 
   /* ---------- 4. Proje kartları: imleç gelince büyür, diğerleri kayıp küçülür ---------- */
   var kartlar = [].slice.call(document.querySelectorAll('#projeler .proje-kart'));
@@ -72,7 +54,7 @@
     { src: '../assets/img/gallery/love.webp', alt: "Kalabalık ve ruhsuz bir şehirde bile içinizi ısıtabilecek soğuk olan ama sıcak hissettiren şeyler görebilirsiniz. Bakmayı bilirseniz.", renk: 'linear-gradient(150deg,#FFC66B,#FF5A6E)' },
     { src: '../assets/img/gallery/milliphoto.webp', alt: "LA ya da hawai vibe'larına bayılırım. Bu yerlerde takılmak harika hissettiriyor.", renk: 'linear-gradient(150deg,#2A0D57,#7FA8FF)' },
     { src: '../assets/img/gallery/gunesdio.webp', alt: "Adımın anlamı olan güneş ışığı ve en sevdiğim animenin bir karakteri. Harika bir kare ヾ(≧▽≦*)o", renk: 'linear-gradient(150deg,#FF8A3D,#6A1B7A)' },
-    { src: '../assets/img/gallery/photohyun.webp', alt: "En sevdeğim şeylerden biri de anı yakalamıktır. Gülümseyin!", renk: 'linear-gradient(150deg,#5B1E6E,#FFB0C8)' },
+    { src: '../assets/img/gallery/photohyun.webp', alt: "En sevdiğim şeylerden biri de anı yakalamıktır. Gülümseyin!", renk: 'linear-gradient(150deg,#5B1E6E,#FFB0C8)' },
     { src: '../assets/img/gallery/roses.webp', alt: "İsmimin fransızca karşılığını sanırım herkes biliyordur. Benim en sevdiğim çiçeklerden biridir kendisi", renk: 'linear-gradient(150deg,#1E0838,#FF8A3D)' }
   ];
   var duvar = document.getElementById('karo-duvar');

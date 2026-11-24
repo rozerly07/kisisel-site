@@ -1,0 +1,181 @@
+/* ==========================================================================
+   tokens.css — Dijital Sirk tasarım değişkenleri
+   Renk · gradyan · font · boşluk · süre · easing · katman
+   ========================================================================== */
+
+/* ---------- Fontlar (self-host, latin + latin-ext → ç ğ ı İ ö ş ü tam) ---------- */
+@font-face {
+  font-family: "Alfa Slab One";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/alfa-slab-one-400-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Alfa Slab One";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/alfa-slab-one-400-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Bungee";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/bungee-400-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Bungee";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/bungee-400-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Space Grotesk değişken font: tek dosya 300–700 */
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../fonts/space-grotesk-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../fonts/space-grotesk-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* ---------- Gökyüzü (gün batımı) ---------- */
+  --gok-1: #0E0726;
+  --gok-2: #2A0D57;
+  --gok-3: #6A1B7A;
+  --gok-4: #C6306E;
+  --gok-5: #FF8A3D;
+  --gok-6: #FFC66B;
+  --gok: linear-gradient(180deg, var(--gok-1) 0%, var(--gok-2) 22%, var(--gok-3) 44%, var(--gok-4) 64%, var(--gok-5) 84%, var(--gok-6) 100%);
+  --gok-boyut: 100% 160%;
+  --gok-sure: 14s;
+
+  /* ---------- Ana renkler ---------- */
+  --cadir-acik: #FF5A66;
+  --cadir-koyu: #A3122A;
+  --krem-acik: #FFF7E8;
+  --krem-koyu: #E7C7A0;
+  --altin: #FFC24B;
+  --isik: #FFE7A3;
+  --pembe: #FF5A6E;
+  --pembe-acik: #FF6FA3;
+  --turuncu: #FF8A3D;
+  --gece-mor: #1A0B33;     /* karo koyu */
+  --lila-krem: #F4E2FF;    /* karo açık */
+  --bordo: #6B0F24;        /* leke, perde gölgesi */
+  --soguk: #7FE7FF;        /* ikinci spot, az kullan */
+
+  /* Türev tonlar */
+  --gece-derin: #0E0726;
+  --mor-yuzey: #2A0D57;
+  --krem-soluk: #E9D6F2;   /* ikincil metin (gece üstünde AA) */
+  --altin-koyu: #B9771A;
+  --golge-mor: #3A0B52;
+
+  /* ---------- Gradyanlar ---------- */
+  --g-cadir: linear-gradient(180deg, var(--cadir-acik), var(--cadir-koyu));
+  --g-krem: linear-gradient(180deg, var(--krem-acik), var(--krem-koyu));
+  --g-baslik: linear-gradient(180deg, #FFF6D6 10%, var(--altin) 50%, var(--pembe) 95%);
+  --g-hap: linear-gradient(90deg, var(--pembe) 0%, var(--turuncu) 100%);
+  --g-altin: linear-gradient(180deg, var(--isik) 0%, var(--altin) 45%, var(--altin-koyu) 100%);
+  --g-cam: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 100%);
+  --g-kapi-isik: radial-gradient(closest-side, #FFF3C4 0%, var(--altin) 35%, rgba(255, 138, 61, 0.55) 65%, rgba(255, 138, 61, 0) 100%);
+
+  /* Başlık parlaması (drop-shadow yığını) */
+  --parlama-baslik: drop-shadow(0 6px 0 var(--golge-mor)) drop-shadow(0 0 26px rgba(255, 170, 80, 0.55));
+  --parlama-etiket: 0 0 14px rgba(255, 90, 110, 0.65), 0 0 2px rgba(255, 111, 163, 0.9);
+
+  /* Anlamsal eşleme */
+  --zemin: var(--gece-derin);
+  --zemin-yuksek: var(--mor-yuzey);
+  --metin: var(--krem-acik);
+  --metin-ikincil: var(--krem-soluk);
+  --vurgu: var(--altin);
+  --odak: var(--isik);
+
+  /* ---------- Fontlar ---------- */
+  --font-baslik: "Alfa Slab One", "Rockwell", Georgia, serif;   /* büyük başlıklar */
+  --font-etiket: "Bungee", "Arial Black", sans-serif;           /* küçük başlık, etiket */
+  --font-govde: "Space Grotesk", system-ui, sans-serif;
+  --iz-etiket: 0.18em;                                           /* Bungee geniş harf aralığı */
+
+  /* ---------- Akışkan tip ölçeği (360px → 1440px) ---------- */
+  --fs-xs: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --fs-sm: clamp(0.9rem, 0.87rem + 0.15vw, 1rem);
+  --fs-base: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --fs-lg: clamp(1.15rem, 1.07rem + 0.4vw, 1.375rem);
+  --fs-xl: clamp(1.4rem, 1.22rem + 0.8vw, 1.875rem);
+  --fs-2xl: clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem);
+  --fs-3xl: clamp(2.25rem, 1.6rem + 3vw, 4rem);
+  --fs-display: clamp(2.5rem, 1.5rem + 4.6vw, 6rem);
+
+  --satir-sik: 1.08;
+  --satir-govde: 1.6;
+  --olcu: 68ch;
+
+  /* ---------- Boşluk ölçeği ---------- */
+  --b-1: 0.25rem;
+  --b-2: 0.5rem;
+  --b-3: 0.75rem;
+  --b-4: 1rem;
+  --b-5: 1.5rem;
+  --b-6: 2rem;
+  --b-7: 3rem;
+  --b-8: 4rem;
+  --b-9: 6rem;
+  --kenar: clamp(1rem, 0.6rem + 2vw, 2.5rem);
+  --genislik: 76rem;
+
+  /* ---------- Köşe & gölge (yumuşak, renkli; siyah kenarlık yok) ---------- */
+  --kose-s: 8px;
+  --kose-m: 14px;
+  --kose-l: 22px;
+  --kose-hap: 999px;
+  --golge-1: 0 4px 14px rgba(14, 7, 38, 0.35);
+  --golge-2: 0 14px 36px rgba(14, 7, 38, 0.45), 0 2px 6px rgba(58, 11, 82, 0.3);
+  --golge-3: 0 28px 70px rgba(14, 7, 38, 0.55), 0 0 40px rgba(255, 138, 61, 0.12);
+  --golge-cam: 0 10px 30px rgba(14, 7, 38, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+
+  /* ---------- Süreler ---------- */
+  --d-ui: 260ms;
+  --d-ui-yavas: 400ms;
+  --d-sahne: 750ms;
+  --d-perde-kapan: 700ms;
+  --d-perde-acil: 900ms;
+
+  /* ---------- Easing (sakin, zıplamasız) ---------- */
+  --ease: cubic-bezier(0.45, 0, 0.55, 1);       /* ease-in-out */
+  --ease-cikis: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-perde: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ---------- Katmanlar ---------- */
+  --z-ust: 100;
+  --z-menu: 90;
+  --z-maskot: 300;
+  --z-konfeti: 310;
+  --z-perde: 1000;
+
+  /* ---------- Bileşen ölçüleri ---------- */
+  --ust-bar-y: 4.75rem;
+  --maskot-boy: 3.25rem;
+}
+
+@media (min-width: 960px) {
+  :root { --ust-bar-y: 5.5rem; --maskot-boy: 3.75rem; }
+}

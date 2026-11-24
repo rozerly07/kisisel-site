@@ -1,0 +1,91 @@
+/* ==========================================================================
+   giris.css — onaylı giriş sahnesi (referans/giris-sahnesi.html'den BİREBİR)
+   Renk, ölçü, açı, koordinat ve süre değerlerine DOKUNMA.
+   Kök index.html ve tr/index.html ortak kullanır.
+   Not: components.css ile çakışmasın diye sınıf adları "giris-" önekli
+   (.konfeti → .giris-konfeti, .ampul → .giris-ampul, .ust-bar → .giris-bar).
+   ========================================================================== */
+
+/* ---------- Fontlar: Google Fonts yerine yerel woff2 (font-family adları aynı) ---------- */
+@font-face {
+  font-family: "Alfa Slab One";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/alfa-slab-one-400-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Alfa Slab One";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/alfa-slab-one-400-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Bungee";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/bungee-400-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Bungee";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/bungee-400-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../fonts/space-grotesk-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../fonts/space-grotesk-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ---------- Referanstaki <style> bloğu (değerler aynen) ---------- */
+body{margin:0}
+#sahne-kap a{color:#FFF3DD}#sahne-kap a:hover{color:#FFD36B}
+@keyframes sky{0%,100%{background-position:50% 0%}50%{background-position:50% 100%}}
+@keyframes sway{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+@keyframes sway2{0%,100%{transform:rotate(12deg)}50%{transform:rotate(-16deg)}}
+@keyframes fall{0%{transform:translateY(-60px) rotate(0)}100%{transform:translateY(860px) rotate(540deg)}}
+@keyframes bob{0%,100%{transform:translate(0,0) rotate(-4deg)}50%{transform:translate(0,-7px) rotate(4deg)}}
+@keyframes glow{0%,100%{opacity:.75}50%{opacity:1}}
+@keyframes flag{0%,100%{transform:skewY(0)}50%{transform:skewY(-8deg)}}
+@keyframes flick{0%,100%{opacity:1}12%{opacity:.25}17%{opacity:1}46%{opacity:.85}52%{opacity:.15}58%{opacity:1}83%{opacity:.4}88%{opacity:1}}
+.st{position:relative}
+.st svg{position:absolute;pointer-events:none;overflow:visible}
+.giris-konfeti{position:absolute;top:0;height:14px;border-radius:3px;opacity:.9;animation-name:fall;animation-timing-function:linear;animation-iteration-count:infinite}
+.giris-ampul{width:10px;height:10px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 12px 3px #FFB84D;animation-name:flick;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
+html,body{height:100%}
+#sahne-kap{position:relative;width:100%;height:100vh;min-height:520px;overflow:hidden;font-family:"Space Grotesk",system-ui,sans-serif;background:linear-gradient(180deg,#0E0726 0%,#2A0D57 30%,#6A1B7A 52%,#C6306E 70%,#FF8A3D 88%,#FFC66B 100%);background-size:100% 160%;animation:sky 14s ease-in-out infinite}
+.giris-bar{position:absolute;z-index:5;top:18px;left:40px;right:40px}
+@media (max-width:760px){.giris-bar{left:12px;right:12px}.giris-bar nav{display:none!important}}
+@media (prefers-reduced-motion:reduce){#sahne-kap{animation:none}}
+@media (prefers-reduced-motion:reduce){#sahne *,#sahne{animation:none!important}}
+
+/* ---------- Eklemeler (görünümü değiştirmez) ---------- */
+/* Çadır kapısı üstündeki görünmez link: yalnızca klavye odağında halka görünür */
+.giris-kapi{position:absolute;display:block;border-radius:50% 50% 0 0/40% 40% 0 0}
+.giris-kapi:focus-visible,.giris-bar a:focus-visible{outline:3px solid #FFE7A3;outline-offset:4px}
+
+/* tr/index.html: base.css'teki "svg{max-width:100%}" reset'i 2560px zemini sıkıştırmasın */
+#sahne svg{max-width:none}
+
+/* tr/index.html: sitenin ortak navbar'ı (components.js) sahnenin üstünde yüzer,
+   referanstaki gibi sahneyi aşağı itmez */
+body[data-sayfa="index"] > .ust-bar{position:fixed;left:0;right:0}

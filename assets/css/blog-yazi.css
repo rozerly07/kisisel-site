@@ -1,0 +1,51 @@
+/* ==========================================================================
+   blog-yazi.css — tr/blog-1/2/3.html (referans/blog-yazi.html'den BİREBİR)
+   Renk, ölçü, açı, süre ve easing değerlerine DOKUNMA.
+   Navbar/maskot/mobil menü: giris.css + menu-perde.css · footer: footer.css · fontlar: tokens.css (Lora dahil)
+   Site geneli imleç → tokens.css (ortak).
+   Not: giris.css ile çakışan keyframe önekli (flick → by-flick).
+   ========================================================================== */
+html{background:#140629}
+body{margin:0;color:#FFF3DD;font-family:"Space Grotesk",system-ui,sans-serif}
+a:focus-visible,button:focus-visible{outline:3px solid #7FE7FF;outline-offset:3px}
+@keyframes by-flick{0%,100%{opacity:1}12%{opacity:.25}17%{opacity:1}46%{opacity:.85}52%{opacity:.15}58%{opacity:1}83%{opacity:.4}88%{opacity:1}}
+@keyframes swayB{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+@keyframes swayB2{0%,100%{transform:rotate(10deg)}50%{transform:rotate(-14deg)}}
+.gt{font-family:"Abril Fatface",Didot,Georgia,serif;font-weight:400;background:linear-gradient(180deg,#FFF6D6 10%,#FFC24B 50%,#FF5A6E 95%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 4px 0 #3A0B52) drop-shadow(0 0 22px rgba(255,170,80,.45))}
+/* navbar: sitenin ortak .giris-bar'ı (konum giris.css'te); referanstaki .ust-bar link rengi */
+.giris-bar a{color:#FFF3DD;text-decoration:none}
+.lb{font-family:Bungee,Impact,sans-serif;letter-spacing:6px;color:#FFE7C2;text-shadow:0 0 16px rgba(255,120,160,.7);font-size:14px}
+.bilet{border:0;padding:12px 24px 12px 26px;font-family:Bungee,Impact,sans-serif;font-size:14px;letter-spacing:2px;color:#FFE7C2;background:linear-gradient(90deg,rgba(255,255,255,.14),rgba(255,255,255,.06));-webkit-mask:radial-gradient(circle at 0 50%,transparent 8px,#000 8.5px) left/51% 100% no-repeat,radial-gradient(circle at 100% 50%,transparent 8px,#000 8.5px) right/51% 100% no-repeat;mask:radial-gradient(circle at 0 50%,transparent 8px,#000 8.5px) left/51% 100% no-repeat,radial-gradient(circle at 100% 50%,transparent 8px,#000 8.5px) right/51% 100% no-repeat;transition:transform .4s cubic-bezier(.22,1,.36,1),background .4s,color .4s;text-decoration:none}
+.bilet span{opacity:.7}
+.bilet[aria-pressed=true],.bilet.altin{background:linear-gradient(90deg,#FFC24B,#FF8A3D);color:#2A0D45;transform:rotate(-2deg) scale(1.06)}
+.etk{display:inline-block;padding:4px 10px;border-radius:999px;font-size:13px;font-weight:600}
+.sahne-bg{position:relative;overflow:hidden;background:radial-gradient(ellipse 80% 30% at 50% 0%,#5B1E6E 0%,#2A0D45 50%,#140629 100%)}
+.isin{position:absolute;top:280px;width:160px;height:1500px;transform-origin:50% 100%;clip-path:polygon(45% 100%,55% 100%,100% 0,0 0);mix-blend-mode:screen;filter:blur(8px);pointer-events:none}
+@media (prefers-reduced-motion:reduce){.sahne-bg *{animation:none!important;transition:none!important}}
+@keyframes kivilcim{0%,100%{transform:translate(50%,-50%) scale(.8);opacity:.8}50%{transform:translate(50%,-50%) scale(1.25);opacity:1}}
+.fitil-kap{position:fixed;left:0;right:0;top:0;height:6px;z-index:40;background:rgba(255,231,194,.12)}
+#fitil{position:relative;height:100%;width:0;background:linear-gradient(90deg,#C6306E,#FF8A3D 70%,#FFE7A3)}
+#fitil::after{content:"";position:absolute;right:0;top:50%;width:18px;height:18px;border-radius:50%;background:radial-gradient(circle,#FFFFFF 0,#FFE7A3 30%,rgba(255,138,61,.6) 60%,transparent 70%);animation:kivilcim .3s ease-in-out infinite}
+.y-ic{position:relative;max-width:900px;margin:0 auto;padding:190px 32px 90px;display:flex;flex-direction:column;align-items:center}
+.geri{align-self:flex-start;font-weight:700;text-decoration:none;color:#FFD36B;margin-bottom:26px}
+.y-ust{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center}
+#y-meta{font-family:VT323,monospace;font-size:21px;color:#FFD36B}
+.y-ic h1{margin:22px 0 16px;font-size:68px;line-height:1.05;text-align:center}
+#y-etiketler{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+#y-etiketler .etk{background:rgba(255,90,138,.14);color:#FFC2D6;border:1px solid rgba(255,90,138,.45)}
+.kagit-yazi{position:relative;margin-top:46px;width:100%;box-sizing:border-box;padding:0 0 56px;background:linear-gradient(175deg,#FFF7E8,#F4E3C6);color:#2A0D45;box-shadow:0 30px 70px rgba(5,0,20,.6),0 0 40px rgba(255,190,110,.12);transform:rotate(-.4deg)}
+.kagit-yazi .bant{position:absolute;top:-14px;width:96px;height:30px;background:linear-gradient(180deg,rgba(255,240,200,.6),rgba(255,220,160,.45))}
+#y-kapak{height:340px;overflow:hidden}#y-kapak img{width:100%;height:100%;object-fit:cover;display:block}
+.metin{max-width:660px;margin:0 auto;padding:46px 30px 0;font-family:Lora,Georgia,serif;font-size:19px;line-height:1.75}
+.metin p{margin:0 0 22px}
+.metin>p:first-of-type::first-letter{float:left;font-family:"Abril Fatface",Georgia,serif;font-size:78px;line-height:.82;margin:8px 12px 0 0;color:#C6306E}
+.metin h2{margin:38px 0 14px;font-family:"Abril Fatface",Georgia,serif;font-weight:400;font-size:32px;color:#6A1B7A}
+.metin blockquote{margin:30px 0;padding:6px 0 6px 26px;border-left:4px solid #FFC24B;font-style:italic;font-size:22px;color:#6A1B7A}
+.metin figure{margin:30px -40px}.metin figure img{width:100%;display:block}
+.metin figcaption{margin-top:8px;text-align:center;font-family:"Space Grotesk",sans-serif;font-size:14px;color:#8A5A7A}
+.imza{margin:34px 0 0;text-align:right;font-family:"Mrs Saint Delafield",cursive;font-size:56px;line-height:1;color:#C6306E}
+.diger{width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:22px;margin-top:56px}
+.diger .bilet{display:flex;flex-direction:column;gap:6px;padding:20px 30px;letter-spacing:1px}
+.diger .bilet .k{font-size:12px;opacity:.75}.diger .bilet .b{font-family:"Abril Fatface",Georgia,serif;font-size:22px;letter-spacing:0}
+.diger .bilet:hover{transform:rotate(-1deg) scale(1.03)}
+@media (max-width:760px){.y-ic{padding:130px 14px 60px}.y-ic h1{font-size:42px}.metin{padding:30px 18px 0;font-size:18px}.metin figure{margin:24px -18px}#y-kapak{height:200px}.kagit-yazi{transform:none}}

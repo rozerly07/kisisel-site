@@ -7,9 +7,9 @@ Yöntem: Her sayfa önce Claude sohbetinde önizlemeyle tasarlanır, onaylanınc
 | 0–1.5 | Kurulum, temel, görsel dil | ✅ |
 | 2 | Anasayfa (giriş + kaydırma + sirkin içi + maskot) | ✅ |
 | 3 | Projeler | ✅ |
-| 4 | Galeri + ortak karo duvar + imleç | ✅ (Görev 4 bittiyse) |
-| 5 | Hakkımda | ⏳ referans hazır, komut aşağıda |
-| 6 | Blog + 3 yazı | önizleme bekliyor |
+| 4 | Galeri + ortak karo duvar + imleç | ✅ |
+| 5 | Hakkımda | ✅ |
+| 6 | Blog + 3 yazı | ⏳ referans hazır, komut aşağıda |
 | 7 | İletişim | önizleme bekliyor |
 | 8 | Impeccable denetimi | sonda |
 | 9 | İngilizce sürüm | sonda |
@@ -66,8 +66,22 @@ referans/hakkimda.html onaylı Hakkımda sayfasının BİREBİR kodu (süslü ç
 Bitince sayfayı açıp sadece konsol hatası kontrol et. En fazla 5 maddede özetle.
 ```
 
-## Görev 6–7
-Önizleme onaylanınca buraya "kopyala" komutu olarak yazılacak. Eski tarif metinlerini kullanma.
+## Görev 6 — Blog + 3 yazı (kopyala)
+`referans/` klasörüne şunları koy: `blog.html`, `blog-yazi.html`, `blog-veri.js`. Sonra:
+```
+referans/blog.html (pano) ve referans/blog-yazi.html (yazı sayfası şablonu) onaylı Blog tasarımının BİREBİR kodu. Yeniden çizme, KOPYALA.
+1. Ortak veri: referans/blog-veri.js'i assets/js/blog-veri.js olarak kopyala. YAZILAR listesini @content/ICERIK.md'deki 3 blog yazısıyla doldur: baslik, ozet (ICERIK'te yoksa yazının ilk iki cümlesi), kategori, tarih, sure (kelime sayısı ÷ 200, yukarı yuvarla), etiketler, kapak (assets/img/blog içinde varsa WebP, yoksa boş bırak). Aynı kategoriye aynı renk: ilk kategori #C6306E, ikinci #2340C8, üçüncü #6A1B7A.
+2. tr/blog.html: referans/blog.html'in kopyası. Stiller assets/css/blog.css, script assets/js/blog.js. Hiçbir renk, ölçü, açı, süre veya easing değerini değiştirme.
+3. tr/blog-1.html, blog-2.html, blog-3.html: üçü de referans/blog-yazi.html'in kopyası. Stiller assets/css/blog-yazi.css, script assets/js/blog-yazi.js (iki sayfa türü de blog-veri.js'i yükler). Her dosyada sadece şunlar değişsin:
+   - <article data-yazi="blog-N.html"> değeri, <title> ve <h1> başlık.
+   - .metin içine ICERIK.md'deki yazının metni paragraf paragraf (<p>). Ara başlık, alıntı ya da yazı içi görsel ICERIK'te yoksa o örnek blokları sil; boş görsel bırakma. Son satırdaki "roze" imzası kalsın.
+4. Yer tutucu navbar ve footer yerine sitenin ortak navbar, logo, mobil menü, perde geçişi, maskot, imleç ve imzalı footer'ı gelsin. Blog sayfalarının hepsinde "Blog" linki aktif. TR · EN → ../en/ altındaki aynı dosya. Fitil (okuma çubuğu) navbarın üstünde, ekranın en tepesinde kalsın.
+5. CLAUDE.md'ye Blog bilgisini ekle (pano, filtreler, yazı şablonu, blog-veri.js).
+Bitince sayfaları açıp sadece konsol hatası kontrol et. ICERIK.md'de eksik olan bir şey varsa uydurma, listele. En fazla 5 maddede özetle.
+```
+
+## Görev 7
+Önizleme onaylanınca buraya "kopyala" komutu olarak yazılacak.
 
 ## Görev 8 — Tasarım denetimi (Impeccable)
 Her sayfa için sırayla (gerekirse ayrı oturumlarda):

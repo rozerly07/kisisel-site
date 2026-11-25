@@ -47,15 +47,43 @@
   });
   document.getElementById('projeler').addEventListener('mouseleave', function () { clearTimeout(pt); projeSec(null); });
 
+  /* ---------- 4b. Projeler: aşağı kaydırdıkça tek satır yana kayar, satır bitince sayfa devam eder ---------- */
+  var pIz = document.getElementById('proje-iz'), pSahne = pIz && pIz.querySelector('.proje-sahne'), pSira = document.getElementById('projeler');
+  if (pIz && pSahne && !azHareket) {
+    var pMesafe = 0;
+    var pKay = function () {
+      var p = pMesafe > 0 ? Math.min(1, Math.max(0, -pIz.getBoundingClientRect().top / pMesafe)) : 0;
+      pSira.style.transform = 'translateX(' + (-p * pMesafe).toFixed(1) + 'px)';
+    };
+    var pOlc = function () {
+      pMesafe = Math.max(0, pSira.offsetWidth - pSahne.clientWidth);   // yana kayacak yol = dikey kaydırma payı
+      pIz.style.height = (pSahne.offsetHeight + pMesafe) + 'px';
+      pKay();
+    };
+    addEventListener('scroll', pKay, { passive: true });
+    addEventListener('resize', pOlc);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(pOlc);
+    pOlc();
+    // klavye: ekran dışındaki karta odaklanınca kart ortaya gelene kadar sayfayı kaydır
+    pSira.addEventListener('focusin', function (e) {
+      var k = e.target.closest('.proje-kart'); if (!k || !pMesafe) return;
+      var hedef = Math.min(pMesafe, Math.max(0, k.offsetLeft + k.offsetWidth / 2 - pSahne.clientWidth / 2));
+      scrollTo(0, scrollY + pIz.getBoundingClientRect().top + hedef);
+    });
+  }
+
   /* ---------- 5. Karo duvar: baklava kafes, camgöz, imleçle büyüyen karo ---------- */
   // Fotoğraf eklemek için bu listeye bir satır ekle. İlk fotoğraf alt-ortaya gelir, sonrakiler dışa doğru dizilir.
   var GALERI = [
-    { src: '../assets/img/gallery/kalp.webp', alt: "Kediler ve sevgi birbiriyle en çok özdeşleşebilecek kavramdır. Bu görseldeki gibi zıt renklerde bile sevgiyi görebiliyoruz.", renk: 'linear-gradient(150deg,#3A1260,#C6306E)' },
-    { src: '../assets/img/gallery/love.webp', alt: "Kalabalık ve ruhsuz bir şehirde bile içinizi ısıtabilecek soğuk olan ama sıcak hissettiren şeyler görebilirsiniz. Bakmayı bilirseniz.", renk: 'linear-gradient(150deg,#FFC66B,#FF5A6E)' },
-    { src: '../assets/img/gallery/milliphoto.webp', alt: "LA ya da hawai vibe'larına bayılırım. Bu yerlerde takılmak harika hissettiriyor.", renk: 'linear-gradient(150deg,#2A0D57,#7FA8FF)' },
-    { src: '../assets/img/gallery/gunesdio.webp', alt: "Adımın anlamı olan güneş ışığı ve en sevdiğim animenin bir karakteri. Harika bir kare ヾ(≧▽≦*)o", renk: 'linear-gradient(150deg,#FF8A3D,#6A1B7A)' },
-    { src: '../assets/img/gallery/photohyun.webp', alt: "En sevdiğim şeylerden biri de anı yakalamıktır. Gülümseyin!", renk: 'linear-gradient(150deg,#5B1E6E,#FFB0C8)' },
-    { src: '../assets/img/gallery/roses.webp', alt: "İsmimin fransızca karşılığını sanırım herkes biliyordur. Benim en sevdiğim çiçeklerden biridir kendisi", renk: 'linear-gradient(150deg,#1E0838,#FF8A3D)' }
+    { src: '../assets/img/gallery/galeripic1.webp', alt: "minik dostlardan biriyle gezi", renk: 'linear-gradient(150deg,#3A1260,#C6306E)' },
+    { src: '../assets/img/gallery/galeripic2.webp', alt: "dostlarla geçirilen kaliteli vakit", renk: 'linear-gradient(150deg,#FFC66B,#FF5A6E)' },
+    { src: '../assets/img/gallery/galeripic3.webp', alt: "hazırlanıp dışarı çıkmak için harika bir gün", renk: 'linear-gradient(150deg,#2A0D57,#7FA8FF)' },
+    { src: '../assets/img/gallery/galeripic4.webp', alt: "çocukluğa dönüş", renk: 'linear-gradient(150deg,#FF8A3D,#6A1B7A)' },
+    { src: '../assets/img/gallery/galeripic5.webp', alt: "miniminnacık yumuşacık bir arkadaş", renk: 'linear-gradient(150deg,#5B1E6E,#FFB0C8)' },
+    { src: '../assets/img/gallery/galeripic6.webp', alt: "gökyüzüne hayranlık", renk: 'linear-gradient(150deg,#1E0838,#FF8A3D)' },
+    { src: '../assets/img/gallery/galeripic7.webp', alt: "yağmurlu bir günde yürüyüş", renk: 'linear-gradient(150deg,#C6306E,#FFC66B)' },
+    { src: '../assets/img/gallery/galeripic8.webp', alt: "manzara tadını çıkarmak için vardır", renk: 'linear-gradient(150deg,#0E3A6E,#FF5A8A)' },
+    { src: '../assets/img/gallery/galeripic9.webp', alt: "arkadaşları beklerken sınıfın sessizliği", renk: 'linear-gradient(150deg,#6A1B7A,#FFC66B)' }
   ];
   var duvar = document.getElementById('karo-duvar');
   // Baklava kafes: satır r=0 en altta. Çift satırlarda x = 0, ±1, ±2… ; tek satırlarda x = ±0.5, ±1.5…

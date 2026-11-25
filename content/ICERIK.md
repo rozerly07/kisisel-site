@@ -6,7 +6,7 @@
 - E-posta: rozerly07@gmail.com
 - Telefon: +90 5411054707
 - Adres (haritada gösterilecek): Antalya\Kepez Fevzi Çakmak mah. 
-- Google Maps embed linki : <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2254.732971097692!2d30.69392760803674!3d36.945957965816916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1str!2str!4v1795522487786!5m2!1str!2str" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+- Google Maps embed linki : <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12764.46239088461!2d30.64280841546859!3d36.88758275555423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c391c4eb3bc819%3A0x29c30089f6e24174!2sAkdeniz%20%C3%9Cniversitesi!5e0!3m2!1str!2str!4v1795559399803!5m2!1str!2str" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
 - Instagram linki:https://www.instagram.com/rozerly_/
 - Letterboxd linki: https://boxd.it/e8shR
 - Formspree endpoint (formspree.io'dan ücretsiz alınır, yoksa boş bırak):
@@ -31,30 +31,38 @@
 
 ## Projeler (en az 3)
 ### Proje 1
-- Ad: GA- Animate Projesi
+- Ad: Animate Projesi
 - Kısa açıklama : Etkileşimli menü butonları, sahne geçişleri ve katmanlı zaman çizelgesi animasyonları içeren web arayüzü çalışmasıdır. Görsel içeriklerin ve zamanlama akışının uyumlu bir bütünlük sunması hedeflenmiştir.
 - Kullanılan araçlar : Adobe Animate 8, Zaman Çizelgesi (Timeline) 8, Katmanlar (Layers) 8, Buton ve Metin Araçları 7, Kare / Anahtar Kare Yönetimi 7
 - Görsel dosya adı: gaproje.png
 ### Proje 2
-- Ad: GA- Photoshop ürün tanıtımı 
+- Ad: Photoshop ürün tanıtımı 
 - Kısa açıklama : MAC Matte Maximal Lipstick ürünü için mat doku vurgusu ve yansıma efektiyle hazırlanan tanıtım görseli tasarımıdır. Tipografi ve renk dengesiyle ürünün marka kimliğini öne çıkarması amaçlanmıştır.
 - Kullanılan araçlar: Adobe Photoshop 8, Metin (Type) Aracı 8, Katman Maskeleri 7, Gradyan ve Yansıma Efektleri 7, Renk ve Ton Ayarları 7, Seçim Araçları 6
 - Görsel dosya adı: resim3.jpeg
 ### Proje 3
-- Ad: GA- Photoshop görüntü düzenleme
+- Ad: Photoshop görüntü düzenleme
 - Kısa açıklama : Siyah-beyaz atmosfer üzerinde seçili karakterlerin renkli bırakıldığı dramatik sahne düzenleme çalışmasıdır. Geçmiş fırçası ve ton düzenlemeleriyle odak noktasının güçlendirilmesi sağlanmıştır.
 - Kullanılan araçlar: Adobe Photoshop 8, History Brush (Geçmiş Fırçası) 9, Siyah-Beyaz / Tonlama Ayarları 8, Fırça (Brush) Aracı 8, Katmanlar ve Maskeler 7, Zoom / Yakınlaştırma Aracı 7
 - Görsel dosya adı: pic15.jpeg
+### Proje 4
+- Ad: Web arayüzü
+- Kısa Açıklama: Bir web sitesinin arayüzünü gösterebilen bir çalışma photoshop üzerinde bölümlere ayrılarak yapıldı, değişikliklerin kaydedilip istendiğinde web sitesinin nasıl görünebileceğine dair seçenekler de sunuldu.
+- Kullanılan araçlar: Adope photoshot, History, Katmanlar.  
+- Görsel dosya adı: pic12.png
 
 
 
 ## Galeri (6-12 fotoğraf, assets/img/gallery/ içine koy)
-- ♡.jpg — Kediler ve sevgi birbiriyle en çok özdeşleşebilecek kavramdır. Bu görseldeki gibi zıt renklerde bile sevgiyi görebiliyoruz.
-- love.jpg — Kalabalık ve ruhsuz bir şehirde bile içinizi ısıtabilecek soğuk olan ama sıcak hissettiren şeyler görebilirsiniz. Bakmayı bilirseniz.
-- milliphoto.jpg — LA ya da hawai vibe'larına bayılırım. Bu yerlerde takılmak harika hissettiriyor. 
-- gunesdio.jpg — Adımın anlamı olan güneş ışığı ve en sevdiğim animenin bir karakteri. Harika bir kare ヾ(≧▽≦*)o
-- photohyun.jpg — En sevdiğim şeylerden biri de anı yakalamıktır. Gülümseyin!
-- roses.jpg — İsmimin fransızca karşılığını sanırım herkes biliyordur. Benim en sevdiğim çiçeklerden biridir kendisi
+- galeripic1.png — minik dostlardan biriyle gezi
+- galeripic2.png — dostlarla geçirilen kaliteli vakit
+- galeripic3.png — hazırlanıp dışarı çıkmak  için harika bir gün
+- galeripic4.png — çocukluğa dönüş
+- galeripic5.png — miniminnacık yumuşacık bir arkadaş
+- galeripic6.png — gökyüzüne hayranlık
+- galeripic7.png — yağmurlu bir günde yürüyüş
+- galeripic8.png — manzara tadını çıkarmak için vardır
+- galeripic9.png — arkadaşları beklerken sınıfın sessizliği
 
 ## Blog (3 yazı)
 ### Yazı 1

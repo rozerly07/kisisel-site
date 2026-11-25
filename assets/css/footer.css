@@ -1,0 +1,98 @@
+/* ==========================================================================
+   footer.css — ortak imzalı footer (HTML'i components.js basar, tek kaynak)
+   Karo zeminli sayfalar: <div data-footer="karo"></div> → zeminin gradyanı #2A0D57'de
+   biter, footer oradan devam eder. Diğer sayfalar: footer body sonuna eklenir,
+   üst kenarı #140629'dan yumuşak gradyanla başlar.
+   ========================================================================== */
+.imza-footer {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 40px 24px 30px;
+  margin: 0;
+  background: linear-gradient(180deg, #140629 0%, #2A0D57 42%, #140629 100%);
+  color: #CDB8E6;
+  text-align: center;
+  overflow-x: clip;
+}
+/* karo zemini olmayan sayfa: üstteki zeminden #140629'a yumuşak geçiş */
+.imza-footer:not(.imza-footer--karo)::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 160px;
+  background: linear-gradient(180deg, rgba(20, 6, 41, 0), #140629);
+  pointer-events: none;
+}
+.imza-footer--karo { background: linear-gradient(180deg, #2A0D57, #140629); }
+
+.imza {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 100%;
+}
+/* Yazı: el yazısı fontun kuyrukları kutudan taşar → dolgu gradyanı için iç boşluk */
+.imza-yazi {
+  margin: 0;
+  padding: 0.18em 0.32em 0.12em;
+  font-family: "Mrs Saint Delafield", "Brush Script MT", cursive;
+  font-weight: 400;
+  font-size: 132px;
+  line-height: 1;
+  white-space: nowrap;
+  background: linear-gradient(90deg, #FFC24B, #FF5A8A 50%, #B98CFF);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #FF5A8A;
+  filter: drop-shadow(0 0 18px rgba(255, 120, 160, 0.45));
+}
+.imza-kuyruk {
+  display: block;
+  width: 86%;
+  height: auto;
+  margin: -0.42em auto 0;   /* yazının hemen altına (font-size'a göre) */
+  font-size: 132px;
+  overflow: visible;
+  filter: drop-shadow(0 0 6px rgba(255, 194, 75, 0.55));
+}
+.imza-kuyruk path {
+  fill: none;
+  stroke: url(#imza-altin);
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.imza-telif { margin: 14px 0 0; font-family: "Space Grotesk", system-ui, sans-serif; font-size: 14px; color: #CDB8E6; }
+
+/* İmza dokunuşu: JS .imza-hazir ekler (görünmez başlar), ekrana girince .imza-oyna */
+.imza-hazir .imza-yazi {
+  clip-path: inset(-30px calc(100% + 30px) -30px -30px);
+  transition: clip-path 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.imza-hazir .imza-kuyruk path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.9s ease-in-out 1.6s;
+}
+.imza-hazir.imza-oyna .imza-yazi { clip-path: inset(-30px -30px -30px -30px); }
+.imza-hazir.imza-oyna .imza-kuyruk path { stroke-dashoffset: 0; }
+.imza-bitti .imza-yazi { clip-path: none; }
+
+@media (max-width: 760px) {
+  .imza-footer { min-height: 240px; padding: 30px 16px 24px; }
+  .imza-yazi, .imza-kuyruk { font-size: 76px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .imza-hazir .imza-yazi { clip-path: none; transition: none; }
+  .imza-hazir .imza-kuyruk path { stroke-dashoffset: 0; transition: none; }
+}

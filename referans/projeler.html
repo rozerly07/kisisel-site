@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Projeler — onaylı referans</title>
+<!-- ONAYLI TASARIM (Projeler). Görünümü ve hareket değerlerini DEĞİŞTİRME.
+     Navbar, maskot, mobil menü ve footer: tr/index.html'deki ortak olanlar kullanılacak (buradakiler yer tutucu).
+     Fontlar ileride assets/fonts'tan; font-family adları aynı kalacak. -->
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;700&family=VT323&family=Rubik+Beastly&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+html{background:#140629}
+body{margin:0;color:#FFF3DD;font-family:"Space Grotesk",system-ui,sans-serif}
+body.detay-acik{overflow:hidden}
+a{color:#FFF3DD}a:hover{color:#FFD36B}
+@keyframes sway{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
+@keyframes sway2{0%,100%{transform:rotate(9deg)}50%{transform:rotate(-12deg)}}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes flick{0%,100%{opacity:1}12%{opacity:.3}17%{opacity:1}52%{opacity:.2}58%{opacity:1}}
+@keyframes scan{from{background-position:0 0}to{background-position:0 6px}}
+.px{font-family:"Pixelify Sans",VT323,monospace}
+.vt{font-family:VT323,monospace}
+.pxbtn{font-family:"Pixelify Sans",VT323,monospace;font-weight:700;cursor:pointer;border:0;color:#140629;background:linear-gradient(180deg,#FFE7A3,#FFC24B 55%,#E08A1E);box-shadow:inset 0 -4px 0 rgba(120,50,0,.45),inset 0 3px 0 rgba(255,255,255,.6),0 0 18px rgba(255,190,90,.45)}
+.pxbtn:disabled{opacity:.45;cursor:not-allowed}
+.pxbtn:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #7FE7FF;outline-offset:3px}
+/* navbar (yer tutucu) */
+.ust-bar{position:fixed;z-index:30;top:18px;left:40px;right:40px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 22px;border-radius:999px;background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(14px);box-shadow:0 10px 40px rgba(10,0,40,.45)}
+.ust-bar nav{display:flex;gap:28px;font-weight:500;font-size:15px}.ust-bar nav a{text-decoration:none}
+@media (max-width:760px){.ust-bar{left:12px;right:12px}.ust-bar nav{display:none}}
+/* sahne */
+#proje-iz{position:relative}
+#proje-sahne{position:sticky;top:0;height:100vh;min-height:560px;overflow:hidden;background:radial-gradient(ellipse 70% 55% at 50% 0%,#5B1E6E 0%,#2A0D45 55%,#140629 100%)}
+#psahne{position:absolute;left:50%;top:0;width:1280px;height:800px;transform-origin:50% 0}
+.isin{position:absolute;mix-blend-mode:screen;filter:blur(8px);pointer-events:none}
+#kartlar{position:absolute;left:440px;top:300px;width:240px;height:280px}
+.kart{position:absolute;left:0;top:0;width:240px;transition:transform 1.1s cubic-bezier(.22,1,.36,1),filter 1.1s ease}
+.kart-ic{position:relative}
+.kart-kes{background:linear-gradient(170deg,#3A1260,#1E0838)}
+.kart-gorsel{height:200px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.kart-gorsel img,#d-ana img{width:100%;height:100%;object-fit:cover;display:block}
+.kart-gorsel .vt{font-size:20px}
+.kart-yazi{padding:14px 22px 22px;display:flex;flex-direction:column;gap:2px}
+.kart-no{font-size:18px;color:#FF9AB0;letter-spacing:2px}.kart-ad{font-size:20px;font-weight:700}
+.kalem{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+#disk{position:absolute;left:50%;top:50%;width:540px;height:540px;margin:-270px 0 0 -270px;transform-origin:50% 50%;transition:transform 1.1s cubic-bezier(.22,1,.36,1)}
+/* panel */
+.panel{position:relative;box-sizing:border-box;padding:22px 24px 24px;border-radius:6px;background:linear-gradient(180deg,rgba(20,6,41,.82),rgba(42,13,69,.82));border:2px solid rgba(127,231,255,.55);box-shadow:0 0 0 4px rgba(20,6,41,.6),0 0 28px rgba(127,231,255,.25),inset 0 0 30px rgba(127,231,255,.08);display:flex;flex-direction:column;gap:12px;overflow:hidden}
+#panel{position:absolute;right:48px;top:236px;width:300px;z-index:6}
+.tarama{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 3px);animation:scan .4s linear infinite}
+.pn-ust{font-size:18px;color:#7FE7FF;letter-spacing:2px}.pn-ad{font-size:28px;font-weight:700;line-height:1.05}.pn-acik{font-size:20px;line-height:1.2;color:#D9C6EC}
+.pn-statlar{display:flex;flex-direction:column;gap:9px;margin-top:4px}
+.stat-ust{display:flex;justify-content:space-between;font-size:18px;color:#FFE7C2}
+.segler{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:3px;margin-top:3px}
+.segler span{height:12px;background:rgba(255,255,255,.12);transition:background .3s ease,box-shadow .3s ease}
+.segler span.dolu{background:linear-gradient(180deg,#FFE7A3,#FF5A6E);box-shadow:0 0 8px rgba(255,140,110,.55)}
+.pn-sec{align-self:flex-start;margin-top:6px;padding:11px 22px;font-size:18px}
+/* başlık ve kontroller (ölçeklenmez) */
+.p-baslik{position:absolute;left:56px;top:104px;z-index:5;display:flex;flex-direction:column;gap:4px}
+.p-baslik h1{margin:0;font-size:58px;font-weight:700;line-height:1;background:linear-gradient(180deg,#FFF6D6 10%,#FFC24B 50%,#FF5A6E 95%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 4px 0 #3A0B52) drop-shadow(0 0 22px rgba(255,170,80,.45))}
+.p-sayac{position:absolute;right:56px;top:112px;z-index:5;text-align:right;font-size:22px;color:#E9D6FF;line-height:1.1}
+#sayac{font-size:56px;color:#FFD36B;text-shadow:0 0 18px rgba(255,190,90,.6)}
+.kontroller{position:absolute;left:0;right:0;bottom:26px;z-index:6;display:flex;justify-content:center;align-items:center;gap:20px}
+.kontroller .pxbtn{width:52px;height:46px;font-size:20px}
+#noktalar{display:flex;gap:10px}#noktalar button{width:16px;height:16px;padding:0;border:2px solid #FFE7A3;cursor:pointer;background:transparent}
+#noktalar button.aktif{background:#FFC24B;box-shadow:0 0 12px rgba(255,190,90,.8)}
+.ipucu{position:absolute;left:56px;bottom:34px;z-index:6;font-size:20px;color:#BFA8DA}
+#panel-mobil{display:none}
+@media (max-width:760px){
+  #proje-sahne{position:relative;height:auto;min-height:0}
+  #panel{display:none}
+  .p-baslik{left:16px;top:84px}.p-baslik h1{font-size:34px}.p-baslik .vt{font-size:18px!important}
+  .p-sayac{right:16px;top:90px}#sayac{font-size:34px}
+  .ipucu{display:none}
+  .kontroller{bottom:14px}
+  #panel-mobil{display:flex;margin:0 14px 40px}
+}
+/* detay penceresi */
+#detay-perde{position:fixed;inset:0;z-index:40;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(20,6,41,.55),rgba(8,2,18,.92));opacity:0;transition:opacity .6s ease}
+#detay-perde.acik{opacity:1}
+#detay{position:fixed;left:50%;top:50%;z-index:41;width:min(1020px,92vw);height:min(640px,88vh);transform:translate(-50%,-50%) translate(-14vw,10vh) scale(.3);opacity:0;transition:transform .75s cubic-bezier(.22,1,.36,1),opacity .5s ease}
+#detay.acik{transform:translate(-50%,-50%);opacity:1}
+#d-kes{position:absolute;inset:0;background:linear-gradient(165deg,#3A1260,#1E0838 60%,#140629)}
+.d-icerik{position:absolute;inset:0;padding:54px 60px 48px;display:flex;gap:44px;overflow:auto}
+.d-sol{flex:0 0 51%;display:flex;flex-direction:column;gap:14px;min-width:0}
+#d-ana{flex:1;min-height:200px;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:inset 0 0 0 2px rgba(255,231,194,.25)}
+#d-ana .vt{font-size:24px}
+#d-kucukler{display:flex;gap:12px}
+#d-kucukler button{flex:1;height:96px;padding:0;cursor:pointer;background:#1E0838;border:2px solid rgba(255,231,194,.25);opacity:.55;transition:opacity .3s,border-color .3s;overflow:hidden}
+#d-kucukler button.aktif{opacity:1;border-color:#FFC24B;box-shadow:0 0 14px rgba(255,190,90,.5)}
+#d-kucukler img{width:100%;height:100%;object-fit:cover;display:block}
+.d-sag{flex:1;display:flex;flex-direction:column;gap:12px;min-width:0}
+#d-no{font-size:20px;color:#7FE7FF;letter-spacing:2px}
+#d-ad{margin:0;font-size:40px;font-weight:700;line-height:1.05;background:linear-gradient(180deg,#FFF6D6 10%,#FFC24B 50%,#FF5A6E 95%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 16px rgba(255,170,80,.4))}
+.d-bilgi{display:flex;gap:18px;font-size:19px;color:#FFE7C2}
+#d-acik{margin:0;font-size:21px;line-height:1.25;color:#E3D2F4}
+#detay .stat{display:grid;grid-template-columns:110px 1fr 46px;align-items:center;gap:10px}
+#detay .stat-ust{display:contents}#detay .stat-ad{grid-column:1}#detay .stat-deger{grid-column:3;text-align:right}#detay .segler{grid-column:2;grid-row:1;margin:0}
+.d-dugmeler{display:flex;gap:14px;margin-top:auto;flex-wrap:wrap}
+#d-link{display:inline-block;padding:12px 22px;font-size:18px;text-decoration:none;color:#140629}
+#d-kapat{padding:12px 20px;font-family:VT323,monospace;font-size:20px;cursor:pointer;color:#FFE7C2;background:transparent;border:2px solid rgba(255,231,194,.5)}
+@media (max-width:760px){.d-icerik{flex-direction:column;padding:34px 26px 30px;gap:20px}.d-sol{flex:none}#d-ana{min-height:220px}#d-ad{font-size:30px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* footer (yer tutucu — ortak footer kullanılacak) */
+.alt{display:flex;flex-direction:column;align-items:center;gap:10px;padding:40px 24px 30px;background:linear-gradient(180deg,#140629,#2A0D57 40%,#140629)}
+.alt p{margin:0}
+</style>
+</head>
+<body>
+<header class="ust-bar"><span style="font-weight:700;color:#FFD36B">[LOGO]</span>
+  <nav aria-label="Ana menü"><a href="index.html">Anasayfa</a><a href="about.html">Hakkımda</a><a href="projects.html" aria-current="page" style="color:#FFD36B">Projeler</a><a href="gallery.html">Galeri</a><a href="blog.html">Blog</a><a href="contact.html">İletişim</a></nav>
+  <a href="../en/projects.html" style="font-size:14px;font-weight:700;padding:6px 14px;border-radius:999px;text-decoration:none;background:linear-gradient(90deg,#FF4D6D,#FF9A3D)">TR · EN</a></header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="kc0" clipPathUnits="objectBoundingBox"><path d="M0.0515 0.0494 L0.0724 0.0477 L0.0934 0.0464 L0.1143 0.0466 L0.1352 0.0485 L0.1561 0.0508 L0.1770 0.0520 L0.1979 0.0510 L0.2188 0.0478 L0.2398 0.0436 L0.2607 0.0401 L0.2816 0.0386 L0.3025 0.0392 L0.3234 0.0409 L0.3443 0.0423 L0.3653 0.0422 L0.3862 0.0404 L0.4071 0.0380 L0.4280 0.0365 L0.4489 0.0373 L0.4698 0.0403 L0.4907 0.0447 L0.5116 0.0486 L0.5325 0.0508 L0.5534 0.0509 L0.5743 0.0498 L0.5952 0.0489 L0.6161 0.0496 L0.6370 0.0520 L0.6579 0.0552 L0.6788 0.0575 L0.6997 0.0578 L0.7207 0.0557 L0.7416 0.0520 L0.7625 0.0485 L0.7835 0.0464 L0.8044 0.0464 L0.8253 0.0477 L0.8462 0.0488 L0.8671 0.0484 L0.8880 0.0462 L0.9090 0.0429 L0.9299 0.0403 L0.9508 0.0396 L0.9638 0.0702 L0.9647 0.0908 L0.9646 0.1114 L0.9641 0.1320 L0.9639 0.1526 L0.9648 0.1732 L0.9671 0.1938 L0.9702 0.2144 L0.9735 0.2350 L0.9757 0.2556 L0.9761 0.2762 L0.9742 0.2968 L0.9703 0.3174 L0.9654 0.3380 L0.9606 0.3585 L0.9570 0.3791 L0.9553 0.3997 L0.9554 0.4203 L0.9567 0.4409 L0.9583 0.4615 L0.9593 0.4821 L0.9593 0.5027 L0.9586 0.5233 L0.9576 0.5439 L0.9574 0.5645 L0.9585 0.5851 L0.9611 0.6057 L0.9650 0.6263 L0.9691 0.6470 L0.9723 0.6676 L0.9736 0.6882 L0.9725 0.7088 L0.9694 0.7294 L0.9651 0.7499 L0.9607 0.7705 L0.9572 0.7911 L0.9553 0.8117 L0.9550 0.8323 L0.9556 0.8529 L0.9562 0.8735 L0.9562 0.8941 L0.9552 0.9146 L0.9535 0.9352 L0.9518 0.9558 L0.9425 0.9632 L0.9212 0.9646 L0.9000 0.9645 L0.8787 0.9635 L0.8575 0.9620 L0.8363 0.9607 L0.8150 0.9601 L0.7938 0.9600 L0.7725 0.9601 L0.7513 0.9598 L0.7300 0.9588 L0.7088 0.9567 L0.6876 0.9540 L0.6664 0.9511 L0.6451 0.9490 L0.6239 0.9483 L0.6026 0.9494 L0.5814 0.9520 L0.5601 0.9556 L0.5388 0.9591 L0.5176 0.9618 L0.4963 0.9630 L0.4751 0.9627 L0.4539 0.9613 L0.4326 0.9594 L0.4114 0.9577 L0.3901 0.9566 L0.3689 0.9562 L0.3477 0.9562 L0.3264 0.9559 L0.3052 0.9550 L0.2839 0.9533 L0.2627 0.9509 L0.2415 0.9484 L0.2203 0.9467 L0.1990 0.9464 L0.1778 0.9477 L0.1565 0.9505 L0.1352 0.9542 L0.1140 0.9577 L0.0927 0.9603 L0.0715 0.9613 L0.0502 0.9607 L0.0314 0.9327 L0.0320 0.9119 L0.0322 0.8912 L0.0322 0.8704 L0.0324 0.8497 L0.0332 0.8290 L0.0347 0.8082 L0.0369 0.7875 L0.0395 0.7668 L0.0422 0.7461 L0.0445 0.7254 L0.0458 0.7047 L0.0459 0.6839 L0.0448 0.6632 L0.0427 0.6424 L0.0401 0.6216 L0.0374 0.6008 L0.0352 0.5800 L0.0339 0.5593 L0.0336 0.5385 L0.0342 0.5178 L0.0354 0.4970 L0.0367 0.4763 L0.0378 0.4556 L0.0385 0.4348 L0.0386 0.4141 L0.0385 0.3934 L0.0384 0.3726 L0.0386 0.3519 L0.0396 0.3311 L0.0413 0.3104 L0.0439 0.2897 L0.0468 0.2690 L0.0498 0.2483 L0.0521 0.2276 L0.0535 0.2069 L0.0536 0.1861 L0.0526 0.1654 L0.0506 0.1446 L0.0481 0.1238 L0.0456 0.1030 L0.0437 0.0822 L0.0426 0.0615Z"/></clipPath><clipPath id="kc1" clipPathUnits="objectBoundingBox"><path d="M0.0427 0.0461 L0.0633 0.0414 L0.0838 0.0362 L0.1044 0.0324 L0.1250 0.0309 L0.1456 0.0318 L0.1662 0.0341 L0.1869 0.0361 L0.2075 0.0368 L0.2281 0.0362 L0.2487 0.0353 L0.2693 0.0352 L0.2899 0.0371 L0.3106 0.0407 L0.3312 0.0449 L0.3518 0.0480 L0.3724 0.0488 L0.3930 0.0467 L0.4136 0.0428 L0.4342 0.0386 L0.4548 0.0356 L0.4754 0.0345 L0.4960 0.0348 L0.5166 0.0353 L0.5372 0.0347 L0.5578 0.0327 L0.5784 0.0298 L0.5990 0.0275 L0.6196 0.0271 L0.6402 0.0293 L0.6608 0.0336 L0.6815 0.0384 L0.7021 0.0421 L0.7227 0.0435 L0.7433 0.0426 L0.7639 0.0404 L0.7845 0.0385 L0.8051 0.0379 L0.8257 0.0385 L0.8464 0.0394 L0.8670 0.0392 L0.8876 0.0370 L0.9081 0.0330 L0.9287 0.0282 L0.9493 0.0245 L0.9564 0.0425 L0.9572 0.0632 L0.9589 0.0839 L0.9617 0.1047 L0.9650 0.1254 L0.9679 0.1461 L0.9697 0.1668 L0.9697 0.1875 L0.9675 0.2082 L0.9636 0.2289 L0.9589 0.2497 L0.9544 0.2704 L0.9511 0.2912 L0.9498 0.3119 L0.9506 0.3326 L0.9530 0.3533 L0.9563 0.3740 L0.9594 0.3947 L0.9618 0.4154 L0.9632 0.4361 L0.9636 0.4568 L0.9636 0.4776 L0.9637 0.4983 L0.9643 0.5190 L0.9656 0.5397 L0.9671 0.5604 L0.9682 0.5811 L0.9682 0.6018 L0.9667 0.6226 L0.9636 0.6433 L0.9596 0.6640 L0.9554 0.6848 L0.9521 0.7055 L0.9506 0.7262 L0.9513 0.7469 L0.9542 0.7676 L0.9584 0.7883 L0.9630 0.8090 L0.9669 0.8297 L0.9694 0.8504 L0.9702 0.8711 L0.9695 0.8919 L0.9681 0.9126 L0.9666 0.9333 L0.9570 0.9452 L0.9362 0.9494 L0.9154 0.9522 L0.8946 0.9531 L0.8737 0.9526 L0.8528 0.9519 L0.8320 0.9520 L0.8111 0.9533 L0.7903 0.9552 L0.7695 0.9566 L0.7486 0.9564 L0.7277 0.9543 L0.7068 0.9507 L0.6858 0.9470 L0.6649 0.9446 L0.6441 0.9443 L0.6232 0.9461 L0.6024 0.9491 L0.5816 0.9519 L0.5608 0.9535 L0.5400 0.9539 L0.5191 0.9538 L0.4982 0.9542 L0.4774 0.9561 L0.4566 0.9593 L0.4358 0.9630 L0.4150 0.9659 L0.3942 0.9668 L0.3733 0.9653 L0.3524 0.9622 L0.3314 0.9587 L0.3105 0.9563 L0.2897 0.9555 L0.2688 0.9563 L0.2480 0.9576 L0.2271 0.9583 L0.2063 0.9579 L0.1854 0.9566 L0.1645 0.9554 L0.1436 0.9555 L0.1228 0.9577 L0.1020 0.9617 L0.0812 0.9664 L0.0605 0.9703 L0.0543 0.9549 L0.0537 0.9343 L0.0536 0.9137 L0.0538 0.8931 L0.0537 0.8725 L0.0530 0.8519 L0.0513 0.8313 L0.0486 0.8107 L0.0454 0.7902 L0.0423 0.7696 L0.0400 0.7490 L0.0391 0.7284 L0.0398 0.7078 L0.0419 0.6871 L0.0449 0.6665 L0.0481 0.6458 L0.0506 0.6252 L0.0520 0.6046 L0.0522 0.5839 L0.0513 0.5633 L0.0499 0.5428 L0.0486 0.5222 L0.0477 0.5016 L0.0474 0.4810 L0.0475 0.4603 L0.0476 0.4397 L0.0471 0.4191 L0.0457 0.3985 L0.0433 0.3780 L0.0403 0.3574 L0.0371 0.3368 L0.0345 0.3162 L0.0331 0.2957 L0.0334 0.2750 L0.0352 0.2544 L0.0380 0.2337 L0.0412 0.2131 L0.0440 0.1924 L0.0458 0.1718 L0.0463 0.1512 L0.0457 0.1306 L0.0444 0.1100 L0.0429 0.0894 L0.0418 0.0688 L0.0413 0.0482Z"/></clipPath><clipPath id="kc2" clipPathUnits="objectBoundingBox"><path d="M0.0515 0.0599 L0.0727 0.0548 L0.0938 0.0489 L0.1150 0.0442 L0.1363 0.0420 L0.1576 0.0424 L0.1790 0.0440 L0.2003 0.0450 L0.2216 0.0442 L0.2429 0.0416 L0.2641 0.0385 L0.2854 0.0367 L0.3067 0.0377 L0.3281 0.0412 L0.3495 0.0461 L0.3710 0.0501 L0.3923 0.0519 L0.4136 0.0510 L0.4349 0.0486 L0.4561 0.0464 L0.4774 0.0460 L0.4988 0.0474 L0.5201 0.0497 L0.5415 0.0510 L0.5628 0.0497 L0.5840 0.0457 L0.6052 0.0400 L0.6263 0.0345 L0.6476 0.0312 L0.6689 0.0305 L0.6902 0.0315 L0.7116 0.0327 L0.7329 0.0323 L0.7541 0.0300 L0.7754 0.0265 L0.7966 0.0236 L0.8179 0.0231 L0.8393 0.0255 L0.8607 0.0299 L0.8821 0.0345 L0.9035 0.0373 L0.9248 0.0375 L0.9461 0.0358 L0.9485 0.0393 L0.9473 0.0601 L0.9484 0.0809 L0.9507 0.1018 L0.9527 0.1227 L0.9532 0.1435 L0.9523 0.1643 L0.9510 0.1852 L0.9507 0.2060 L0.9525 0.2268 L0.9562 0.2477 L0.9605 0.2686 L0.9635 0.2895 L0.9642 0.3103 L0.9623 0.3311 L0.9590 0.3519 L0.9560 0.3727 L0.9544 0.3936 L0.9545 0.4144 L0.9552 0.4352 L0.9552 0.4561 L0.9533 0.4769 L0.9497 0.4977 L0.9455 0.5185 L0.9424 0.5393 L0.9418 0.5602 L0.9437 0.5810 L0.9472 0.6019 L0.9505 0.6227 L0.9523 0.6436 L0.9523 0.6644 L0.9513 0.6853 L0.9508 0.7061 L0.9518 0.7269 L0.9545 0.7478 L0.9579 0.7687 L0.9601 0.7895 L0.9600 0.8104 L0.9574 0.8312 L0.9531 0.8520 L0.9489 0.8728 L0.9463 0.8936 L0.9458 0.9144 L0.9465 0.9353 L0.9471 0.9561 L0.9470 0.9609 L0.9265 0.9618 L0.9059 0.9622 L0.8853 0.9619 L0.8647 0.9611 L0.8442 0.9601 L0.8236 0.9597 L0.8030 0.9602 L0.7824 0.9619 L0.7618 0.9645 L0.7412 0.9676 L0.7206 0.9704 L0.7000 0.9721 L0.6795 0.9722 L0.6589 0.9708 L0.6384 0.9681 L0.6178 0.9647 L0.5973 0.9614 L0.5767 0.9589 L0.5562 0.9575 L0.5356 0.9571 L0.5150 0.9574 L0.4945 0.9577 L0.4739 0.9575 L0.4533 0.9567 L0.4328 0.9553 L0.4122 0.9537 L0.3917 0.9526 L0.3711 0.9525 L0.3505 0.9537 L0.3299 0.9561 L0.3093 0.9594 L0.2887 0.9628 L0.2681 0.9654 L0.2475 0.9667 L0.2269 0.9664 L0.2063 0.9647 L0.1858 0.9621 L0.1653 0.9593 L0.1447 0.9569 L0.1242 0.9554 L0.1036 0.9548 L0.0830 0.9547 L0.0624 0.9547 L0.0419 0.9542 L0.0346 0.9514 L0.0339 0.9310 L0.0346 0.9106 L0.0373 0.8902 L0.0414 0.8697 L0.0455 0.8493 L0.0481 0.8289 L0.0481 0.8084 L0.0455 0.7880 L0.0415 0.7676 L0.0376 0.7472 L0.0351 0.7268 L0.0345 0.7064 L0.0350 0.6860 L0.0354 0.6656 L0.0346 0.6452 L0.0322 0.6248 L0.0291 0.6043 L0.0266 0.5839 L0.0261 0.5635 L0.0282 0.5431 L0.0325 0.5227 L0.0374 0.5022 L0.0412 0.4818 L0.0429 0.4614 L0.0425 0.4410 L0.0407 0.4205 L0.0392 0.4001 L0.0389 0.3797 L0.0399 0.3593 L0.0413 0.3389 L0.0419 0.3185 L0.0404 0.2980 L0.0367 0.2776 L0.0318 0.2572 L0.0272 0.2368 L0.0245 0.2164 L0.0245 0.1960 L0.0267 0.1756 L0.0299 0.1552 L0.0325 0.1347 L0.0336 0.1143 L0.0333 0.0939 L0.0326 0.0735 L0.0327 0.0531Z"/></clipPath>
+    <filter id="pencil2" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="0.7" xChannelSelector="R" yChannelSelector="G" result="d"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.6 1.35" result="g"/><feComposite in="d" in2="g" operator="in"/></filter></defs></svg>
+<main>
+<section id="proje-iz" aria-label="Projeler">
+  <div id="proje-sahne">
+    <div id="psahne" aria-hidden="false">
+      <svg style="position:absolute;left:0;top:0" width="1280" height="800" viewBox="0 0 1280 800" aria-hidden="true">
+    <defs><clipPath id="glb"><ellipse cx="640" cy="990" rx="1500" ry="400"/></clipPath>
+    <linearGradient id="flp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9A6E0"/><stop offset="1" stop-color="#F4E2FF"/></linearGradient></defs>
+    <g transform="translate(0 -110)"><g clip-path="url(#glb)"><rect x="0" y="560" width="1280" height="690" fill="url(#flp)"/><g fill="#1A0B33"><polygon points="-291,1090 -105,1090 23,971 -131,971"/><polygon points="81,1090 268,1090 331,971 177,971"/><polygon points="454,1090 640,1090 640,971 486,971"/><polygon points="826,1090 1012,1090 949,971 794,971"/><polygon points="1199,1090 1385,1090 1257,971 1103,971"/><polygon points="23,971 177,971 245,888 113,888"/><polygon points="331,971 486,971 508,888 377,888"/><polygon points="640,971 794,971 772,888 640,888"/><polygon points="949,971 1103,971 1035,888 903,888"/><polygon points="1257,971 1411,971 1299,888 1167,888"/><polygon points="-19,888 113,888 180,826 66,826"/><polygon points="245,888 377,888 410,826 295,826"/><polygon points="508,888 640,888 640,826 525,826"/><polygon points="772,888 903,888 870,826 755,826"/><polygon points="1035,888 1167,888 1100,826 985,826"/><polygon points="1299,888 1430,888 1329,826 1214,826"/><polygon points="-49,826 66,826 131,777 29,777"/><polygon points="180,826 295,826 334,777 232,777"/><polygon points="410,826 525,826 538,777 436,777"/><polygon points="640,826 755,826 742,777 640,777"/><polygon points="870,826 985,826 946,777 844,777"/><polygon points="1100,826 1214,826 1149,777 1048,777"/><polygon points="1329,826 1444,826 1353,777 1251,777"/><polygon points="-73,777 29,777 91,739 -1,739"/><polygon points="131,777 232,777 274,739 182,739"/><polygon points="334,777 436,777 457,739 365,739"/><polygon points="538,777 640,777 640,739 548,739"/><polygon points="742,777 844,777 823,739 732,739"/><polygon points="946,777 1048,777 1006,739 915,739"/><polygon points="1149,777 1251,777 1189,739 1098,739"/><polygon points="1353,777 1455,777 1372,739 1281,739"/><polygon points="-92,739 -1,739 58,708 -25,708"/><polygon points="91,739 182,739 225,708 142,708"/><polygon points="274,739 365,739 391,708 308,708"/><polygon points="457,739 548,739 557,708 474,708"/><polygon points="640,739 732,739 723,708 640,708"/><polygon points="823,739 915,739 889,708 806,708"/><polygon points="1006,739 1098,739 1055,708 972,708"/><polygon points="1189,739 1281,739 1222,708 1138,708"/><polygon points="-108,708 -25,708 32,682 -45,682"/><polygon points="58,708 142,708 184,682 108,682"/><polygon points="225,708 308,708 336,682 260,682"/><polygon points="391,708 474,708 488,682 412,682"/><polygon points="557,708 640,708 640,682 564,682"/><polygon points="723,708 806,708 792,682 716,682"/><polygon points="889,708 972,708 944,682 868,682"/><polygon points="1055,708 1138,708 1096,682 1020,682"/><polygon points="1222,708 1305,708 1248,682 1172,682"/><polygon points="-121,682 -45,682 9,660 -61,660"/><polygon points="32,682 108,682 149,660 79,660"/><polygon points="184,682 260,682 289,660 219,660"/><polygon points="336,682 412,682 430,660 359,660"/><polygon points="488,682 564,682 570,660 500,660"/><polygon points="640,682 716,682 710,660 640,660"/><polygon points="792,682 868,682 850,660 780,660"/><polygon points="944,682 1020,682 991,660 921,660"/><polygon points="1096,682 1172,682 1131,660 1061,660"/><polygon points="1248,682 1325,682 1271,660 1201,660"/><polygon points="9,660 79,660 120,641 54,641"/><polygon points="149,660 219,660 250,641 185,641"/><polygon points="289,660 359,660 380,641 315,641"/><polygon points="430,660 500,660 510,641 445,641"/><polygon points="570,660 640,660 640,641 575,641"/><polygon points="710,660 780,660 770,641 705,641"/><polygon points="850,660 921,660 900,641 835,641"/><polygon points="991,660 1061,660 1030,641 965,641"/><polygon points="1131,660 1201,660 1160,641 1095,641"/><polygon points="1271,660 1341,660 1291,641 1226,641"/><polygon points="-11,641 54,641 94,625 33,625"/><polygon points="120,641 185,641 215,625 155,625"/><polygon points="250,641 315,641 337,625 276,625"/><polygon points="380,641 445,641 458,625 397,625"/><polygon points="510,641 575,641 579,625 519,625"/><polygon points="640,641 705,641 701,625 640,625"/><polygon points="770,641 835,641 822,625 761,625"/><polygon points="900,641 965,641 943,625 883,625"/><polygon points="1030,641 1095,641 1065,625 1004,625"/><polygon points="1160,641 1226,641 1186,625 1125,625"/><polygon points="1291,641 1356,641 1307,625 1247,625"/><polygon points="-27,625 33,625 72,611 15,611"/><polygon points="94,625 155,625 185,611 128,611"/><polygon points="215,625 276,625 299,611 242,611"/><polygon points="337,625 397,625 413,611 356,611"/><polygon points="458,625 519,625 526,611 469,611"/><polygon points="579,625 640,625 640,611 583,611"/><polygon points="701,625 761,625 754,611 697,611"/><polygon points="822,625 883,625 867,611 811,611"/><polygon points="943,625 1004,625 981,611 924,611"/><polygon points="1065,625 1125,625 1095,611 1038,611"/><polygon points="1186,625 1247,625 1208,611 1152,611"/><polygon points="1307,625 1368,625 1322,611 1265,611"/><polygon points="-42,611 15,611 52,598 -2,598"/><polygon points="72,611 128,611 159,598 105,598"/><polygon points="185,611 242,611 266,598 212,598"/><polygon points="299,611 356,611 373,598 319,598"/><polygon points="413,611 469,611 480,598 426,598"/><polygon points="526,611 583,611 587,598 533,598"/><polygon points="640,611 697,611 693,598 640,598"/><polygon points="754,611 811,611 800,598 747,598"/><polygon points="867,611 924,611 907,598 854,598"/><polygon points="981,611 1038,611 1014,598 961,598"/><polygon points="1095,611 1152,611 1121,598 1068,598"/><polygon points="1208,611 1265,611 1228,598 1175,598"/><polygon points="1322,611 1379,611 1335,598 1282,598"/><polygon points="-55,598 -2,598 34,587 -16,587"/><polygon points="52,598 105,598 135,587 85,587"/><polygon points="159,598 212,598 236,587 186,587"/><polygon points="266,598 319,598 337,587 287,587"/><polygon points="373,598 426,598 438,587 388,587"/><polygon points="480,598 533,598 539,587 489,587"/><polygon points="587,598 640,598 640,587 590,587"/><polygon points="693,598 747,598 741,587 690,587"/><polygon points="800,598 854,598 842,587 791,587"/><polygon points="907,598 961,598 943,587 892,587"/><polygon points="1014,598 1068,598 1044,587 993,587"/><polygon points="1121,598 1175,598 1145,587 1094,587"/><polygon points="1228,598 1282,598 1246,587 1195,587"/><polygon points="-67,587 -16,587 19,577 -29,577"/><polygon points="34,587 85,587 114,577 67,577"/><polygon points="135,587 186,587 210,577 162,577"/><polygon points="236,587 287,587 305,577 258,577"/><polygon points="337,587 388,587 401,577 353,577"/><polygon points="438,587 489,587 497,577 449,577"/><polygon points="539,587 590,587 592,577 544,577"/><polygon points="640,587 690,587 688,577 640,577"/><polygon points="741,587 791,587 783,577 736,577"/><polygon points="842,587 892,587 879,577 831,577"/><polygon points="943,587 993,587 975,577 927,577"/><polygon points="1044,587 1094,587 1070,577 1022,577"/><polygon points="1145,587 1195,587 1166,577 1118,577"/><polygon points="1246,587 1296,587 1261,577 1213,577"/></g></g>
+    <ellipse cx="640" cy="990" rx="1500" ry="400" fill="none" stroke="#FFE7C2" stroke-opacity=".6" stroke-width="2"/></g>
+  </svg>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 34% 40% at 44% 66%,rgba(255,214,140,.30),transparent 70%),linear-gradient(0deg,rgba(20,6,41,.55),transparent 35%)" aria-hidden="true"></div>
+      <div class="isin" style="left:220px;top:-60px;width:170px;height:760px;transform-origin:50% 0;animation:sway 9s ease-in-out infinite;background:linear-gradient(180deg,rgba(255,226,150,0),rgba(255,226,150,.32) 85%);clip-path:polygon(45% 0,55% 0,100% 100%,0 100%)" aria-hidden="true"></div>
+      <div class="isin" style="left:730px;top:-60px;width:170px;height:760px;transform-origin:50% 0;animation:sway2 10s ease-in-out infinite;background:linear-gradient(180deg,rgba(140,230,255,0),rgba(140,230,255,.28) 85%);clip-path:polygon(45% 0,55% 0,100% 100%,0 100%)" aria-hidden="true"></div>
+      <div class="isin" style="left:390px;top:-40px;width:340px;height:700px;filter:blur(10px);background:linear-gradient(180deg,rgba(255,240,200,0),rgba(255,240,200,.22));clip-path:polygon(44% 0,56% 0,100% 100%,0 100%)" aria-hidden="true"></div>
+      <!-- döner podyum -->
+      <div style="position:absolute;left:260px;top:548px;width:600px;height:150px" aria-hidden="true">
+        <div style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse at 50% 50%,rgba(255,200,110,.35),transparent 70%);filter:blur(14px)"></div>
+        <div style="position:absolute;left:30px;right:30px;top:40px;height:100px;border-radius:50%;background:linear-gradient(180deg,#8A5A14,#3A1E05)"></div>
+        <div style="position:absolute;left:30px;right:30px;top:18px;height:100px;border-radius:50%;overflow:hidden;background:linear-gradient(160deg,#FFF1B8,#C98A2B 45%,#FFE7A3 70%,#8A5A14);padding:6px;box-sizing:border-box">
+          <div style="width:100%;height:100%;border-radius:50%;overflow:hidden;position:relative;background:#2A0D45">
+            <div id="disk"><div style="width:100%;height:100%;border-radius:50%;background:repeating-conic-gradient(#C6306E 0 15deg,#FFF3DD 0 30deg)"></div></div>
+          </div>
+        </div>
+        <div style="position:absolute;left:44px;right:44px;top:28px;height:80px;display:flex;justify-content:space-between;align-items:center"><span style="width:8px;height:8px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 10px 2px #FFB84D;transform:translateY(0.0px);animation:flick 1.84s ease-in-out infinite;animation-delay:-1.11s"></span><span style="width:8px;height:8px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 10px 2px #FFB84D;transform:translateY(10.1px);animation:flick 2.92s ease-in-out infinite;animation-delay:-2.49s"></span><span style="width:8px;height:8px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 10px 2px #FFB84D;transform:translateY(19.5px);animation:flick 1.34s ease-in-out infinite;animation-delay:-2.82s"></span><span style="width:8px;height:8px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 10px 2px #FFB84D;transform:translateY(27.2px);animation:flick 2.42s ease-in-out infinite;animation-delay:-1.98s"></span><span style="width:8px;height:8px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 10px 2px #FFB84D;transform:translateY(32.7px);animation:flick 2.06s ease-in-out infinite;animation-delay:-0.87s"></span><span style="width:8px;height:8px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 10px 2px #FFB84D;transform:translateY(35.6px);animation:flick 2.76s ease-in-out infinite;animation-delay:-2.73s"></span><span style="width:8px;height:8px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 10px 2px #FFB84D;transform:translateY(35.6px);animation:flick 1.20s ease-in-out infinite;animation-delay:-0.15s"></span><span style="width:8px;height:8px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 10px 2px #FFB84D;transform:translateY(32.7px);animation:flick 2.54s ease-in-out infinite;animation-delay:-0.63s"></span><span style="width:8px;height:8px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 10px 2px #FFB84D;transform:translateY(27.2px);animation:flick 1.68s ease-in-out infinite;animation-delay:-1.44s"></span><span style="width:8px;height:8px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 10px 2px #FFB84D;transform:translateY(19.5px);animation:flick 2.26s ease-in-out infinite;animation-delay:-1.74s"></span><span style="width:8px;height:8px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 10px 2px #FFB84D;transform:translateY(10.1px);animation:flick 2.98s ease-in-out infinite;animation-delay:-0.36s"></span><span style="width:8px;height:8px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 10px 2px #FFB84D;transform:translateY(0.0px);animation:flick 1.52s ease-in-out infinite;animation-delay:-2.16s"></span></div>
+      </div>
+      <div id="kartlar"></div>
+      <div id="panel" class="panel" aria-live="polite"></div>
+    </div>
+    <div class="p-baslik">
+      <span class="vt" style="font-size:24px;letter-spacing:3px;color:#7FE7FF;text-shadow:0 0 12px rgba(127,231,255,.6)">&gt; PROJELER.EXE<span style="animation:blink 1s steps(1) infinite">_</span></span>
+      <h1 class="px">NUMARANI SEÇ</h1>
+    </div>
+    <div class="p-sayac vt"><div id="sayac">01/04</div><div style="letter-spacing:2px">PROJE</div></div>
+    <div class="kontroller" id="kontroller-masa">
+      <button class="pxbtn" id="onceki" type="button" aria-label="Önceki proje">◀</button>
+      <div id="noktalar"></div>
+      <button class="pxbtn" id="sonraki" type="button" aria-label="Sonraki proje">▶</button>
+    </div>
+    <span class="vt ipucu">KAYDIR · OKLAR · NOKTALAR</span>
+  </div>
+  <div id="panel-mobil" class="panel" aria-live="polite"></div>
+</section>
+</main>
+<div id="detay-perde" hidden></div>
+<div id="detay" role="dialog" aria-modal="true" aria-labelledby="d-ad" hidden>
+  <div id="d-kes">
+    <div class="tarama" aria-hidden="true"></div>
+    <div class="d-icerik">
+      <div class="d-sol"><div id="d-ana"></div><div id="d-kucukler"></div></div>
+      <div class="d-sag">
+        <span class="vt" id="d-no"></span>
+        <h2 class="px" id="d-ad"></h2>
+        <div class="vt d-bilgi"><span id="d-rol"></span><span id="d-yil"></span></div>
+        <p class="vt" id="d-acik"></p>
+        <div class="pn-statlar"><div class="stat"><div class="vt stat-ust"><span class="stat-ad"></span><span class="stat-deger"></span></div><div class="segler"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div><div class="stat"><div class="vt stat-ust"><span class="stat-ad"></span><span class="stat-deger"></span></div><div class="segler"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div><div class="stat"><div class="vt stat-ust"><span class="stat-ad"></span><span class="stat-deger"></span></div><div class="segler"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div></div>
+        <div class="d-dugmeler">
+          <a class="pxbtn" id="d-link" href="#" target="_blank" rel="noopener">PROJEYİ AÇ ↗</a>
+          <button type="button" id="d-kapat">KAPAT [ESC]</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="d-kalem" style="position:absolute;inset:0;pointer-events:none"></div>
+</div>
+<footer class="alt">
+  <p style="font-family:'Rubik Beastly',Impact,cursive;font-size:64px;line-height:1;background:linear-gradient(90deg,#FFC24B,#FF5A8A 50%,#B98CFF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">roze's world</p>
+  <p style="font-size:14px;color:#CDB8E6">© 2026 roze's world · Tüm hakları saklıdır.</p>
+</footer>
+<script>
+(function () {
+  /* ================= VERİ =================
+     Projeleri buraya yaz (ICERIK.md'den). Alan boşsa pencerede o kısım gizlenir.
+     gorseller: 1 tane de olur; 1'den fazlaysa küçük görseller çıkar.
+     kilitli:true → oyunlardaki gibi kilitli "YAKINDA" numarası (istersen sil). */
+  var PROJELER = [
+    { ad: '[PROJE 1 ADI]', kisa: '[Kısa açıklama, 1-2 cümle]', uzun: '[Uzun açıklama, 3-5 cümle]', rol: '[ROLÜN]', yil: '[YIL]', link: '',
+      gorseller: [], araclar: [['[ARAÇ 1]', 8], ['[ARAÇ 2]', 6], ['[ARAÇ 3]', 4]], renk: 'linear-gradient(160deg,#2A0D57,#C6306E 70%,#FF8A3D)' },
+    { ad: '[PROJE 2 ADI]', kisa: '[Kısa açıklama, 1-2 cümle]', uzun: '[Uzun açıklama, 3-5 cümle]', rol: '[ROLÜN]', yil: '[YIL]', link: '',
+      gorseller: [], araclar: [['[ARAÇ 1]', 5], ['[ARAÇ 2]', 9], ['[ARAÇ 3]', 7]], renk: 'linear-gradient(160deg,#0E3A6E,#6A1B7A 60%,#FF5A8A)' },
+    { ad: '[PROJE 3 ADI]', kisa: '[Kısa açıklama, 1-2 cümle]', uzun: '[Uzun açıklama, 3-5 cümle]', rol: '[ROLÜN]', yil: '[YIL]', link: '',
+      gorseller: [], araclar: [['[ARAÇ 1]', 7], ['[ARAÇ 2]', 3], ['[ARAÇ 3]', 8]], renk: 'linear-gradient(160deg,#6A1B7A,#FF8A3D 70%,#FFC66B)' },
+    { ad: '??? YAKINDA', kisa: 'Bu numara henüz prova aşamasında. Kilidi yakında açılacak.', kilitli: true,
+      gorseller: [], araclar: [['???', 0], ['???', 0], ['???', 0]], renk: 'linear-gradient(160deg,#1E0838,#3A1260)' }
+  ];
+  /* Elle çizilmiş sarı kalem çerçeveler (kart kutusunun 0–100 koordinatlarında). Değiştirme. */
+  var KALEM = [["M0.96 4.99 L3.06 5.14 L5.16 5.16 L7.27 5.09 L9.35 5.10 L11.40 5.28 L13.45 5.55 L15.54 5.87 L17.69 6.08 L19.88 6.06 L22.06 5.81 L24.18 5.45 L26.21 5.16 L28.19 5.04 L30.19 5.11 L32.25 5.28 L34.40 5.40 L36.58 5.34 L38.72 5.09 L40.80 4.78 L42.82 4.56 L44.82 4.54 L46.86 4.75 L48.95 5.09 L51.08 5.41 L53.22 5.56 L55.35 5.52 L57.45 5.36 L59.53 5.25 L61.59 5.31 L63.66 5.56 L65.74 5.91 L67.85 6.20 L70.00 6.29 L72.15 6.15 L74.27 5.86 L76.35 5.60 L78.39 5.49 L80.41 5.58 L82.47 5.79 L84.60 5.96 L86.78 5.98 L88.96 5.79 L91.06 5.48 L93.07 5.06 L95.06 4.77 L97.10 4.73 L99.20 4.87 L101.32 5.04 L101.38 4.71 L99.32 4.14 L97.25 3.57 L95.11 3.15 L92.91 3.00 L90.73 3.11 L88.65 3.45 L86.64 3.70 L84.64 3.79 L82.59 3.75 L80.47 3.71 L78.31 3.80 L76.15 4.09 L74.05 4.54 L71.99 4.99 L69.95 5.27 L67.91 5.31 L65.84 5.12 L63.75 4.84 L61.64 4.61 L59.52 4.54 L57.41 4.60 L55.33 4.67 L53.27 4.60 L51.24 4.31 L49.19 3.84 L47.11 3.32 L44.97 2.91 L42.79 2.75 L40.62 2.81 L38.51 2.98 L36.47 3.10 L34.47 3.06 L32.43 2.90 L30.32 2.72 L28.14 2.67 L25.93 2.86 L23.78 3.27 L21.70 3.75 L19.69 4.13 L17.70 4.31 L15.67 4.28 L13.59 4.15 L11.46 4.05 L9.32 4.17 L7.22 4.44 L5.14 4.73 L3.06 4.89 L0.98 4.75Z", "M95.52 0.85 L95.54 2.94 L95.57 5.02 L95.55 7.08 L95.44 9.10 L95.30 11.12 L95.30 13.18 L95.36 15.27 L95.55 17.39 L95.88 19.49 L96.30 21.55 L96.73 23.58 L97.05 25.60 L97.16 27.61 L97.03 29.63 L96.68 31.67 L96.19 33.72 L95.69 35.78 L95.28 37.86 L95.04 39.95 L94.96 42.05 L94.98 44.14 L95.03 46.20 L95.03 48.23 L94.93 50.25 L94.77 52.28 L94.62 54.35 L94.55 56.47 L94.65 58.62 L94.94 60.76 L95.38 62.85 L95.85 64.88 L96.24 66.87 L96.46 68.83 L96.47 70.80 L96.28 72.82 L95.95 74.87 L95.59 76.96 L95.31 79.05 L95.16 81.15 L95.15 83.23 L95.20 85.30 L95.23 87.35 L95.17 89.40 L95.07 91.43 L94.92 93.49 L94.81 95.56 L94.82 97.64 L95.04 99.71 L95.35 99.70 L95.39 97.64 L95.56 95.60 L95.79 93.56 L95.98 91.49 L96.08 89.42 L96.02 87.34 L95.91 85.27 L95.85 83.22 L95.90 81.19 L96.14 79.16 L96.55 77.14 L97.07 75.11 L97.61 73.06 L98.03 70.96 L98.25 68.81 L98.21 66.65 L97.97 64.51 L97.62 62.42 L97.28 60.39 L97.04 58.40 L96.92 56.42 L96.91 54.42 L96.94 52.37 L96.93 50.29 L96.83 48.19 L96.62 46.10 L96.35 44.04 L96.12 42.01 L96.03 39.99 L96.12 37.96 L96.43 35.93 L96.88 33.88 L97.38 31.81 L97.80 29.74 L98.05 27.64 L98.10 25.53 L97.96 23.42 L97.74 21.33 L97.53 19.27 L97.42 17.25 L97.43 15.24 L97.52 13.21 L97.63 11.15 L97.50 9.05 L97.20 6.96 L96.77 4.89 L96.29 2.85 L95.87 0.81Z", "M100.61 95.25 L98.48 95.58 L96.35 95.87 L94.22 96.06 L92.11 96.09 L90.01 95.95 L87.91 95.75 L85.79 95.49 L83.66 95.25 L81.52 95.07 L79.38 94.96 L77.26 94.89 L75.16 94.81 L73.09 94.68 L71.02 94.49 L68.91 94.25 L66.76 94.04 L64.58 93.91 L62.38 93.95 L60.20 94.18 L58.04 94.56 L55.92 95.02 L53.82 95.46 L51.72 95.79 L49.63 95.95 L47.52 95.92 L45.41 95.75 L43.30 95.51 L41.17 95.25 L39.04 95.04 L36.90 94.89 L34.77 94.77 L32.67 94.63 L30.58 94.45 L28.51 94.20 L26.41 93.91 L24.27 93.65 L22.08 93.49 L19.87 93.50 L17.67 93.71 L15.50 94.10 L13.38 94.57 L11.29 95.04 L9.22 95.40 L7.14 95.68 L5.04 95.77 L2.92 95.70 L0.79 95.54 L-1.34 95.33 L-1.36 95.56 L0.76 95.78 L2.88 96.09 L5.00 96.37 L7.15 96.58 L9.32 96.66 L11.50 96.51 L13.67 96.27 L15.80 96.01 L17.88 95.83 L19.93 95.78 L21.97 95.85 L24.03 96.04 L26.14 96.26 L28.28 96.46 L30.45 96.56 L32.62 96.56 L34.76 96.47 L36.88 96.36 L38.99 96.29 L41.10 96.29 L43.22 96.38 L45.36 96.51 L47.49 96.63 L49.64 96.66 L51.79 96.57 L53.95 96.37 L56.10 96.10 L58.23 95.85 L60.33 95.71 L62.40 95.72 L64.45 95.89 L66.51 96.19 L68.61 96.54 L70.75 96.86 L72.92 97.07 L75.09 97.16 L77.25 97.13 L79.38 97.04 L81.48 96.95 L83.59 96.90 L85.70 96.91 L87.84 96.94 L89.98 96.95 L92.13 96.82 L94.27 96.57 L96.40 96.23 L98.52 95.83 L100.64 95.49Z", "M2.89 99.50 L3.27 97.44 L3.64 95.38 L3.95 93.30 L4.16 91.21 L4.25 89.12 L4.13 87.05 L4.03 84.99 L3.97 82.93 L4.00 80.87 L4.13 78.80 L4.33 76.73 L4.57 74.65 L4.81 72.57 L4.99 70.48 L5.09 68.38 L5.08 66.27 L5.00 64.15 L4.86 62.05 L4.72 59.97 L4.61 57.91 L4.55 55.88 L4.56 53.86 L4.61 51.83 L4.69 49.77 L4.74 47.69 L4.75 45.60 L4.69 43.50 L4.58 41.41 L4.44 39.33 L4.32 37.26 L4.26 35.20 L4.31 33.14 L4.48 31.08 L4.77 29.02 L5.13 26.96 L5.53 24.90 L5.88 22.82 L6.15 20.72 L6.30 18.59 L6.30 16.46 L6.18 14.34 L5.98 12.24 L5.75 10.17 L5.38 8.15 L5.02 6.12 L4.76 4.08 L4.60 2.01 L4.51 -0.07 L4.26 -0.08 L3.98 1.99 L3.71 4.07 L3.49 6.17 L3.36 8.30 L3.37 10.43 L3.63 12.52 L3.93 14.58 L4.22 16.61 L4.43 18.63 L4.55 20.66 L4.54 22.70 L4.43 24.76 L4.23 26.84 L4.00 28.92 L3.78 31.00 L3.60 33.09 L3.46 35.17 L3.35 37.26 L3.26 39.34 L3.15 41.41 L3.00 43.47 L2.81 45.52 L2.60 47.57 L2.39 49.64 L2.23 51.73 L2.17 53.84 L2.24 55.97 L2.44 58.09 L2.76 60.19 L3.15 62.27 L3.54 64.32 L3.87 66.36 L4.09 68.40 L4.16 70.45 L4.08 72.51 L3.87 74.57 L3.58 76.63 L3.25 78.70 L2.93 80.77 L2.66 82.86 L2.45 84.95 L2.30 87.04 L2.19 89.11 L2.23 91.17 L2.33 93.23 L2.41 95.30 L2.47 97.38 L2.51 99.47Z", "M9.59 4.94 L11.68 4.96 L13.77 5.15 L15.86 5.38 L17.95 5.50 L20.04 5.40 L22.13 5.08 L24.23 4.66 L26.32 4.31 L28.41 4.16 L30.50 4.22 L32.59 4.39 L34.68 4.53 L36.78 4.52 L38.87 4.34 L40.96 4.10 L43.05 3.95 L45.14 4.03 L47.23 4.33 L49.32 4.77 L51.41 5.16 L53.50 5.38 L55.59 5.39 L57.68 5.28 L59.77 5.19 L61.86 5.26 L63.95 5.50 L66.04 5.82 L68.13 6.05 L70.22 6.08 L72.32 5.87 L74.41 5.50 L76.50 5.15 L78.60 4.94 L80.69 4.94 L82.78 5.07 L84.87 5.18 L86.96 5.14 L89.05 4.92 L91.15 4.59 L93.24 4.33", "M92.37 96.76 L90.25 96.75 L88.12 96.65 L86.00 96.50 L83.88 96.37 L81.75 96.31 L79.63 96.30 L77.50 96.31 L75.38 96.28 L73.25 96.18 L71.13 95.97 L69.01 95.70 L66.89 95.41 L64.76 95.20 L62.64 95.13 L60.51 95.24 L58.39 95.50 L56.26 95.86 L54.13 96.21 L52.01 96.48 L49.88 96.60 L47.76 96.57 L45.64 96.43 L43.51 96.24 L41.39 96.07 L39.26 95.96 L37.14 95.92 L35.02 95.92 L32.89 95.89 L30.77 95.80 L28.64 95.63 L26.52 95.39 L24.40 95.14 L22.28 94.97 L20.15 94.94 L18.03 95.07 L15.90 95.35 L13.77 95.72 L11.65 96.07 L9.52 96.33 L7.40 96.43"], ["M0.15 5.02 L2.23 5.10 L4.34 5.02 L6.48 4.79 L8.59 4.55 L10.59 4.41 L12.52 4.29 L14.47 4.33 L16.52 4.45 L18.63 4.51 L20.75 4.43 L22.83 4.21 L24.88 3.98 L26.91 3.90 L28.95 4.05 L30.98 4.45 L33.03 4.97 L35.12 5.43 L37.27 5.67 L39.44 5.62 L41.57 5.35 L43.62 5.01 L45.60 4.75 L47.56 4.61 L49.58 4.55 L51.66 4.46 L53.77 4.24 L55.85 3.88 L57.90 3.45 L59.92 3.13 L61.94 3.06 L63.96 3.30 L65.98 3.82 L68.03 4.43 L70.12 4.97 L72.26 5.27 L74.41 5.32 L76.51 5.20 L78.53 5.05 L80.51 4.96 L82.53 4.94 L84.62 4.90 L86.74 4.72 L88.85 4.34 L90.90 3.72 L92.93 3.09 L94.95 2.62 L96.99 2.43 L99.04 2.57 L99.06 2.33 L96.99 2.18 L94.91 2.27 L92.82 2.55 L90.72 2.88 L88.66 3.07 L86.65 3.12 L84.65 2.98 L82.61 2.76 L80.51 2.61 L78.38 2.65 L76.28 2.89 L74.26 3.20 L72.28 3.42 L70.30 3.45 L68.27 3.25 L66.19 2.90 L64.08 2.55 L61.97 2.36 L59.87 2.36 L57.78 2.51 L55.71 2.66 L53.67 2.70 L51.66 2.59 L49.62 2.41 L47.51 2.28 L45.36 2.37 L43.22 2.71 L41.15 3.22 L39.17 3.73 L37.22 4.09 L35.24 4.18 L33.21 4.01 L31.13 3.68 L29.04 3.36 L26.95 3.15 L24.86 3.07 L22.79 3.04 L20.75 2.94 L18.75 2.70 L16.73 2.36 L14.65 2.04 L12.49 1.89 L10.29 2.07 L8.18 2.69 L6.17 3.48 L4.19 4.19 L2.19 4.65 L0.15 4.78Z", "M95.51 0.11 L95.40 2.18 L95.21 4.26 L95.04 6.36 L94.96 8.50 L95.01 10.63 L95.31 12.71 L95.62 14.74 L95.86 16.72 L95.96 18.69 L95.89 20.70 L95.65 22.75 L95.31 24.84 L94.97 26.96 L94.73 29.07 L94.63 31.18 L94.70 33.29 L94.88 35.39 L95.11 37.48 L95.29 39.56 L95.39 41.61 L95.38 43.65 L95.29 45.69 L95.20 47.76 L95.17 49.85 L95.24 51.95 L95.42 54.04 L95.67 56.11 L95.91 58.14 L96.05 60.16 L96.05 62.19 L95.87 64.24 L95.56 66.32 L95.18 68.41 L94.85 70.51 L94.66 72.61 L94.64 74.74 L94.81 76.87 L95.10 78.99 L95.41 81.08 L95.67 83.13 L95.81 85.13 L95.83 87.12 L95.76 89.13 L95.82 91.19 L95.92 93.29 L96.07 95.39 L96.24 97.47 L96.40 99.55 L96.64 99.55 L96.79 97.48 L97.04 95.42 L97.39 93.38 L97.80 91.33 L98.15 89.25 L98.21 87.11 L98.06 84.95 L97.71 82.81 L97.18 80.72 L96.58 78.67 L96.03 76.66 L95.63 74.65 L95.46 72.63 L95.56 70.59 L95.89 68.54 L96.36 66.48 L96.86 64.41 L97.29 62.32 L97.59 60.21 L97.73 58.09 L97.75 55.97 L97.69 53.89 L97.62 51.84 L97.56 49.80 L97.51 47.75 L97.42 45.67 L97.26 43.57 L96.98 41.47 L96.60 39.38 L96.15 37.32 L95.72 35.27 L95.42 33.23 L95.33 31.19 L95.50 29.16 L95.90 27.13 L96.46 25.10 L97.07 23.04 L97.61 20.95 L97.97 18.80 L98.08 16.63 L97.97 14.47 L97.68 12.36 L97.33 10.30 L96.83 8.29 L96.39 6.28 L96.08 4.24 L95.87 2.18 L95.75 0.11Z", "M99.84 93.64 L97.73 93.83 L95.61 94.07 L93.50 94.23 L91.46 94.23 L89.45 94.11 L87.40 94.08 L85.30 94.08 L83.17 94.22 L81.05 94.50 L78.98 94.85 L76.93 95.14 L74.88 95.24 L72.82 95.08 L70.74 94.71 L68.65 94.27 L66.53 93.91 L64.38 93.73 L62.23 93.75 L60.11 93.90 L58.04 94.06 L56.02 94.16 L53.99 94.20 L51.90 94.25 L49.77 94.41 L47.64 94.75 L45.55 95.24 L43.50 95.76 L41.46 96.17 L39.42 96.32 L37.37 96.18 L35.30 95.81 L33.22 95.35 L31.10 94.96 L28.96 94.72 L26.83 94.64 L24.74 94.65 L22.70 94.65 L20.68 94.59 L18.61 94.51 L16.47 94.50 L14.31 94.66 L12.17 95.04 L10.08 95.61 L8.05 96.26 L6.01 96.78 L3.96 97.06 L1.88 97.09 L-0.20 96.94 L-0.22 97.18 L1.87 97.36 L3.97 97.42 L6.08 97.29 L8.20 97.02 L10.32 96.73 L12.39 96.49 L14.41 96.44 L16.42 96.58 L18.47 96.80 L20.57 96.99 L22.72 97.02 L24.85 96.87 L26.93 96.62 L28.97 96.39 L31.00 96.30 L33.07 96.39 L35.17 96.63 L37.29 96.89 L39.41 97.04 L41.54 97.02 L43.67 96.84 L45.78 96.62 L47.85 96.46 L49.88 96.44 L51.92 96.51 L54.00 96.58 L56.14 96.54 L58.28 96.31 L60.38 95.92 L62.42 95.48 L64.43 95.13 L66.46 95.01 L68.52 95.13 L70.62 95.43 L72.72 95.78 L74.84 96.05 L76.96 96.18 L79.08 96.18 L81.18 96.15 L83.23 96.18 L85.27 96.30 L87.34 96.44 L89.47 96.50 L91.63 96.20 L93.74 95.65 L95.80 94.98 L97.82 94.33 L99.88 93.88Z", "M5.82 99.60 L5.78 97.54 L5.70 95.48 L5.65 93.43 L5.67 91.37 L5.74 89.31 L5.80 87.24 L5.84 85.16 L5.82 83.06 L5.71 80.95 L5.53 78.86 L5.34 76.81 L5.18 74.81 L5.10 72.84 L5.11 70.86 L5.21 68.84 L5.36 66.78 L5.52 64.68 L5.62 62.57 L5.64 60.47 L5.58 58.39 L5.48 56.32 L5.39 54.25 L5.36 52.19 L5.42 50.14 L5.55 48.09 L5.72 46.04 L5.85 43.96 L5.89 41.86 L5.77 39.74 L5.48 37.64 L5.08 35.58 L4.62 33.55 L4.21 31.55 L3.92 29.55 L3.81 27.53 L3.90 25.48 L4.15 23.43 L4.50 21.36 L4.86 19.30 L5.18 17.21 L5.39 15.12 L5.49 13.02 L5.50 10.93 L5.29 8.88 L5.01 6.85 L4.73 4.81 L4.50 2.76 L4.30 0.70 L3.98 0.70 L3.75 2.76 L3.52 4.83 L3.36 6.91 L3.30 9.00 L3.38 11.07 L3.65 13.10 L3.87 15.12 L3.98 17.15 L3.93 19.19 L3.74 21.25 L3.45 23.32 L3.14 25.40 L2.87 27.48 L2.71 29.58 L2.69 31.70 L2.79 33.81 L2.97 35.90 L3.18 37.95 L3.38 39.96 L3.54 41.97 L3.66 43.98 L3.79 46.03 L3.93 48.10 L4.12 50.17 L4.35 52.24 L4.59 54.30 L4.78 56.35 L4.85 58.40 L4.76 60.44 L4.50 62.47 L4.10 64.49 L3.63 66.52 L3.18 68.59 L2.85 70.70 L2.71 72.85 L2.81 74.99 L3.11 77.10 L3.54 79.17 L4.01 81.19 L4.44 83.20 L4.76 85.22 L4.95 87.26 L5.02 89.31 L5.05 91.37 L5.09 93.44 L5.16 95.50 L5.32 97.57 L5.55 99.62Z", "M8.63 3.92 L10.69 3.54 L12.75 3.39 L14.81 3.48 L16.87 3.71 L18.94 3.91 L21.00 3.98 L23.06 3.92 L25.12 3.83 L27.18 3.82 L29.24 4.01 L31.31 4.37 L33.37 4.79 L35.43 5.10 L37.49 5.18 L39.55 4.97 L41.61 4.58 L43.67 4.16 L45.73 3.86 L47.79 3.75 L49.85 3.78 L51.91 3.83 L53.97 3.77 L56.03 3.57 L58.09 3.28 L60.15 3.05 L62.21 3.01 L64.27 3.23 L66.33 3.66 L68.40 4.14 L70.46 4.51 L72.52 4.65 L74.58 4.56 L76.64 4.34 L78.70 4.15 L80.76 4.09 L82.82 4.15 L84.89 4.24 L86.95 4.22 L89.01 4.00 L91.06 3.60", "M91.79 95.52 L89.71 95.61 L87.62 95.56 L85.53 95.49 L83.45 95.50 L81.36 95.63 L79.28 95.82 L77.20 95.96 L75.11 95.94 L73.02 95.73 L70.93 95.37 L68.83 95.00 L66.74 94.76 L64.66 94.73 L62.57 94.91 L60.49 95.21 L58.41 95.49 L56.33 95.65 L54.25 95.69 L52.16 95.68 L50.07 95.72 L47.99 95.91 L45.91 96.23 L43.83 96.60 L41.75 96.89 L39.67 96.98 L37.58 96.83 L35.49 96.52 L33.39 96.17 L31.30 95.93 L29.22 95.85 L27.13 95.93 L25.05 96.06 L22.96 96.13 L20.88 96.09 L18.79 95.96 L16.70 95.84 L14.61 95.85 L12.53 96.07 L10.45 96.47 L8.37 96.94"], ["M-1.26 6.24 L0.87 6.63 L3.06 6.87 L5.29 6.79 L7.51 6.43 L9.64 5.90 L11.65 5.33 L13.66 4.98 L15.73 4.88 L17.86 4.91 L20.03 4.92 L22.19 4.78 L24.33 4.51 L26.45 4.23 L28.55 4.14 L30.61 4.34 L32.67 4.82 L34.78 5.45 L36.96 5.99 L39.21 6.29 L41.45 6.27 L43.61 6.05 L45.68 5.82 L47.72 5.71 L49.79 5.76 L51.94 5.86 L54.15 5.85 L56.35 5.58 L58.51 5.05 L60.62 4.38 L62.71 3.80 L64.79 3.47 L66.88 3.45 L69.00 3.64 L71.14 3.88 L73.33 3.98 L75.53 3.88 L77.69 3.65 L79.75 3.48 L81.74 3.49 L83.74 3.74 L85.83 4.14 L88.03 4.53 L90.28 4.72 L92.51 4.49 L94.66 4.06 L96.76 3.65 L98.86 3.42 L100.99 3.50 L101.01 3.26 L98.87 3.11 L96.71 3.06 L94.56 3.09 L92.46 3.02 L90.42 2.75 L88.40 2.37 L86.31 1.85 L84.12 1.37 L81.84 1.13 L79.57 1.25 L77.38 1.64 L75.29 2.11 L73.24 2.49 L71.17 2.66 L69.05 2.66 L66.89 2.64 L64.72 2.76 L62.56 3.10 L60.41 3.61 L58.29 4.09 L56.20 4.37 L54.15 4.35 L52.09 4.09 L49.97 3.73 L47.77 3.48 L45.54 3.46 L43.36 3.67 L41.27 3.93 L39.25 4.09 L37.23 4.03 L35.13 3.77 L32.95 3.42 L30.73 3.19 L28.53 3.21 L26.37 3.46 L24.24 3.81 L22.13 4.06 L20.03 4.08 L17.93 3.88 L15.79 3.60 L13.60 3.42 L11.36 3.51 L9.13 3.88 L7.02 4.53 L5.00 5.18 L2.99 5.64 L0.91 5.85 L-1.23 5.89Z", "M95.58 -0.26 L95.10 1.82 L94.65 3.90 L94.40 6.01 L94.33 8.14 L94.35 10.26 L94.40 12.32 L94.32 14.34 L94.12 16.37 L93.92 18.47 L93.87 20.65 L94.09 22.84 L94.54 24.98 L95.07 27.03 L95.50 29.02 L95.70 31.01 L95.66 33.04 L95.45 35.12 L95.22 37.23 L95.09 39.34 L95.08 41.45 L95.09 43.53 L94.99 45.58 L94.68 47.60 L94.18 49.62 L93.62 51.69 L93.18 53.84 L93.03 56.05 L93.19 58.26 L93.54 60.38 L93.92 62.41 L94.19 64.40 L94.31 66.42 L94.35 68.50 L94.44 70.62 L94.67 72.74 L95.04 74.84 L95.43 76.92 L95.66 78.97 L95.61 81.01 L95.26 83.04 L94.72 85.08 L94.17 87.16 L93.76 89.29 L93.71 91.45 L93.89 93.55 L94.10 95.61 L94.22 97.66 L94.20 99.75 L94.58 99.80 L95.04 97.73 L95.32 95.62 L95.42 93.50 L95.45 91.44 L95.51 89.43 L95.62 87.40 L95.89 85.32 L96.21 83.20 L96.40 81.06 L96.37 78.93 L96.14 76.82 L95.87 74.72 L95.69 72.65 L95.72 70.60 L95.91 68.56 L96.15 66.47 L96.28 64.32 L96.18 62.14 L95.90 60.00 L95.56 57.95 L95.33 55.98 L95.30 54.03 L95.48 52.01 L95.76 49.92 L95.98 47.78 L96.05 45.63 L95.95 43.52 L95.81 41.43 L95.79 39.37 L95.98 37.32 L96.36 35.26 L96.80 33.18 L97.13 31.05 L97.21 28.87 L97.02 26.69 L96.70 24.57 L96.42 22.53 L96.27 20.55 L96.27 18.56 L96.33 16.49 L96.32 14.36 L96.14 12.21 L95.79 10.11 L95.34 8.05 L95.05 6.01 L95.05 3.95 L95.34 1.87 L95.82 -0.21Z", "M98.82 95.87 L96.76 95.89 L94.70 95.91 L92.64 95.91 L90.59 95.85 L88.54 95.70 L86.50 95.55 L84.44 95.37 L82.36 95.24 L80.26 95.20 L78.15 95.29 L76.05 95.48 L73.97 95.72 L71.94 95.93 L69.95 96.05 L67.98 96.04 L66.01 95.89 L64.01 95.63 L61.97 95.32 L59.88 95.03 L57.77 94.83 L55.66 94.76 L53.56 94.80 L51.49 94.91 L49.44 95.03 L47.40 95.10 L45.36 95.10 L43.31 95.03 L41.25 94.93 L39.18 94.87 L37.10 94.88 L35.02 95.02 L32.94 95.26 L30.87 95.57 L28.81 95.86 L26.76 96.07 L24.73 96.12 L22.72 96.02 L20.71 95.76 L18.69 95.42 L16.64 95.05 L14.56 94.73 L12.47 94.50 L10.38 94.37 L8.30 94.48 L6.25 94.66 L4.21 94.81 L2.16 94.89 L0.10 94.90 L0.06 95.29 L2.10 95.70 L4.16 96.04 L6.23 96.29 L8.30 96.47 L10.34 96.58 L12.36 96.58 L14.38 96.66 L16.42 96.81 L18.48 97.00 L20.56 97.18 L22.66 97.27 L24.76 97.22 L26.85 97.02 L28.93 96.69 L30.99 96.32 L33.04 95.97 L35.08 95.72 L37.12 95.61 L39.15 95.65 L41.19 95.81 L43.24 96.03 L45.30 96.24 L47.37 96.41 L49.45 96.51 L51.51 96.57 L53.56 96.63 L55.57 96.75 L57.57 96.95 L59.57 97.25 L61.60 97.62 L63.66 97.98 L65.77 98.27 L67.91 98.41 L70.06 98.37 L72.18 98.15 L74.27 97.81 L76.32 97.43 L78.34 97.09 L80.35 96.84 L82.36 96.70 L84.40 96.66 L86.45 96.67 L88.52 96.68 L90.59 96.59 L92.65 96.45 L94.71 96.28 L96.77 96.13 L98.82 96.11Z", "M3.66 99.23 L3.80 97.18 L3.91 95.12 L4.09 93.10 L4.42 91.14 L4.90 89.21 L5.31 87.21 L5.70 85.12 L5.88 82.95 L5.75 80.78 L5.34 78.68 L4.78 76.64 L4.26 74.64 L3.92 72.65 L3.80 70.64 L3.85 68.61 L3.95 66.55 L3.96 64.48 L3.85 62.39 L3.69 60.33 L3.59 58.33 L3.67 56.40 L3.96 54.49 L4.41 52.53 L4.90 50.47 L5.24 48.33 L5.31 46.17 L5.13 44.05 L4.81 42.00 L4.51 39.99 L4.35 37.98 L4.37 35.95 L4.48 33.90 L4.56 31.84 L4.48 29.75 L4.22 27.65 L3.86 25.57 L3.55 23.54 L3.44 21.58 L3.55 19.66 L3.84 17.71 L4.18 15.68 L4.42 13.58 L4.45 11.45 L4.17 9.37 L3.82 7.34 L3.61 5.32 L3.63 3.29 L3.91 1.24 L3.67 1.20 L3.27 3.24 L2.92 5.29 L2.69 7.36 L2.50 9.41 L2.27 11.41 L2.09 13.37 L1.80 15.35 L1.51 17.41 L1.35 19.54 L1.47 21.71 L1.89 23.83 L2.50 25.88 L3.13 27.88 L3.60 29.86 L3.82 31.85 L3.78 33.87 L3.60 35.91 L3.42 37.96 L3.33 40.04 L3.34 42.11 L3.36 44.14 L3.27 46.11 L3.01 48.03 L2.57 49.97 L2.08 52.01 L1.68 54.13 L1.55 56.31 L1.73 58.46 L2.13 60.54 L2.59 62.56 L2.95 64.55 L3.13 66.56 L3.14 68.59 L3.09 70.64 L3.10 72.71 L3.25 74.80 L3.52 76.89 L3.77 78.93 L3.87 80.90 L3.75 82.82 L3.41 84.74 L2.96 86.73 L2.56 88.82 L2.50 90.98 L2.69 93.10 L3.01 95.16 L3.30 97.19 L3.42 99.22Z", "M7.52 5.78 L9.63 5.19 L11.75 4.72 L13.88 4.50 L16.01 4.54 L18.15 4.70 L20.28 4.80 L22.41 4.72 L24.54 4.46 L26.66 4.15 L28.79 3.97 L30.92 4.07 L33.06 4.42 L35.20 4.91 L37.35 5.31 L39.48 5.49 L41.61 5.40 L43.74 5.16 L45.86 4.94 L47.99 4.90 L50.13 5.04 L52.26 5.27 L54.40 5.40 L56.53 5.27 L58.65 4.87 L60.77 4.30 L62.88 3.75 L65.01 3.42 L67.14 3.35 L69.27 3.45 L71.41 3.57 L73.54 3.53 L75.66 3.30 L77.79 2.95 L79.91 2.66 L82.04 2.61 L84.18 2.85 L86.32 3.29 L88.46 3.75 L90.60 4.03 L92.73 4.05", "M90.84 96.52 L88.78 96.49 L86.72 96.41 L84.67 96.31 L82.61 96.27 L80.55 96.32 L78.49 96.49 L76.43 96.75 L74.37 97.06 L72.31 97.34 L70.25 97.51 L68.20 97.52 L66.14 97.38 L64.09 97.11 L62.03 96.77 L59.98 96.44 L57.92 96.19 L55.87 96.05 L53.81 96.01 L51.75 96.04 L49.70 96.07 L47.64 96.05 L45.58 95.97 L43.53 95.83 L41.47 95.67 L39.42 95.56 L37.36 95.55 L35.30 95.67 L33.24 95.91 L31.18 96.24 L29.12 96.58 L27.06 96.84 L25.00 96.97 L22.94 96.94 L20.88 96.77 L18.83 96.51 L16.78 96.23 L14.72 95.99 L12.67 95.84 L10.61 95.78 L8.55 95.77"]];
+
+  var azHareket = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var N = PROJELER.length, act = 0;
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var mobil = function () { return innerWidth < 760; };
+
+  /* ---------- sahne ölçeği (1280x800 tasarım) ---------- */
+  var kap = $('proje-sahne'), sahne = $('psahne'), iz = $('proje-iz');
+  function olc() {
+    var w = kap.clientWidth, h = kap.clientHeight, k, x;
+    if (mobil()) { k = w / 640; x = (640 - 560) * k; }         // telefonda karusel ortada, panel aşağıda ayrı
+    else { k = Math.min(w / 1280, h / 800); x = 0; }
+    sahne.style.transform = 'translateX(calc(-50% + ' + x + 'px)) scale(' + k + ')';
+    sahne.style.top = mobil() ? (150 - 130 * k) + 'px' : (h - 800 * k) + 'px';
+    if (mobil()) kap.style.height = Math.round((720 - 130) * k + 150 + 70) + 'px'; else kap.style.height = '';
+  }
+
+  /* ---------- kartlar ---------- */
+  var kartKap = $('kartlar'), kartlar = [];
+  function kalemSvg(p) {
+    return '<svg class="kalem" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><g filter="url(#pencil2)">' +
+      '<path d="' + p[0] + '" fill="#F9D648"/><path d="' + p[1] + '" fill="#F9D648"/><path d="' + p[2] + '" fill="#F9D648"/><path d="' + p[3] + '" fill="#F9D648"/>' +
+      '<path d="' + p[4] + '" fill="none" stroke="#FFF0A8" stroke-width=".9" stroke-opacity=".75" vector-effect="non-scaling-stroke"/>' +
+      '<path d="' + p[5] + '" fill="none" stroke="#FFF0A8" stroke-width=".9" stroke-opacity=".75" vector-effect="non-scaling-stroke"/></g></svg>';
+  }
+  function gorselHtml(p, i) {
+    var g = p.gorseller && p.gorseller[i];
+    return g ? '<img src="' + esc(g) + '" alt="' + esc(p.ad) + '" loading="lazy">' : '<span class="vt">' + (p.kilitli ? 'KİLİTLİ' : '[PROJE GÖRSELİ]') + '</span>';
+  }
+  PROJELER.forEach(function (p, i) {
+    var d = document.createElement('div');
+    d.className = 'kart';
+    d.innerHTML = '<div class="kart-ic"><div class="kart-kes" style="clip-path:url(#kc' + (i % 3) + ')">' +
+      '<div class="kart-gorsel" style="background:' + p.renk + '">' + gorselHtml(p, 0) + '</div>' +
+      '<div class="kart-yazi"><span class="vt kart-no">NUMARA_' + String(i + 1).padStart(2, '0') + '</span><span class="px kart-ad">' + esc(p.ad) + '</span></div>' +
+      '</div>' + kalemSvg(KALEM[i % 3]) + '</div>';
+    kartKap.appendChild(d); kartlar.push(d);
+  });
+
+  /* ---------- panel (masaüstü sağda, telefonda aşağıda) ---------- */
+  var paneller = [$('panel'), $('panel-mobil')];
+  paneller.forEach(function (pn) {
+    pn.innerHTML = '<div class="tarama" aria-hidden="true"></div>' +
+      '<span class="vt pn-ust"></span><span class="px pn-ad"></span><span class="vt pn-acik"></span>' +
+      '<div class="pn-statlar">' + [0, 1, 2].map(function () {
+        return '<div class="stat"><div class="vt stat-ust"><span class="stat-ad"></span><span class="stat-deger"></span></div><div class="segler">' +
+          '<span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>';
+      }).join('') + '</div>' +
+      '<button class="pxbtn pn-sec" type="button">SEÇ ▶</button>';
+    pn.querySelector('.pn-sec').addEventListener('click', function () { ac(act, this); });
+  });
+  function statDoldur(kok, araclar) {
+    var st = kok.querySelectorAll('.stat');
+    st.forEach(function (s, si) {
+      var a = araclar[si];
+      s.style.display = a ? '' : 'none';
+      if (!a) return;
+      s.querySelector('.stat-ad').textContent = a[0];
+      s.querySelector('.stat-deger').textContent = a[1] + '/10';
+      s.querySelectorAll('.segler span').forEach(function (g, k) {
+        g.style.transitionDelay = (si * 0.12 + k * 0.04).toFixed(2) + 's';
+        g.classList.toggle('dolu', k < a[1]);
+      });
+    });
+  }
+  function panelCiz() {
+    var p = PROJELER[act];
+    paneller.forEach(function (pn) {
+      pn.querySelector('.pn-ust').textContent = 'OYUNCU 1 · NUMARA_' + String(act + 1).padStart(2, '0');
+      pn.querySelector('.pn-ad').textContent = p.ad;
+      pn.querySelector('.pn-acik').textContent = p.kisa || '';
+      statDoldur(pn, p.araclar || []);
+      var b = pn.querySelector('.pn-sec');
+      b.textContent = p.kilitli ? 'KİLİTLİ' : 'SEÇ ▶'; b.disabled = !!p.kilitli;
+    });
+  }
+
+  /* ---------- yörünge yerleşimi ---------- */
+  var disk = $('disk'), sayac = $('sayac'), noktalar = $('noktalar');
+  noktalar.innerHTML = PROJELER.map(function (p, i) { return '<button type="button" aria-label="Proje ' + (i + 1) + '"></button>'; }).join('');
+  var noktaBtn = [].slice.call(noktalar.children);
+  noktaBtn.forEach(function (b, i) { b.addEventListener('click', function () { git(i); }); });
+  function yerlestir() {
+    var step = 2 * Math.PI / N;
+    kartlar.forEach(function (k, i) {
+      var th = (i - act) * step, x = Math.sin(th) * 265, derin = Math.cos(th);
+      var sc = 0.55 + 0.45 * (derin + 1) / 2, y = (1 - derin) * -46;
+      k.style.zIndex = Math.round((derin + 1) * 10);
+      k.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) scale(' + sc.toFixed(3) + ')';
+      k.style.filter = derin > 0.95 ? 'drop-shadow(0 0 24px rgba(255,200,90,.45)) drop-shadow(0 26px 30px rgba(5,0,20,.7))'
+        : 'brightness(' + (0.35 + 0.35 * (derin + 1) / 2).toFixed(2) + ') saturate(.7) blur(' + (derin < -0.5 ? 2 : 0.6) + 'px)';
+      k.setAttribute('aria-hidden', i === act ? 'false' : 'true');
+    });
+    disk.style.transform = 'scaleY(.18) rotate(' + (-act * 360 / N) + 'deg)';
+    sayac.textContent = String(act + 1).padStart(2, '0') + '/' + String(N).padStart(2, '0');
+    noktaBtn.forEach(function (b, i) { b.classList.toggle('aktif', i === act); });
+    $('onceki').disabled = act === 0; $('sonraki').disabled = act === N - 1;
+    panelCiz();
+  }
+  function secAct(i) { i = Math.max(0, Math.min(N - 1, i)); if (i === act) return; act = i; yerlestir(); }
+
+  /* ---------- kaydırma: bölüm sabit, her proje ~1 ekran kaydırma ---------- */
+  function kaydir() {
+    if (mobil()) return;
+    var toplam = iz.offsetHeight - innerHeight;
+    var p = toplam > 0 ? Math.min(1, Math.max(0, (scrollY - iz.offsetTop) / toplam)) : 0;
+    secAct(Math.round(p * (N - 1)));
+  }
+  function git(i) {
+    i = Math.max(0, Math.min(N - 1, i));
+    if (mobil()) { secAct(i); return; }
+    var toplam = iz.offsetHeight - innerHeight;
+    scrollTo({ top: iz.offsetTop + (N > 1 ? i / (N - 1) : 0) * toplam, behavior: azHareket ? 'auto' : 'smooth' });
+  }
+  $('onceki').addEventListener('click', function () { git(act - 1); });
+  $('sonraki').addEventListener('click', function () { git(act + 1); });
+  addEventListener('keydown', function (e) {
+    if (acik) { if (e.key === 'Escape') kapat(); return; }
+    var r = kap.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > innerHeight) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); git(act + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); git(act - 1); }
+  });
+  // telefonda sola-sağa kaydırma
+  var tx = null;
+  kap.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
+  kap.addEventListener('touchend', function (e) {
+    if (tx === null || !mobil()) return;
+    var dx = e.changedTouches[0].clientX - tx; tx = null;
+    if (Math.abs(dx) > 40) secAct(act + (dx < 0 ? 1 : -1));
+  });
+
+  /* ---------- detay penceresi ---------- */
+  var perde = $('detay-perde'), detay = $('detay'), acik = false, geriOdak = null, gi = 0;
+  function detayGorsel() {
+    var p = PROJELER[act], gs = p.gorseller || [];
+    $('d-ana').style.background = p.renk;
+    $('d-ana').innerHTML = gorselHtml(p, gi);
+    var th = $('d-kucukler');
+    th.style.display = gs.length > 1 ? '' : 'none';
+    th.innerHTML = gs.length > 1 ? gs.map(function (g, i) {
+      return '<button type="button" class="' + (i === gi ? 'aktif' : '') + '" aria-label="Görsel ' + (i + 1) + '"><img src="' + esc(g) + '" alt=""></button>';
+    }).join('') : '';
+    [].forEach.call(th.children, function (b, i) { b.addEventListener('click', function () { gi = i; detayGorsel(); }); });
+  }
+  function ac(i, kaynak) {
+    var p = PROJELER[i]; if (p.kilitli) return;
+    gi = 0; geriOdak = kaynak || null;
+    $('d-no').textContent = 'NUMARA_' + String(i + 1).padStart(2, '0') + ' · PROFİL';
+    $('d-ad').textContent = p.ad;
+    $('d-rol').textContent = p.rol ? 'ROL: ' + p.rol : ''; $('d-rol').style.display = p.rol ? '' : 'none';
+    $('d-yil').textContent = p.yil ? 'TARİH: ' + p.yil : ''; $('d-yil').style.display = p.yil ? '' : 'none';
+    $('d-acik').textContent = p.uzun || p.kisa || '';
+    statDoldur(detay, p.araclar || []);
+    var l = $('d-link'); l.style.display = p.link ? '' : 'none'; if (p.link) l.href = p.link;
+    $('d-kalem').innerHTML = kalemSvg(KALEM[i % 3]).replace(/^<svg class="kalem"/, '<svg class="kalem"');
+    $('d-kes').style.clipPath = 'url(#kc' + (i % 3) + ')';
+    detayGorsel();
+    acik = true; document.body.classList.add('detay-acik');
+    detay.removeAttribute('hidden'); perde.removeAttribute('hidden');
+    requestAnimationFrame(function () { detay.classList.add('acik'); perde.classList.add('acik'); $('d-kapat').focus(); });
+  }
+  function kapat() {
+    if (!acik) return;
+    acik = false; detay.classList.remove('acik'); perde.classList.remove('acik'); document.body.classList.remove('detay-acik');
+    setTimeout(function () { if (!acik) { detay.setAttribute('hidden', ''); perde.setAttribute('hidden', ''); } }, 700);
+    if (geriOdak) geriOdak.focus();
+  }
+  $('d-kapat').addEventListener('click', kapat);
+  perde.addEventListener('click', kapat);
+
+  /* ---------- başlat ---------- */
+  function hepsi() { olc(); kaydir(); }
+  addEventListener('resize', hepsi);
+  addEventListener('scroll', kaydir, { passive: true });
+  olc(); yerlestir(); kaydir();
+})();
+</script>
+</body>
+</html>

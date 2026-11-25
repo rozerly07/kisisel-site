@@ -1,0 +1,107 @@
+/* ==========================================================================
+   projeler.css — tr/projects.html (referans/projeler.html'den BİREBİR)
+   Renk, ölçü, açı, koordinat, süre ve easing değerlerine DOKUNMA.
+   Navbar/maskot/mobil menü: giris.css + menu-perde.css · fontlar: tokens.css
+   Not: giris.css ile çakışan keyframe'ler önekli (sway→pj-sway, sway2→pj-sway2, flick→pj-flick).
+   ========================================================================== */
+html{background:#140629}
+body{margin:0;color:#FFF3DD;font-family:"Space Grotesk",system-ui,sans-serif}
+body.detay-acik{overflow:hidden}
+a{color:#FFF3DD}a:hover{color:#FFD36B}
+@keyframes pj-sway{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
+@keyframes pj-sway2{0%,100%{transform:rotate(9deg)}50%{transform:rotate(-12deg)}}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes pj-flick{0%,100%{opacity:1}12%{opacity:.3}17%{opacity:1}52%{opacity:.2}58%{opacity:1}}
+@keyframes scan{from{background-position:0 0}to{background-position:0 6px}}
+.px{font-family:"Pixelify Sans",VT323,monospace}
+.vt{font-family:VT323,monospace}
+.pxbtn{font-family:"Pixelify Sans",VT323,monospace;font-weight:700;cursor:pointer;border:0;color:#140629;background:linear-gradient(180deg,#FFE7A3,#FFC24B 55%,#E08A1E);box-shadow:inset 0 -4px 0 rgba(120,50,0,.45),inset 0 3px 0 rgba(255,255,255,.6),0 0 18px rgba(255,190,90,.45)}
+.pxbtn:disabled{opacity:.45;cursor:not-allowed}
+.pxbtn:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #7FE7FF;outline-offset:3px}
+/* sahne */
+#proje-iz{position:relative}
+#proje-sahne{position:sticky;top:0;height:100vh;min-height:560px;overflow:hidden;background:radial-gradient(ellipse 70% 55% at 50% 0%,#5B1E6E 0%,#2A0D45 55%,#140629 100%)}
+#psahne{position:absolute;left:50%;top:0;width:1280px;height:800px;transform-origin:50% 0}
+.isin{position:absolute;mix-blend-mode:screen;filter:blur(8px);pointer-events:none}
+#kartlar{position:absolute;left:440px;top:300px;width:240px;height:280px}
+.kart{position:absolute;left:0;top:0;width:240px;transition:transform .15s linear,filter .15s linear;pointer-events:none}
+.kart-ic{position:relative;transition:transform .3s ease-in-out}
+/* yalnızca öndeki (aktif, kilitsiz) kart tıklanır */
+.kart.tikla{pointer-events:auto;cursor:pointer}
+.kart.tikla:hover .kart-ic,.kart.tikla:focus-visible .kart-ic{transform:scale(1.03)}
+.kart .kalem{transition:filter .3s ease-in-out}
+.kart.tikla:hover .kalem,.kart.tikla:focus-visible .kalem{filter:brightness(1.18) drop-shadow(0 0 6px rgba(249,214,72,.75))}
+.kart:focus{outline:none}.kart.tikla:focus-visible{outline:3px solid #7FE7FF;outline-offset:6px}
+.kart-kes{background:linear-gradient(170deg,#3A1260,#1E0838)}
+.kart-gorsel{height:200px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.kart-gorsel img,#d-ana img{width:100%;height:100%;object-fit:cover;display:block}
+.kart-gorsel .vt{font-size:20px}
+.kart-yazi{padding:14px 22px 22px;display:flex;flex-direction:column;gap:2px}
+.kart-no{font-size:18px;color:#FF9AB0;letter-spacing:2px}.kart-ad{font-size:20px;font-weight:700}
+.kalem{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+#disk{position:absolute;left:50%;top:50%;width:540px;height:540px;margin:-270px 0 0 -270px;transform-origin:50% 50%;transition:transform .15s linear}
+/* panel */
+.panel{position:relative;box-sizing:border-box;padding:22px 24px 24px;border-radius:6px;background:linear-gradient(180deg,rgba(20,6,41,.82),rgba(42,13,69,.82));border:2px solid rgba(127,231,255,.55);box-shadow:0 0 0 4px rgba(20,6,41,.6),0 0 28px rgba(127,231,255,.25),inset 0 0 30px rgba(127,231,255,.08);display:flex;flex-direction:column;gap:12px;overflow:hidden}
+#panel{position:absolute;right:48px;top:236px;width:300px;z-index:6}
+.tarama{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 3px);animation:scan .4s linear infinite}
+.pn-ust{font-size:18px;color:#7FE7FF;letter-spacing:2px}.pn-ad{font-size:28px;font-weight:700;line-height:1.05}.pn-acik{font-size:20px;line-height:1.2;color:#D9C6EC}
+.pn-statlar{display:flex;flex-direction:column;gap:9px;margin-top:4px}
+.stat-ust{display:flex;justify-content:space-between;font-size:18px;color:#FFE7C2}
+.segler{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:3px;margin-top:3px}
+.segler span{height:12px;background:rgba(255,255,255,.12);transition:background .3s ease,box-shadow .3s ease}
+.segler span.dolu{background:linear-gradient(180deg,#FFE7A3,#FF5A6E);box-shadow:0 0 8px rgba(255,140,110,.55)}
+.pn-imlec{margin-top:6px;font-size:18px;letter-spacing:.5px;color:#7FE7FF;text-shadow:0 0 10px rgba(127,231,255,.55)}
+.pn-imlec.kilitli{color:#BFA8DA;text-shadow:none}
+.pn-imlec .imlec{animation:blink 1s steps(1) infinite}
+/* başlık ve kontroller (ölçeklenmez) */
+.p-baslik{position:absolute;left:56px;top:104px;z-index:5;display:flex;flex-direction:column;gap:4px}
+.p-baslik h1{margin:0;font-size:58px;font-weight:700;line-height:1;background:linear-gradient(180deg,#FFF6D6 10%,#FFC24B 50%,#FF5A6E 95%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 4px 0 #3A0B52) drop-shadow(0 0 22px rgba(255,170,80,.45))}
+.p-sayac{position:absolute;right:56px;top:112px;z-index:5;text-align:right;font-size:22px;color:#E9D6FF;line-height:1.1}
+#sayac{font-size:56px;color:#FFD36B;text-shadow:0 0 18px rgba(255,190,90,.6)}
+.ses-dugme{margin-top:10px;padding:3px 10px;font-size:18px;letter-spacing:2px;line-height:1.1;cursor:pointer;color:#7FE7FF;background:rgba(20,6,41,.6);border:2px solid rgba(127,231,255,.55);border-radius:3px;box-shadow:0 0 12px rgba(127,231,255,.2);transition:color .25s ease,border-color .25s ease}
+.ses-dugme[aria-pressed="false"]{color:#BFA8DA;border-color:rgba(191,168,218,.4);box-shadow:none}
+.ipucu{position:absolute;left:56px;bottom:34px;z-index:6;font-size:20px;color:#BFA8DA}
+.ipucu-mobil{display:none}
+#panel-mobil{display:none}
+@media (max-width:760px){
+  #proje-sahne{position:relative;height:auto;min-height:0}
+  #panel{display:none}
+  .p-baslik{left:16px;top:100px}.p-baslik h1{font-size:34px}.p-baslik .vt{font-size:18px!important}
+  .p-sayac{right:16px;top:106px}#sayac{font-size:34px}
+  .ses-dugme{margin-top:6px;font-size:16px;padding:2px 8px}
+  .ipucu{left:16px;bottom:14px;font-size:18px}
+  .ipucu-masa{display:none}.ipucu-mobil{display:inline}
+  #panel-mobil{display:flex;margin:0 14px 40px}
+  /* telefonda sola-sağa kaydırma aynen: kademeli dönüş eski süresiyle */
+  .kart{transition:transform 1.1s cubic-bezier(.22,1,.36,1),filter 1.1s ease}
+  #disk{transition:transform 1.1s cubic-bezier(.22,1,.36,1)}
+}
+/* detay penceresi */
+#detay-perde{position:fixed;inset:0;z-index:40;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(20,6,41,.55),rgba(8,2,18,.92));opacity:0;transition:opacity .6s ease}
+#detay-perde.acik{opacity:1}
+#detay{position:fixed;left:50%;top:50%;z-index:41;width:min(1020px,92vw);height:min(640px,88vh);transform:translate(-50%,-50%) translate(-14vw,10vh) scale(.3);opacity:0;transition:transform .75s cubic-bezier(.22,1,.36,1),opacity .5s ease}
+#detay.acik{transform:translate(-50%,-50%);opacity:1}
+#d-kes{position:absolute;inset:0;background:linear-gradient(165deg,#3A1260,#1E0838 60%,#140629)}
+.d-icerik{position:absolute;inset:0;padding:54px 60px 48px;display:flex;gap:44px;overflow:auto}
+.d-sol{flex:0 0 51%;display:flex;flex-direction:column;gap:14px;min-width:0}
+#d-ana{flex:1;min-height:200px;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:inset 0 0 0 2px rgba(255,231,194,.25)}
+#d-ana .vt{font-size:24px}
+#d-kucukler{display:flex;gap:12px}
+#d-kucukler button{flex:1;height:96px;padding:0;cursor:pointer;background:#1E0838;border:2px solid rgba(255,231,194,.25);opacity:.55;transition:opacity .3s,border-color .3s;overflow:hidden}
+#d-kucukler button.aktif{opacity:1;border-color:#FFC24B;box-shadow:0 0 14px rgba(255,190,90,.5)}
+#d-kucukler img{width:100%;height:100%;object-fit:cover;display:block}
+.d-sag{flex:1;display:flex;flex-direction:column;gap:12px;min-width:0}
+#d-no{font-size:20px;color:#7FE7FF;letter-spacing:2px}
+#d-ad{margin:0;font-size:40px;font-weight:700;line-height:1.05;background:linear-gradient(180deg,#FFF6D6 10%,#FFC24B 50%,#FF5A6E 95%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 16px rgba(255,170,80,.4))}
+.d-bilgi{display:flex;gap:18px;font-size:19px;color:#FFE7C2}
+#d-acik{margin:0;font-size:21px;line-height:1.25;color:#E3D2F4}
+#detay .stat{display:grid;grid-template-columns:110px 1fr 46px;align-items:center;gap:10px}
+#detay .stat-ust{display:contents}#detay .stat-ad{grid-column:1}#detay .stat-deger{grid-column:3;text-align:right}#detay .segler{grid-column:2;grid-row:1;margin:0}
+.d-dugmeler{display:flex;gap:14px;margin-top:auto;flex-wrap:wrap}
+#d-link{display:inline-block;padding:12px 22px;font-size:18px;text-decoration:none;color:#140629}
+#d-kapat{padding:12px 20px;font-family:VT323,monospace;font-size:20px;cursor:pointer;color:#FFE7C2;background:transparent;border:2px solid rgba(255,231,194,.5)}
+@media (max-width:760px){.d-icerik{flex-direction:column;padding:34px 26px 30px;gap:20px}.d-sol{flex:none}#d-ana{min-height:220px}#d-ad{font-size:30px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* Telefonda sola-sağa kaydırma karuseli çevirir: yatay hareket tarayıcının
+   "geri git" hareketine gitmesin (dikey kaydırma tarayıcıda kalır) */
+#proje-sahne{touch-action:pan-y}

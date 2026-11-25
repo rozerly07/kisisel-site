@@ -35,6 +35,7 @@
       gise: 'Gişeye dön',
       sosyal: 'Sosyal medya',
       marki: 'İNANILMAZ DİJİTAL SİRKE HOŞGELDİNİZ',
+      telif: 'Tüm hakları saklıdır.',
       nav: ['Anasayfa', 'Hakkımda', 'Projeler', 'Galeri', 'Blog', 'İletişim']
     },
     en: {
@@ -47,6 +48,7 @@
       gise: 'Back to the box office',
       sosyal: 'Social media',
       marki: 'WELCOME TO THE INCREDIBLE DIGITAL CIRCUS',
+      telif: 'All rights reserved.',
       nav: ['Home', 'About', 'Projects', 'Gallery', 'Blog', 'Contact']
     }
   };
@@ -192,31 +194,47 @@
       mobilMenuHTML(m, aktif);
   }
 
-  function footerHTML(m) {
-    var parca = '';
-    for (var i = 0; i < 3; i++) {
-      parca += '<span>' + kacis(m.marki) + '</span><span class="marki__ayrac"></span>';
-    }
-    var sosyal = SOSYAL_GOSTER ? SOSYAL.map(function (s) {
-      return '<li><a class="sosyal__link" href="' + s.url + '" target="_blank" rel="noopener noreferrer">' +
-        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">' + s.ikon + '</svg>' +
-        s.ad + '</a></li>';
-    }).join('') : '';
-    var yil = new Date().getFullYear();
-
-    return '<footer class="alt-bilgi">' +
-      '<div class="marki" aria-hidden="true">' +
-        '<div class="ampul-sira" data-ampul></div>' +
-        '<div class="marki__serit">' +
-          '<div class="marki__metin">' + parca + '</div>' +
-          '<div class="marki__metin">' + parca + '</div>' +
-        '</div>' +
+  /* ---------- Footer (tek kaynak: bütün sayfalar buradan) ----------
+     Stil: assets/css/footer.css. Karo zeminli sayfada yer tutucu
+     <div data-footer="karo"></div> değiştirilir; diğerlerinde body sonuna eklenir.
+     Link yok. İmza: yazı soldan sağa açılır (1.6s), ardından altın kuyruk çizilir (0.9s). */
+  function footerHTML(m, karo) {
+    return '<footer class="imza-footer' + (karo ? ' imza-footer--karo' : '') + '">' +
+      '<div class="imza">' +
+        '<p class="imza-yazi" lang="en">roze&#39;s world</p>' +
+        '<svg class="imza-kuyruk" viewBox="0 0 600 56" aria-hidden="true" focusable="false">' +
+          '<defs><linearGradient id="imza-altin" x1="0" y1="0" x2="1" y2="0">' +
+            '<stop offset="0" stop-color="#FFE7A3" stop-opacity=".55"/><stop offset=".35" stop-color="#FFC24B"/>' +
+            '<stop offset=".8" stop-color="#FFC24B"/><stop offset="1" stop-color="#FFE7A3" stop-opacity=".7"/>' +
+          '</linearGradient></defs>' +
+          '<path pathLength="1" d="M10 30 C 52 40, 92 20, 140 26 S 214 42, 268 32 S 352 14, 404 26 S 470 42, 506 30 ' +
+            'C 528 22, 548 10, 540 6 C 532 2, 518 16, 530 26 C 546 38, 572 34, 592 22"/>' +
+        '</svg>' +
       '</div>' +
-      '<div class="alt-bilgi__ic kap">' +
-        '<p class="alt-bilgi__imza">© ' + yil + ' Rozerin AKTAŞ · <a href="../index.html">' + m.gise + '</a></p>' +
-        (sosyal ? '<ul class="sosyal" aria-label="' + m.sosyal + '">' + sosyal + '</ul>' : '') +
-      '</div>' +
+      '<p class="imza-telif">© 2026 roze&#39;s world · ' + m.telif + '</p>' +
       '</footer>';
+  }
+
+  function footerKur(m, zorunlu) {
+    var yer = document.querySelector('[data-footer]');
+    if (!yer && !zorunlu) return;
+    var karo = !!yer && yer.getAttribute('data-footer') === 'karo';
+    if (yer) yer.outerHTML = footerHTML(m, karo);
+    else document.body.insertAdjacentHTML('beforeend', footerHTML(m, false));
+    var f = document.querySelector('.imza-footer');
+    if (!f || azHareket()) return;          // az hareket: imza direkt görünür
+    f.classList.add('imza-hazir');
+    function oyna() {
+      f.classList.add('imza-oyna');
+      setTimeout(function () { f.classList.add('imza-bitti'); }, 1700);
+    }
+    if (!('IntersectionObserver' in window)) { oyna(); return; }
+    var io = new IntersectionObserver(function (girdiler) {
+      if (!girdiler[0].isIntersecting) return;
+      io.disconnect();                      // yalnızca bir kez
+      oyna();
+    }, { threshold: 0.35 });
+    io.observe(f);
   }
 
   function perdeHTML() {
@@ -840,6 +858,7 @@
         gise: body.getAttribute('data-menu-gise') !== 'yok',
         kapat: true
       }));
+      footerKur(mm, false);
       menuKur('(min-width: 761px)');
       perdeKur();
       return;
@@ -849,7 +868,7 @@
       var d = dil();
       var m = METIN[d];
       body.insertAdjacentHTML('afterbegin', ustBarHTML(m, d, aktifSayfa()));
-      body.insertAdjacentHTML('beforeend', footerHTML(m));
+      footerKur(m, true);
       menuKur();
       maskotKur();
     }

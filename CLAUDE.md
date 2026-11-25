@@ -25,7 +25,8 @@ index.html                 → Gişe: dil seçim girişi (TR / EN bileti)
 tr/ & en/                  → index, about, projects, gallery, blog, blog-1, blog-2, blog-3, contact (.html)
 assets/css/tokens.css      → renk, font, boşluk, süre değişkenleri
 assets/css/base.css        → reset, tipografi, layout yardımcıları
-assets/css/components.css  → navbar, maskot, perde, kartlar, butonlar, footer
+assets/css/components.css  → navbar, maskot, perde, kartlar, butonlar
+assets/css/footer.css      → ortak imzalı footer (bütün sayfalar)
 assets/css/pages/*.css     → sayfaya özel stiller
 assets/js/components.js    → navbar + maskot + dil değiştirici + perde geçişi + footer
 assets/js/pages/*.js       → sayfaya özel etkileşimler
@@ -42,6 +43,14 @@ Görsel referanslar: `referans/anasayfa.html` (giriş + kaydırma + sirkin içi,
 
 Mekân eşlemesi: Anasayfa = çadırın girişi → içi · Hakkımda = sanatçı afişi + cambaz ipi · Projeler = karo zeminli sahnede döner podyum · Galeri = karo duvar · Blog = duyuru panosu · İletişim = gişe.
 
+**Projeler sahnesi** (`tr/projects.html`, `assets/css/projeler.css`, `assets/js/projeler.js`; görünüm `referans/projeler.html`):
+- Masaüstü: bölüm sabit (sticky), kaydırma podyumu **kesintisiz** döndürür: `rot = p × (N−1)` (ondalıklı). Kart yörünge konumu/ölçeği/parlaklığı ve disk dönüşü `rot`'tan; `.kart` ve `#disk` transition'ı `0.15s linear`. Panel, sayaç, `aria-hidden` ve tıklanabilirlik en yakın projeye göre (`Math.round(rot)`); panel yalnızca bu değer değişince yeniden dolar (çubuklar baştan dolar). Son projeden sonra sabitlik biter, sayfa normal devam eder.
+- Telefon: sola-sağa kaydırma ile proje proje (geçiş eski 1.1s eğrisiyle). Klavye ← → her yerde çalışır.
+- Ok/nokta düğmeleri YOK. Sol altta ipucu: "AŞAĞI KAYDIR ↓" (telefonda "KAYDIR ← →").
+- Panel altında yanıp sönen imleçli VT323 satırı: "> SEÇMEK İÇİN PROJEYE TIKLA_" (kilitli: "> BU NUMARA KİLİTLİ_"). SEÇ düğmesi yok.
+- Yalnızca öndeki (aktif) kilitsiz kart tıklanır: `role="button"`, `tabindex="0"`, `aria-label="[ad] ayrıntılarını aç"`, Enter/Space; detay penceresi açılır, kapanınca odak karta döner. Arkadaki kartlar `pointer-events:none`. Hover/focus: `.kart-ic` scale 1.03 + kalem çerçevesi hafif parlar. Kilitli kartta hiçbir şey olmaz.
+- **Ses** (Web Audio, dosyasız, square dalga): aktif proje değişince bip 880→1320Hz/70ms, ses 0.05, en sık 90ms'de bir; detay açılınca arpej 660·880·1320Hz (her biri 60ms); kapanınca 440Hz/80ms. AudioContext ilk tıklama/dokunma/tuşta oluşturulur/resume edilir; hata sessizce geçilir. Sayaç altında "SES: AÇIK / SES: KAPALI" düğmesi (`aria-pressed`, varsayılan açık, `localStorage` `sirk-ses`). Reduced-motion sesi etkilemez.
+
 ## Tasarım dili (onaylı — değiştirme)
 **Gökyüzü / ana zemin**: dikey gün batımı gradyanı `#0E0726 → #2A0D57 → #6A1B7A → #C6306E → #FF8A3D → #FFC66B`, `background-size:100% 160%` ile 14 sn'de yavaşça kayar. Üst yarıda ince yıldız tozu.
 
@@ -56,7 +65,7 @@ Mekân eşlemesi: Anasayfa = çadırın girişi → içi · Hakkımda = sanatç�
 - Ad-soyad başlığında 2–3 harfte bordo leke: düzensiz oval, bir ucu fırça gibi çekilmiş sivri iz, yanında küçük damla, hafif açık iç ışık; her harfte değil. Inline SVG, harfe göre konumlu.
 - Bölüm başlıkları (Merhaba ben…, Galeri vb.): **Abril Fatface** (kalın gövde, ince serif), aynı altın→pembe gradyan dolgu ve parlama. Üstünde küçük tema etiketi (ör. "KARO DUVAR").
 - Projeler ile ilgili her yazı: pikselli fontlar — başlık/ad **Pixelify Sans**, etiket/açıklama **VT323** (`> PROJELER.EXE_` gibi komut satırı etiketleri).
-- Footer: "roze's world" **Rubik Beastly** (şekilsiz, absürt harfler), gradyanlı; altında © satırı. Footer'da link YOK.
+- Footer: "roze's world" **Mrs Saint Delafield** (el yazısı imza; yerel woff2, ğ/İ/ş glifi yok → yalnızca ASCII), altın→pembe→lila gradyan; altında © satırı. Footer'da link YOK.
 - Küçük başlık/etiket: Bungee, geniş harf aralığı, pembe parlama.
 - Gövde: Space Grotesk.
 
@@ -71,12 +80,20 @@ Mekân eşlemesi: Anasayfa = çadırın girişi → içi · Hakkımda = sanatç�
 **Hareket**: akıcı ve sürekli ama sakin; ease-in-out, sahne geçişleri 600–900ms, UI 200–400ms. Sert/zıplayan "oyuncak" hareketleri yok. `prefers-reduced-motion`'da sürekli animasyonlar durur.
 
 ## Global bileşenler
-- **Maskot (kullanıcının karakteri)**: `assets/img/maskot/` görselleri (şeffaf, ≤160px, WebP). Ekrana sabit (`position:fixed`), kaydırırken hep görünür; birkaç saniyede bir ekranın alt kısmında yeni bir yere yürür (gittiği yöne yan görünüm), durunca önden görünür; imleç üstüne gelince/mobilde dokununca hızla ekranın öbür yanına kaçar. Davranış kodu `referans/anasayfa.html` içinde; sadece yer tutucu daire görsellerle değiştirilir.
+- **Maskot (kullanıcının karakteri)**: `assets/img/maskot/` görselleri (şeffaf, ≤160px, WebP): `on.webp`, `yan.webp` (sola bakar), `yan-sag.webp` (aynalı, sağa bakar), `arka.webp`. Ekrana sabit (`position:fixed`). Kod `assets/js/maskot.js`'de (anasayfa); dolaşma modu `referans/anasayfa.html`'deki değerlerle. Rengi `--maskot-renk` (tokens.css; on.webp'nin baskın rengi `#C0AED8`).
+  - **Navbar modu** (scrollY < 80): logonun sağında, dikey ortalı, 44px (mobil 36px), on.webp ile yerinde süzülür; z-index navbardan yüksek. İmleçle dokunulunca yan görünümle navbardaki boşluklardan birine kaçar (0.45s), navbardan çıkmaz, durunca önden döner.
+  - **Aşağı kaydırınca** (scrollY ≥ 80): yan görünümle yay çizerek (önce biraz yukarı, sonra aşağı) 0.9s'de navbardan atlar, 90px'e büyür, dolaşma moduna geçer: her 4.2 sn'de ekranın alt kısmında (72–90vh) yeni yere yürür (2.8s), dokununca kaçar (0.45s).
+  - **En üste dönünce**: yürüyüp küçülerek (0.9s) navbardaki yerine oturur.
+  - **Yazı yeme** (yalnızca navbar modunda, yalnızca "Anasayfa", "Hakkımda", "Projeler"): boştayken 7–10 sn'de bir rastgele ya da imleç linkte 400ms kalınca; aynı anda tek yeme. Maskot linkin yanına uçar, ağzını linke çevirir; harfler en yakından başlayıp 40ms arayla ağza doğru kayar (en fazla %60 yol), %60'a küçülür, maskot rengine döner — kaybolmaz; maskot 3 kez çiğner (~700ms). Kusma (~600ms): harfler aynı sırayla hafif geri sekmeyle yerine zıplar, 5–6 maskot renginde damla saçılıp söner; harfler 2.5 sn maskot renginde kalır, 1 sn'de eski rengine döner. Link harf span'larına bölünür (span'lar `aria-hidden`, linkte `aria-label` tam metin); link kutusu değişmez, yalnızca harflerin transform'u ve rengi değişir; link her an tıklanabilir, yeme sırasında maskot `pointer-events:none`, tıklama animasyonu beklemez. Mobil menü açıkken yeme olmaz.
+  - **prefers-reduced-motion**: yalnızca navbarda hareketsiz durur, yeme yok.
 - **Logo**: `assets/img/logo/` (SVG tercih, yoksa şeffaf PNG); navbardaki "[ADIN] SİRKİ" yazısının yerine.
 - **Mobil menü**: tam ekran perde iner, linkler sırayla düşer.
 - **Perde geçişi**: iç linke tıklayınca kadife perde kapanır → sayfa değişir → yeni sayfada açılır.
 - **Dil değiştirici**: navbarda TR · EN hap butonu (pembe→turuncu gradyan); aynı dosyayı diğer klasörde açar. `<html lang>` doğru.
-- **Footer**: karo zeminden gradyanla geçilen koyu mor alan, "roze's world" + © 2026 satırı. Link yok.
+- **Footer (imzalı, tek kaynak)**: HTML'i `components.js` (`footerHTML`/`footerKur`) basar, stili `assets/css/footer.css`; bütün `tr/` sayfalarında aynı. Karo zeminli sayfada yer tutucu `<div data-footer="karo"></div>` (zeminden `#2A0D57`→`#140629` gradyanla geçiş), diğer sayfalarda body sonuna eklenir ve üst kenarı `#140629`'dan yumuşak gradyanla başlar. Min. yükseklik 320px (telefon 240px), içerik dikey ortalı.
+  - "roze's world": Mrs Saint Delafield, 132px (telefon 76px), dolgu `linear-gradient(90deg,#FFC24B,#FF5A8A 50%,#B98CFF)`, parlama `drop-shadow(0 0 18px rgba(255,120,160,.45))`.
+  - **İmza dokunuşu**: footer ekrana ilk girince (IntersectionObserver, bir kez) yazı 1.6s'de soldan sağa açılır (clip-path inset, ease-out); ardından altında yazı genişliğinde elle çekilmiş kıvrımlı altın SVG kuyruk çizilir (stroke-dashoffset, 0.9s). Reduced-motion'da direkt görünür.
+  - Altında "© 2026 roze's world · Tüm hakları saklıdır." Link yok.
 
 ## Çalışma kuralları (token tasarrufu)
 - Sadece görevde adı geçen dosyaları oku/düzenle. Tüm projeyi tarama.

@@ -73,15 +73,13 @@ body{margin:0}
 .giris-ampul{width:10px;height:10px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 12px 3px #FFB84D;animation-name:flick;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
 html,body{height:100%}
 #sahne-kap{position:relative;width:100%;height:100vh;min-height:520px;overflow:hidden;font-family:"Space Grotesk",system-ui,sans-serif;background:linear-gradient(180deg,#0E0726 0%,#2A0D57 30%,#6A1B7A 52%,#C6306E 70%,#FF8A3D 88%,#FFC66B 100%);background-size:100% 160%;animation:sky 14s ease-in-out infinite}
-.giris-bar{position:absolute;z-index:5;top:18px;left:40px;right:40px}
+.giris-bar{position:fixed;z-index:30;top:18px;left:40px;right:40px} /* referans/anasayfa.html + projeler.html: sabit navbar */
 @media (max-width:760px){.giris-bar{left:12px;right:12px}.giris-bar nav{display:none!important}}
 @media (prefers-reduced-motion:reduce){#sahne-kap{animation:none}}
 @media (prefers-reduced-motion:reduce){#sahne *,#sahne{animation:none!important}}
 
 /* ---------- Eklemeler (görünümü değiştirmez) ---------- */
-/* Çadır kapısı üstündeki görünmez link: yalnızca klavye odağında halka görünür */
-.giris-kapi{position:absolute;display:block;border-radius:50% 50% 0 0/40% 40% 0 0}
-.giris-kapi:focus-visible,.giris-bar a:focus-visible{outline:3px solid #FFE7A3;outline-offset:4px}
+.giris-bar a:focus-visible{outline:3px solid #FFE7A3;outline-offset:4px}
 
 /* ---------- Mobil menü (components.js "menu-perde" modu) ---------- */
 /* Menü butonu yalnızca 760px altında; masaüstü navbar aynen kalır */
@@ -94,7 +92,16 @@ html,body{height:100%}
    (bar top 18 + kenarlık 1 + padding 12 · sağ 12 + 1 + 22) */
 .mobil-menu .menu-kapat{position:absolute;top:31px;right:35px}
 
-/* ---------- Maskot (kök index + tr/index ortak; referans/anasayfa.html'den) ---------- */
+/* ---------- Maskot (tr/index; davranış assets/js/maskot.js) ---------- */
+/* dolaşırken yürüme (referans "step"), navbarda yerinde süzülme (referans "bob") */
+#maskot .maskot-gorsel{animation:step .6s ease-in-out infinite}
+#maskot.mk-nav .maskot-gorsel{animation:bob 2.6s ease-in-out infinite}
+#maskot .maskot-cigne{transform-origin:50% 85%}
+/* yazı yeme: harf span'ları (link kutusu değişmez, yalnızca transform + renk) */
+.mk-kutu{visibility:hidden}
+.mk-harfler{position:absolute;left:0;top:0;white-space:nowrap}
+.mk-harf{display:inline-block}
+.mk-damla{position:fixed;left:0;top:0;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--maskot-renk);pointer-events:none;z-index:32}
 @keyframes step{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-10px) rotate(5deg)}}
 @media (prefers-reduced-motion:reduce){#maskot *{animation:none!important;transition:none!important}}
 /* body'de font yok (sahne kendi fontunu taşır): menü sitenin gövde fontunu kullansın */

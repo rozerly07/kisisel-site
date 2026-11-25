@@ -5,7 +5,7 @@
 - Kısa unvan / tek cümle tanıtım: Akdeniz Üniversitesi Bilgisayar Programcılığı öğrencisi, Sinemaya, modaya, sanata ve tarihe ilgi duyuyor. Anime ve Film izlemeye bayılır. Kaotik ve sarcastik şeyleri sever.   
 - E-posta: rozerly07@gmail.com
 - Telefon: +90 5411054707
-- Adres (haritada gösterilecek): Antalya\Kepez Akdeniz Üniversitesi.
+- Adres (haritada gösterilecek): Akdeniz Üniversitesi Konyaaltı/ Antalya, Türkiye
 - Google Maps embed linki : <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12764.46239088461!2d30.64280841546859!3d36.88758275555423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c391c4eb3bc819%3A0x29c30089f6e24174!2sAkdeniz%20%C3%9Cniversitesi!5e0!3m2!1str!2str!4v1795559399803!5m2!1str!2str" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
 - Instagram linki:https://www.instagram.com/rozerly_/
 - Letterboxd linki: https://boxd.it/e8shR

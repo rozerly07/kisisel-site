@@ -51,6 +51,10 @@ Mekân eşlemesi: Anasayfa = çadırın girişi → içi · Hakkımda = sanatç�
 - Yalnızca öndeki (aktif) kilitsiz kart tıklanır: `role="button"`, `tabindex="0"`, `aria-label="[ad] ayrıntılarını aç"`, Enter/Space; detay penceresi açılır, kapanınca odak karta döner. Arkadaki kartlar `pointer-events:none`. Hover/focus: `.kart-ic` scale 1.03 + kalem çerçevesi hafif parlar. Kilitli kartta hiçbir şey olmaz.
 - **Ses** (Web Audio, dosyasız, square dalga): aktif proje değişince bip 880→1320Hz/70ms, ses 0.05, en sık 90ms'de bir; detay açılınca arpej 660·880·1320Hz (her biri 60ms); kapanınca 440Hz/80ms. AudioContext ilk tıklama/dokunma/tuşta oluşturulur/resume edilir; hata sessizce geçilir. Sayaç altında "SES: AÇIK / SES: KAPALI" düğmesi (`aria-pressed`, varsayılan açık, `localStorage` `sirk-ses`). Reduced-motion sesi etkilemez.
 
+**Galeri** (`tr/gallery.html`, `assets/css/galeri.css`, `assets/js/galeri.js`; görünüm `referans/galeri.html`, BİREBİR kopya): çadır içi tavan + marki ampulleri, iki spot, "ROZE'YE BİR BAKIŞ" etiketi + Abril "Galeri", karo duvar (`adim:20, kosegen:16.8, xMax:2`, altın parıltılar), altta karo zemin + `data-footer="karo"`. Karoya tıklayınca büyük görünüm karonun yerinden 45° dönük kalkıp ortaya büyür (0.8s); altın çerçeve + ampuller, ← → / kaydırma, Esc/perde ile kapanır, odak karoya döner, Tab pencerede kalır. `gallery.html#foto-N` → o fotoğraf açık gelir. Navbar/maskot/menü/perde projects.html ile aynı yapı (`data-bilesen="menu-perde"`). Keyframe öneki: `gl-flick`.
+
+**Ortak karo duvar** (`assets/js/karo-duvar.js`, `referans/karo-duvar.js`'in değiştirilmemiş kopyası): `KaroDuvar(kutu, {fotolar, adim, kosegen, xMax, yildiz:{boyutYatay, boyutCapraz, renk, parilti}, tikla})`. Baklava kafes, camgöz, imleçle büyüyen karo, köşe parıltıları; kendi CSS'ini (`kd-` önekli) basar. Sayfaya özel ayar sayfanın dosyasında verilir. Fotoğraf listesi TEK yerde: `assets/js/galeri-veri.js` (`window.GALERI`, ICERIK.md'den; `renk` yedek zemin). Anasayfa (`anasayfa.js`): `adim:26, kosegen:21.8, xMax:1.5`, lila `#D9C2FF` / camgöbeği parıltı, küçük yıldız (1.6/1.1), tıklayınca `gallery.html#foto-N`. Sıra: `karo-duvar.js` → `galeri-veri.js` → sayfa scripti.
+
 ## Tasarım dili (onaylı — değiştirme)
 **Gökyüzü / ana zemin**: dikey gün batımı gradyanı `#0E0726 → #2A0D57 → #6A1B7A → #C6306E → #FF8A3D → #FFC66B`, `background-size:100% 160%` ile 14 sn'de yavaşça kayar. Üst yarıda ince yıldız tozu.
 
@@ -89,6 +93,7 @@ Mekân eşlemesi: Anasayfa = çadırın girişi → içi · Hakkımda = sanatç�
 - **Logo**: `assets/img/logo/` (SVG tercih, yoksa şeffaf PNG); navbardaki "[ADIN] SİRKİ" yazısının yerine.
 - **Mobil menü**: tam ekran perde iner, linkler sırayla düşer.
 - **Perde geçişi**: iç linke tıklayınca kadife perde kapanır → sayfa değişir → yeni sayfada açılır.
+- **İmleç (bütün sayfalar)**: `assets/img/imlec/imlec.svg` (yıldız) ve `imlec-el.svg` (tıklanabilir öğeler), hotspot `16 16`. Kural `tokens.css` sonunda (her sayfa yükler); tıklanabilirlerde `!important` (sayfa CSS'indeki düz `cursor:pointer` ezmesin), `:disabled` → `not-allowed`. Sayfa CSS'ine ayrı imleç kuralı yazma.
 - **Dil değiştirici**: navbarda TR · EN hap butonu (pembe→turuncu gradyan); aynı dosyayı diğer klasörde açar. `<html lang>` doğru.
 - **Footer (imzalı, tek kaynak)**: HTML'i `components.js` (`footerHTML`/`footerKur`) basar, stili `assets/css/footer.css`; bütün `tr/` sayfalarında aynı. Karo zeminli sayfada yer tutucu `<div data-footer="karo"></div>` (zeminden `#2A0D57`→`#140629` gradyanla geçiş), diğer sayfalarda body sonuna eklenir ve üst kenarı `#140629`'dan yumuşak gradyanla başlar. Min. yükseklik 320px (telefon 240px), içerik dikey ortalı.
   - "roze's world": Mrs Saint Delafield, 132px (telefon 76px), dolgu `linear-gradient(90deg,#FFC24B,#FF5A8A 50%,#B98CFF)`, parlama `drop-shadow(0 0 18px rgba(255,120,160,.45))`.
@@ -100,3 +105,4 @@ Mekân eşlemesi: Anasayfa = çadırın girişi → içi · Hakkımda = sanatç�
 - Değişiklik sonrası uzun özet yazma; 3–5 maddelik kısa not yeter.
 - Ortak stil/JS tekrar yazma; tokens.css ve components.js'i kullan.
 - Önce `tr/` sayfaları bitirilir; `en/` en sonda tek görevde çevrilir.
+- **Ekran görüntüsü ALMA** (hiçbir görevde). Kontrol için yalnızca sayfaları açıp konsolda hata olup olmadığına bak.

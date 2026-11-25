@@ -265,3 +265,10 @@
 @media (min-width: 960px) {
   :root { --ust-bar-y: 5.5rem; --maskot-boy: 3.75rem; }
 }
+
+/* ---------- SİTE GENELİ İMLEÇ (referans/galeri.html'den; bütün sayfalar) ----------
+   Görseller assets/img/imlec/ · hotspot 16 16 (yıldızın ortası).
+   !important: sayfa CSS'lerindeki düz "cursor:pointer" kuralları ortak imleci ezmesin. */
+html,body{cursor:url(../img/imlec/imlec.svg) 16 16,auto}
+a,button,[role=button],label,select,summary,#maskot{cursor:url(../img/imlec/imlec-el.svg) 16 16,pointer!important}
+:disabled,[aria-disabled=true]{cursor:not-allowed!important}

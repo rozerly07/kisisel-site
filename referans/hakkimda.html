@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hakkımda — onaylı referans</title>
+<!-- ONAYLI TASARIM (Hakkımda). Görünümü ve hareket değerlerini DEĞİŞTİRME.
+     Navbar, maskot, mobil menü, imleç ve footer: sitenin ortak olanları kullanılacak (buradakiler yer tutucu). -->
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bungee&family=VT323&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+html{background:#140629}
+body{margin:0;color:#FFF3DD;font-family:"Space Grotesk",system-ui,sans-serif}
+a:focus-visible,button:focus-visible{outline:3px solid #7FE7FF;outline-offset:3px}
+@keyframes flick{0%,100%{opacity:1}12%{opacity:.25}17%{opacity:1}46%{opacity:.85}52%{opacity:.15}58%{opacity:1}83%{opacity:.4}88%{opacity:1}}
+@keyframes swayH{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+@keyframes swayH2{0%,100%{transform:rotate(10deg)}50%{transform:rotate(-14deg)}}
+@keyframes denge{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+@keyframes zil{0%,100%{transform:rotate(0)}20%{transform:rotate(-14deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(5deg)}}
+@keyframes zilisik{0%,100%{opacity:.2}50%{opacity:1}}
+@keyframes hokkabaz{from{offset-distance:0%}to{offset-distance:100%}}
+.gt{font-family:"Abril Fatface",Didot,Georgia,serif;font-weight:400;background:linear-gradient(180deg,#FFF6D6 10%,#FFC24B 50%,#FF5A6E 95%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 4px 0 #3A0B52) drop-shadow(0 0 22px rgba(255,170,80,.45))}
+.lb{font-family:Bungee,Impact,sans-serif;letter-spacing:6px;color:#FFE7C2;text-shadow:0 0 16px rgba(255,120,160,.7);font-size:14px}
+.cam{border-radius:22px;background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.03));border:1px solid rgba(255,231,194,.35);backdrop-filter:blur(12px);box-shadow:0 24px 60px rgba(10,0,30,.5)}
+.ust-bar{position:fixed;z-index:30;top:18px;left:40px;right:40px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 22px;border-radius:999px;background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(14px);box-shadow:0 10px 40px rgba(10,0,40,.45)}
+.ust-bar nav{display:flex;gap:28px;font-weight:500;font-size:15px}.ust-bar a{color:#FFF3DD;text-decoration:none}
+@media (max-width:760px){.ust-bar{left:12px;right:12px}.ust-bar nav{display:none}}
+#hakkimda{position:relative;overflow:hidden;background:radial-gradient(ellipse 80% 30% at 50% 0%,#5B1E6E 0%,#2A0D45 50%,#140629 100%)}
+.isin{position:absolute;top:280px;width:160px;height:2600px;transform-origin:50% 100%;clip-path:polygon(45% 100%,55% 100%,100% 0,0 0);mix-blend-mode:screen;filter:blur(8px);pointer-events:none}
+.h-ic{position:relative;max-width:1140px;margin:0 auto;padding:200px 32px 80px;display:flex;flex-direction:column;gap:130px}
+.bolum{display:flex;flex-direction:column;align-items:center;gap:20px}
+.bolum h2{margin:0;font-size:56px}
+/* afiş */
+.afis{display:flex;flex-wrap:wrap;gap:60px;align-items:center;justify-content:center}
+.cerceve-kap{position:relative;flex:none;margin:70px 60px 60px}
+.vesika{position:relative;width:260px;height:330px;border-radius:130px 130px 18px 18px;padding:8px;box-sizing:border-box;background:linear-gradient(160deg,#FFE7A3,#C98A2B 45%,#FFE7A3 70%,#8A5A14);box-shadow:0 0 40px rgba(255,180,80,.35),0 30px 60px rgba(10,0,30,.6)}
+.vesika-ic{width:100%;height:100%;border-radius:122px 122px 12px 12px;overflow:hidden;background:linear-gradient(170deg,#6A1B7A,#C6306E 60%,#FF8A3D);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+.vesika-ic img{width:100%;height:100%;object-fit:cover;display:block}
+.ozgecmis{flex:1 1 420px;max-width:560px;display:flex;flex-direction:column;gap:14px;padding:36px 40px;box-sizing:border-box}
+.ozgecmis h1{margin:0;font-size:64px;line-height:1}
+.ozgecmis p{margin:0;font-size:17px;line-height:1.7;color:#EBDDF7}
+.etiketler{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.etiketler span{padding:7px 14px;border-radius:999px;font-size:14px}
+/* cambaz ipi */
+#ip{position:relative;width:100%;max-width:1080px;height:430px;margin-top:20px}
+#cambaz{position:absolute;width:0;height:0;z-index:3;transition:left .3s linear,top .3s linear}
+#cambaz svg{position:absolute;left:-60px;top:-92px;overflow:visible;transform-origin:50% 100%;animation:denge 2.4s ease-in-out infinite}
+.durak{position:absolute;width:0;height:0;z-index:2}
+.durak-nokta{position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:50%;background:rgba(255,231,194,.35);transition:all .6s}
+.durak.gecti .durak-nokta{background:#FF5A8A}
+.durak.aktif .durak-nokta{background:#FFC24B;box-shadow:0 0 16px 4px rgba(255,194,75,.8)}
+.durak-ip{position:absolute;left:-1px;top:6px;width:2px;background:linear-gradient(180deg,rgba(255,231,194,.7),rgba(255,231,194,.1))}
+.durak-kart{position:absolute;left:-140px;width:280px;box-sizing:border-box;padding:18px 20px;opacity:.6;transform:translateY(10px) scale(.96);transition:transform .7s cubic-bezier(.22,1,.36,1),opacity .7s,border-color .7s}
+.durak.aktif .durak-kart{opacity:1;transform:scale(1.04);border-color:rgba(255,194,75,.8)}
+.durak-yil{display:block;font-family:VT323,monospace;font-size:20px;color:#FFD36B;letter-spacing:1px}
+.durak-okul{display:block;font-family:"Abril Fatface",Georgia,serif;font-size:22px;line-height:1.15;margin:4px 0 6px}
+.durak-bolum{display:block;font-size:15px;color:#D9C6EC}
+#ip-dikey{display:none}
+/* güç ölçer */
+#kuleler{display:flex;flex-wrap:wrap;justify-content:center;gap:46px;margin-top:30px}
+.kule{display:flex;flex-direction:column;align-items:center;gap:8px;width:110px}
+.zil{position:relative;width:46px;height:40px;transform-origin:50% 0}
+.zil-isik{position:absolute;left:-12px;top:-10px;width:70px;height:60px;border-radius:50%;background:radial-gradient(circle,rgba(255,220,130,.7),transparent 65%);opacity:0}
+.gorundu .zilli .zil{animation:zil .9s ease-in-out calc(var(--gecikme) + 1.7s) 3}
+.gorundu .zilli .zil-isik{animation:zilisik .45s ease-in-out calc(var(--gecikme) + 1.7s) 6}
+.tup{position:relative;width:40px;height:300px;border-radius:20px;padding:5px;box-sizing:border-box;background:linear-gradient(90deg,#2A0D45,#4A1A66 50%,#2A0D45);border:2px solid rgba(255,231,194,.4);box-shadow:inset 0 0 18px rgba(0,0,0,.5)}
+.cizgiler{position:absolute;left:-14px;top:5px;bottom:5px;display:flex;flex-direction:column;justify-content:space-between}
+.cizgiler span{width:8px;height:2px;background:rgba(255,231,194,.5)}.cizgiler span:nth-child(2n){width:6px;background:rgba(255,231,194,.3)}
+.sivi{position:absolute;left:5px;right:5px;bottom:5px;height:0;border-radius:15px;background:linear-gradient(0deg,#C6306E,#FF5A6E 40%,#FFC24B 85%,#FFF1B8);box-shadow:0 0 18px rgba(255,140,90,.6);transition:height 1.6s cubic-bezier(.2,1.3,.4,1) var(--gecikme)}
+.gorundu .sivi{height:calc(var(--sv) * 10% - var(--sv) * 1px)}
+.pul{position:absolute;left:-6px;right:-6px;top:-8px;height:16px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#FFFFFF,#FFE7A3 40%,#C98A2B)}
+.kaide{width:84px;height:16px;border-radius:6px;background:linear-gradient(180deg,#C98A2B,#5A3A0A)}
+.kule-deger{font-family:VT323,monospace;font-size:22px;color:#FFD36B}
+.kule-ad{font-weight:700;font-size:15px;text-align:center}
+/* hokkabaz */
+.top-kap{position:relative;width:100%;max-width:640px;height:380px;margin:10px auto 0}
+#toplar{position:absolute;left:0;top:0;width:640px;height:380px;transform-origin:0 0}
+.top{position:absolute;left:0;top:0;width:96px;height:96px;padding:0;border:0;border-radius:50%;offset-path:path('M320 330 C80 330 60 40 220 40 C300 40 340 120 320 190 C300 260 340 340 420 340 C580 340 560 40 420 40 C340 40 300 120 320 190 C340 260 300 330 320 330 Z');offset-rotate:0deg;animation:hokkabaz 9s linear infinite;background:radial-gradient(circle at 35% 30%,#FFFFFF 0,var(--renk) 38%,var(--renk) 60%,rgba(20,0,40,.55) 100%);box-shadow:0 14px 24px rgba(5,0,20,.5);font:700 13px "Space Grotesk",system-ui,sans-serif;transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s}
+#toplar.durdu .top{animation-play-state:paused;transform:scale(.85)}
+#toplar.durdu .top.secili{transform:scale(1.35);z-index:5;box-shadow:0 0 40px var(--renk),0 20px 30px rgba(5,0,20,.6)}
+@media (max-width:760px){
+  .h-ic{padding:140px 16px 60px;gap:90px}
+  .cerceve-kap{margin:70px 50px 50px;transform:scale(.85)}
+  .ozgecmis{padding:26px 22px}.ozgecmis h1{font-size:48px}
+  .bolum h2{font-size:42px}
+  #ip{display:none}
+  #ip-dikey{display:block;position:relative;width:100%;padding:10px 0 10px 64px;box-sizing:border-box}
+  #ip-dikey::before{content:"";position:absolute;left:30px;top:0;bottom:0;width:3px;border-radius:2px;background:linear-gradient(180deg,#FFE7C2,rgba(255,231,194,.3))}
+  #cambaz-dikey{position:absolute;left:31px;width:0;height:0;z-index:2;transition:top .3s linear}
+  #cambaz-dikey svg{position:absolute;left:-30px;top:-48px;width:60px;height:48px;overflow:visible;animation:denge 2.4s ease-in-out infinite}
+  .dikey-kart{display:block;margin:0 0 22px;padding:16px 18px;opacity:.6;transition:opacity .6s,border-color .6s}
+  .dikey-kart.aktif{opacity:1;border-color:rgba(255,194,75,.8)}
+  #kuleler{gap:18px}.kule{width:84px}.tup{height:220px}
+}
+@media (prefers-reduced-motion:reduce){#hakkimda *{animation:none!important;transition:none!important}}
+.alt{min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#2A0D57,#140629)}
+</style>
+</head>
+<body>
+<header class="ust-bar"><span style="font-weight:700;color:#FFD36B">[LOGO]</span>
+  <nav aria-label="Ana menü"><a href="index.html">Anasayfa</a><a href="about.html" aria-current="page" style="color:#FFD36B">Hakkımda</a><a href="projects.html">Projeler</a><a href="gallery.html">Galeri</a><a href="blog.html">Blog</a><a href="contact.html">İletişim</a></nav>
+  <a href="../en/about.html" style="font-size:14px;font-weight:700;padding:6px 14px;border-radius:999px;background:linear-gradient(90deg,#FF4D6D,#FF9A3D)">TR · EN</a></header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="zg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1B8"/><stop offset=".5" stop-color="#E0A030"/><stop offset="1" stop-color="#8A5A14"/></linearGradient></defs></svg>
+<main id="hakkimda">
+  <svg style="position:absolute;left:0;top:0;width:100%;height:520px;-webkit-mask-image:linear-gradient(180deg,#000 35%,rgba(0,0,0,.6) 60%,transparent 100%);mask-image:linear-gradient(180deg,#000 35%,rgba(0,0,0,.6) 60%,transparent 100%)" viewBox="0 0 1280 380" preserveAspectRatio="xMidYMin slice" aria-hidden="true"><defs><linearGradient id="ir" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8E1A34"/><stop offset="1" stop-color="#4A0C24"/></linearGradient><linearGradient id="ic" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B8927C"/><stop offset="1" stop-color="#4B2E4A"/></linearGradient><linearGradient id="ifade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#140629" stop-opacity=".15"/><stop offset=".7" stop-color="#2A0D45" stop-opacity=".55"/><stop offset="1" stop-color="#2A0D45" stop-opacity=".7"/></linearGradient></defs><polygon points="640,-60 -200,380 -107,380" fill="url(#ir)"/><polygon points="640,-60 -107,380 -13,380" fill="url(#ic)"/><polygon points="640,-60 -13,380 80,380" fill="url(#ir)"/><polygon points="640,-60 80,380 173,380" fill="url(#ic)"/><polygon points="640,-60 173,380 267,380" fill="url(#ir)"/><polygon points="640,-60 267,380 360,380" fill="url(#ic)"/><polygon points="640,-60 360,380 453,380" fill="url(#ir)"/><polygon points="640,-60 453,380 547,380" fill="url(#ic)"/><polygon points="640,-60 547,380 640,380" fill="url(#ir)"/><polygon points="640,-60 640,380 733,380" fill="url(#ic)"/><polygon points="640,-60 733,380 827,380" fill="url(#ir)"/><polygon points="640,-60 827,380 920,380" fill="url(#ic)"/><polygon points="640,-60 920,380 1013,380" fill="url(#ir)"/><polygon points="640,-60 1013,380 1107,380" fill="url(#ic)"/><polygon points="640,-60 1107,380 1200,380" fill="url(#ir)"/><polygon points="640,-60 1200,380 1293,380" fill="url(#ic)"/><polygon points="640,-60 1293,380 1387,380" fill="url(#ir)"/><polygon points="640,-60 1387,380 1480,380" fill="url(#ic)"/><rect x="0" y="0" width="1280" height="380" fill="url(#ifade)"/><path d="M0 40 Q320 220 640 40" fill="none" stroke="#2A0B3F" stroke-width="2"/><path d="M640 40 Q960 220 1280 40" fill="none" stroke="#2A0B3F" stroke-width="2"/><path d="M120 10 Q640 310 1160 10" fill="none" stroke="#2A0B3F" stroke-width="2"/><circle cx="64" cy="77" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 1.91s ease-in-out infinite;animation-delay:-2.16s"/><circle cx="128" cy="103" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 3.10s ease-in-out infinite;animation-delay:-0.48s"/><circle cx="192" cy="121" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 1.36s ease-in-out infinite;animation-delay:-2.73s"/><circle cx="256" cy="131" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 2.55s ease-in-out infinite;animation-delay:-0.87s"/><circle cx="320" cy="135" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 2.16s ease-in-out infinite;animation-delay:-2.07s"/><circle cx="384" cy="131" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 2.93s ease-in-out infinite;animation-delay:-0.36s"/><circle cx="448" cy="121" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 1.21s ease-in-out infinite;animation-delay:-1.74s"/><circle cx="512" cy="103" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 2.68s ease-in-out infinite;animation-delay:-2.64s"/><circle cx="576" cy="77" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 1.74s ease-in-out infinite;animation-delay:-1.98s"/><circle cx="704" cy="77" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 2.38s ease-in-out infinite;animation-delay:-2.82s"/><circle cx="768" cy="103" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 3.17s ease-in-out infinite;animation-delay:-0.99s"/><circle cx="832" cy="121" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 1.56s ease-in-out infinite;animation-delay:-1.44s"/><circle cx="896" cy="131" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 2.79s ease-in-out infinite;animation-delay:-0.63s"/><circle cx="960" cy="135" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 2.05s ease-in-out infinite;animation-delay:-1.56s"/><circle cx="1024" cy="131" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 1.45s ease-in-out infinite;animation-delay:-2.49s"/><circle cx="1088" cy="121" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 2.62s ease-in-out infinite;animation-delay:-2.31s"/><circle cx="1152" cy="103" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 3.04s ease-in-out infinite;animation-delay:-0.24s"/><circle cx="1216" cy="77" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 1.83s ease-in-out infinite;animation-delay:-0.15s"/><circle cx="224" cy="69" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 2.24s ease-in-out infinite;animation-delay:-1.29s"/><circle cx="328" cy="111" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 1.28s ease-in-out infinite;animation-delay:-1.11s"/><circle cx="432" cy="141" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 1.91s ease-in-out infinite;animation-delay:-2.16s"/><circle cx="536" cy="159" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 3.10s ease-in-out infinite;animation-delay:-0.48s"/><circle cx="640" cy="165" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 1.36s ease-in-out infinite;animation-delay:-2.73s"/><circle cx="744" cy="159" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 2.55s ease-in-out infinite;animation-delay:-0.87s"/><circle cx="848" cy="141" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 2.16s ease-in-out infinite;animation-delay:-2.07s"/><circle cx="952" cy="111" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 2.93s ease-in-out infinite;animation-delay:-0.36s"/><circle cx="1056" cy="69" r="6" fill="#FFE7A3" style="filter:drop-shadow(0 0 6px #FFB84D);animation:flick 1.21s ease-in-out infinite;animation-delay:-1.74s"/></svg>
+  <div class="isin" style="left:6%;animation:swayH 8s ease-in-out infinite;background:linear-gradient(0deg,rgba(255,226,150,.2),rgba(255,226,150,0) 80%)" aria-hidden="true"></div>
+  <div class="isin" style="right:6%;animation:swayH2 9s ease-in-out infinite;background:linear-gradient(0deg,rgba(140,230,255,.18),rgba(140,230,255,0) 80%)" aria-hidden="true"></div>
+  <div class="h-ic">
+    <section class="afis" aria-labelledby="h-baslik">
+      <div class="cerceve-kap">
+        <div style="position:absolute;left:50%;top:-140px;width:460px;height:620px;transform:translateX(-50%);background:radial-gradient(ellipse 50% 60% at 50% 30%,rgba(255,214,130,.4),transparent 70%)" aria-hidden="true"></div>
+        <div class="vesika"><div class="vesika-ic">[VESİKALIK]</div></div>
+        <svg style="position:absolute;left:-60px;top:-70px;width:380px;height:470px;pointer-events:none;overflow:visible" viewBox="0 0 380 470" aria-hidden="true"><defs><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1B8"/><stop offset=".45" stop-color="#C98A2B"/><stop offset=".7" stop-color="#FFE7A3"/><stop offset="1" stop-color="#8A5A14"/></linearGradient><linearGradient id="rib" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF5A66"/><stop offset="1" stop-color="#A3122A"/></linearGradient></defs><path d="M44 404L44 200A146 146 0 0 1 336 200L336 404" fill="none" stroke="url(#gold)" stroke-width="4"/><path d="M34 404L34 200A156 156 0 0 1 346 200L346 404" fill="none" stroke="url(#gold)" stroke-width="1.5" stroke-dasharray="2 6" stroke-linecap="round"/><circle cx="22" cy="200" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 1.91s ease-in-out infinite;animation-delay:-1.11s"/><circle cx="28" cy="157" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 3.10s ease-in-out infinite;animation-delay:-2.16s"/><circle cx="45" cy="116" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 1.36s ease-in-out infinite;animation-delay:-0.48s"/><circle cx="71" cy="81" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 2.55s ease-in-out infinite;animation-delay:-2.91s"/><circle cx="106" cy="55" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 2.16s ease-in-out infinite;animation-delay:-2.49s"/><circle cx="147" cy="38" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 2.93s ease-in-out infinite;animation-delay:-2.31s"/><circle cx="190" cy="32" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 1.21s ease-in-out infinite;animation-delay:-0.24s"/><circle cx="233" cy="38" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 2.68s ease-in-out infinite;animation-delay:-1.98s"/><circle cx="274" cy="55" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 1.74s ease-in-out infinite;animation-delay:-2.82s"/><circle cx="309" cy="81" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 2.38s ease-in-out infinite;animation-delay:-0.99s"/><circle cx="335" cy="116" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 3.17s ease-in-out infinite;animation-delay:-2.73s"/><circle cx="352" cy="157" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 1.56s ease-in-out infinite;animation-delay:-0.87s"/><circle cx="358" cy="200" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 2.79s ease-in-out infinite;animation-delay:-2.07s"/><circle cx="22" cy="240" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 2.05s ease-in-out infinite;animation-delay:-0.75s"/><circle cx="358" cy="240" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 1.45s ease-in-out infinite;animation-delay:-0.15s"/><circle cx="22" cy="280" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 2.62s ease-in-out infinite;animation-delay:-1.29s"/><circle cx="358" cy="280" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 3.04s ease-in-out infinite;animation-delay:-1.83s"/><circle cx="22" cy="320" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 1.83s ease-in-out infinite;animation-delay:-1.44s"/><circle cx="358" cy="320" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 2.24s ease-in-out infinite;animation-delay:-0.63s"/><circle cx="22" cy="360" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 1.28s ease-in-out infinite;animation-delay:-1.56s"/><circle cx="358" cy="360" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 2.44s ease-in-out infinite;animation-delay:-0.36s"/><circle cx="22" cy="400" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 3.23s ease-in-out infinite;animation-delay:-1.74s"/><circle cx="358" cy="400" r="5.5" fill="#FFE7A3" style="filter:drop-shadow(0 0 5px #FFB84D);animation:flick 1.65s ease-in-out infinite;animation-delay:-2.64s"/><g fill="none" stroke="url(#gold)" stroke-width="3" stroke-linecap="round"><path d="M0 0C-18 -6 -26 -26 -12 -38C2 -50 22 -38 14 -24C8 -14 -4 -20 0 -28" transform="translate(30 300)"/><path d="M0 0C-18 -6 -26 -26 -12 -38C2 -50 22 -38 14 -24C8 -14 -4 -20 0 -28" transform="translate(30 330) scale(1 -1)"/><path d="M0 0C-18 -6 -26 -26 -12 -38C2 -50 22 -38 14 -24C8 -14 -4 -20 0 -28" transform="translate(350 300) scale(-1 1)"/><path d="M0 0C-18 -6 -26 -26 -12 -38C2 -50 22 -38 14 -24C8 -14 -4 -20 0 -28" transform="translate(350 330) scale(-1 -1)"/></g><polygon points="190.0,10.0 194.1,20.3 205.2,21.1 196.7,28.2 199.4,38.9 190.0,33.0 180.6,38.9 183.3,28.2 174.8,21.1 185.9,20.3" fill="url(#gold)" style="filter:drop-shadow(0 0 10px rgba(255,200,90,.9))"/><circle cx="152" cy="40" r="3" fill="#FFE7A3"/><circle cx="228" cy="40" r="3" fill="#FFE7A3"/><path d="M48 418L78 410L78 446L48 438L60 428Z" fill="#7A0E22"/><path d="M332 418L302 410L302 446L332 438L320 428Z" fill="#7A0E22"/><path d="M74 404Q190 386 306 404L306 444Q190 426 74 444Z" fill="url(#rib)" stroke="url(#gold)" stroke-width="1.5"/><text x="190" y="428" text-anchor="middle" font-family="Bungee,Impact,sans-serif" font-size="15" letter-spacing="3" fill="#FFF3DD">★ [ADIN] ★</text></svg>
+      </div>
+      <div class="cam ozgecmis">
+        <span class="lb">BU AKŞAM SAHNEDE</span>
+        <h1 class="gt" id="h-baslik">Hakkımda</h1>
+        <p>[Özgeçmiş paragrafı — 4-6 cümle, ICERIK.md'den.]</p>
+        <div class="etiketler">
+          <span style="background:rgba(255,194,75,.14);border:1px solid rgba(255,194,75,.45);color:#FFE7A3">[Şehir]</span>
+          <span style="background:rgba(255,90,138,.14);border:1px solid rgba(255,90,138,.45);color:#FFC2D6">[Bölüm / okul]</span>
+          <span style="background:rgba(127,231,255,.12);border:1px solid rgba(127,231,255,.45);color:#C8F6FF">[Şu an ne yapıyorsun]</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="bolum" id="egitim" aria-labelledby="h-egitim">
+      <span class="lb">CAMBAZ İPİ</span>
+      <h2 class="gt" id="h-egitim">Eğitim</h2>
+      <div id="ip">
+        <svg style="position:absolute;inset:0;width:100%;height:220px;overflow:visible" viewBox="0 0 1080 220" preserveAspectRatio="none" aria-hidden="true">
+          <defs><linearGradient id="dir" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C6306E"/><stop offset=".5" stop-color="#FFF3DD"/><stop offset="1" stop-color="#C6306E"/></linearGradient></defs>
+          <rect x="22" y="40" width="14" height="190" rx="3" fill="url(#dir)"/><rect x="1044" y="40" width="14" height="190" rx="3" fill="url(#dir)"/>
+          <circle cx="29" cy="36" r="10" fill="#FFC24B"/><circle cx="1051" cy="36" r="10" fill="#FFC24B"/>
+          <path d="M29 60 Q540 170 1051 60" fill="none" stroke="#FFE7C2" stroke-width="3" stroke-linecap="round"/>
+          <path d="M29 60 Q540 170 1051 60" fill="none" stroke="#2A0D45" stroke-width="1" stroke-dasharray="4 6"/>
+        </svg>
+        <div id="cambaz" aria-hidden="true"><svg width="120" height="96" viewBox="-60 -92 120 96">
+            <path d="M-56 -46 Q0 -60 56 -46" fill="none" stroke="#FFC24B" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="-56" cy="-46" r="4" fill="#FF5A8A"/><circle cx="56" cy="-46" r="4" fill="#FF5A8A"/>
+            <circle cx="0" cy="-74" r="9" fill="#FFE7C2"/>
+            <path d="M-12 -84 Q0 -96 12 -84 L0 -80Z" fill="#FF5A8A"/>
+            <path d="M0 -65 L0 -36" stroke="#FFE7C2" stroke-width="4" stroke-linecap="round"/>
+            <path d="M0 -58 L-22 -50 M0 -58 L22 -50" stroke="#FFE7C2" stroke-width="3" stroke-linecap="round"/>
+            <path d="M-14 -36 L14 -36 L8 -22 L-8 -22Z" fill="#C6306E"/>
+            <path d="M-4 -22 L-6 0 M4 -22 L6 0" stroke="#FFE7C2" stroke-width="3" stroke-linecap="round"/>
+          </svg></div>
+      </div>
+      <div id="ip-dikey"><div id="cambaz-dikey" aria-hidden="true"><svg width="60" height="48" viewBox="-60 -92 120 96">
+            <path d="M-56 -46 Q0 -60 56 -46" fill="none" stroke="#FFC24B" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="-56" cy="-46" r="4" fill="#FF5A8A"/><circle cx="56" cy="-46" r="4" fill="#FF5A8A"/>
+            <circle cx="0" cy="-74" r="9" fill="#FFE7C2"/>
+            <path d="M-12 -84 Q0 -96 12 -84 L0 -80Z" fill="#FF5A8A"/>
+            <path d="M0 -65 L0 -36" stroke="#FFE7C2" stroke-width="4" stroke-linecap="round"/>
+            <path d="M0 -58 L-22 -50 M0 -58 L22 -50" stroke="#FFE7C2" stroke-width="3" stroke-linecap="round"/>
+            <path d="M-14 -36 L14 -36 L8 -22 L-8 -22Z" fill="#C6306E"/>
+            <path d="M-4 -22 L-6 0 M4 -22 L6 0" stroke="#FFE7C2" stroke-width="3" stroke-linecap="round"/>
+          </svg></div></div>
+    </section>
+
+    <section class="bolum" aria-labelledby="h-yetenek">
+      <span class="lb">GÜÇ ÖLÇER</span>
+      <h2 class="gt" id="h-yetenek">Yetenekler</h2>
+      <div id="kuleler"></div>
+    </section>
+
+    <section class="bolum" aria-labelledby="h-ilgi">
+      <span class="lb">HOKKABAZ</span>
+      <h2 class="gt" id="h-ilgi">İlgi Alanları</h2>
+      <p style="margin:0;font-size:15px;color:#D9C6EC">Bir topun üstüne gel, havada dursun.</p>
+      <div class="top-kap"><div id="toplar"></div></div>
+    </section>
+  </div>
+  <div style="position:relative">
+    <div style="position:absolute;left:0;right:0;bottom:0;height:75%;z-index:1;background:linear-gradient(180deg,rgba(42,13,87,0),rgba(42,13,87,.6) 55%,#2A0D57)" aria-hidden="true"></div>
+    <svg style="display:block;width:100%;height:auto" viewBox="0 586 1280 214" aria-hidden="true"><defs><clipPath id="g2"><ellipse cx="640" cy="990" rx="1500" ry="400"/></clipPath><linearGradient id="fl2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6C8F2"/><stop offset="1" stop-color="#F4E2FF"/></linearGradient></defs><g clip-path="url(#g2)"><rect x="0" y="560" width="1280" height="240" fill="url(#fl2)"/><g fill="#1A0B33"><polygon points="-49,826 66,826 131,777 29,777"/><polygon points="180,826 295,826 334,777 232,777"/><polygon points="410,826 525,826 538,777 436,777"/><polygon points="640,826 755,826 742,777 640,777"/><polygon points="870,826 985,826 946,777 844,777"/><polygon points="1100,826 1214,826 1149,777 1048,777"/><polygon points="1329,826 1444,826 1353,777 1251,777"/><polygon points="-73,777 29,777 91,739 -1,739"/><polygon points="131,777 232,777 274,739 182,739"/><polygon points="334,777 436,777 457,739 365,739"/><polygon points="538,777 640,777 640,739 548,739"/><polygon points="742,777 844,777 823,739 732,739"/><polygon points="946,777 1048,777 1006,739 915,739"/><polygon points="1149,777 1251,777 1189,739 1098,739"/><polygon points="1353,777 1455,777 1372,739 1281,739"/><polygon points="-92,739 -1,739 58,708 -25,708"/><polygon points="91,739 182,739 225,708 142,708"/><polygon points="274,739 365,739 391,708 308,708"/><polygon points="457,739 548,739 557,708 474,708"/><polygon points="640,739 732,739 723,708 640,708"/><polygon points="823,739 915,739 889,708 806,708"/><polygon points="1006,739 1098,739 1055,708 972,708"/><polygon points="1189,739 1281,739 1222,708 1138,708"/><polygon points="-108,708 -25,708 32,682 -45,682"/><polygon points="58,708 142,708 184,682 108,682"/><polygon points="225,708 308,708 336,682 260,682"/><polygon points="391,708 474,708 488,682 412,682"/><polygon points="557,708 640,708 640,682 564,682"/><polygon points="723,708 806,708 792,682 716,682"/><polygon points="889,708 972,708 944,682 868,682"/><polygon points="1055,708 1138,708 1096,682 1020,682"/><polygon points="1222,708 1305,708 1248,682 1172,682"/><polygon points="-121,682 -45,682 9,660 -61,660"/><polygon points="32,682 108,682 149,660 79,660"/><polygon points="184,682 260,682 289,660 219,660"/><polygon points="336,682 412,682 430,660 359,660"/><polygon points="488,682 564,682 570,660 500,660"/><polygon points="640,682 716,682 710,660 640,660"/><polygon points="792,682 868,682 850,660 780,660"/><polygon points="944,682 1020,682 991,660 921,660"/><polygon points="1096,682 1172,682 1131,660 1061,660"/><polygon points="1248,682 1325,682 1271,660 1201,660"/><polygon points="9,660 79,660 120,641 54,641"/><polygon points="149,660 219,660 250,641 185,641"/><polygon points="289,660 359,660 380,641 315,641"/><polygon points="430,660 500,660 510,641 445,641"/><polygon points="570,660 640,660 640,641 575,641"/><polygon points="710,660 780,660 770,641 705,641"/><polygon points="850,660 921,660 900,641 835,641"/><polygon points="991,660 1061,660 1030,641 965,641"/><polygon points="1131,660 1201,660 1160,641 1095,641"/><polygon points="1271,660 1341,660 1291,641 1226,641"/><polygon points="-11,641 54,641 94,625 33,625"/><polygon points="120,641 185,641 215,625 155,625"/><polygon points="250,641 315,641 337,625 276,625"/><polygon points="380,641 445,641 458,625 397,625"/><polygon points="510,641 575,641 579,625 519,625"/><polygon points="640,641 705,641 701,625 640,625"/><polygon points="770,641 835,641 822,625 761,625"/><polygon points="900,641 965,641 943,625 883,625"/><polygon points="1030,641 1095,641 1065,625 1004,625"/><polygon points="1160,641 1226,641 1186,625 1125,625"/><polygon points="1291,641 1356,641 1307,625 1247,625"/><polygon points="-27,625 33,625 72,611 15,611"/><polygon points="94,625 155,625 185,611 128,611"/><polygon points="215,625 276,625 299,611 242,611"/><polygon points="337,625 397,625 413,611 356,611"/><polygon points="458,625 519,625 526,611 469,611"/><polygon points="579,625 640,625 640,611 583,611"/><polygon points="701,625 761,625 754,611 697,611"/><polygon points="822,625 883,625 867,611 811,611"/><polygon points="943,625 1004,625 981,611 924,611"/><polygon points="1065,625 1125,625 1095,611 1038,611"/><polygon points="1186,625 1247,625 1208,611 1152,611"/><polygon points="1307,625 1368,625 1322,611 1265,611"/><polygon points="-42,611 15,611 52,598 -2,598"/><polygon points="72,611 128,611 159,598 105,598"/><polygon points="185,611 242,611 266,598 212,598"/><polygon points="299,611 356,611 373,598 319,598"/><polygon points="413,611 469,611 480,598 426,598"/><polygon points="526,611 583,611 587,598 533,598"/><polygon points="640,611 697,611 693,598 640,598"/><polygon points="754,611 811,611 800,598 747,598"/><polygon points="867,611 924,611 907,598 854,598"/><polygon points="981,611 1038,611 1014,598 961,598"/><polygon points="1095,611 1152,611 1121,598 1068,598"/><polygon points="1208,611 1265,611 1228,598 1175,598"/><polygon points="1322,611 1379,611 1335,598 1282,598"/><polygon points="-55,598 -2,598 34,587 -16,587"/><polygon points="52,598 105,598 135,587 85,587"/><polygon points="159,598 212,598 236,587 186,587"/><polygon points="266,598 319,598 337,587 287,587"/><polygon points="373,598 426,598 438,587 388,587"/><polygon points="480,598 533,598 539,587 489,587"/><polygon points="587,598 640,598 640,587 590,587"/><polygon points="693,598 747,598 741,587 690,587"/><polygon points="800,598 854,598 842,587 791,587"/><polygon points="907,598 961,598 943,587 892,587"/><polygon points="1014,598 1068,598 1044,587 993,587"/><polygon points="1121,598 1175,598 1145,587 1094,587"/><polygon points="1228,598 1282,598 1246,587 1195,587"/><polygon points="-67,587 -16,587 19,577 -29,577"/><polygon points="34,587 85,587 114,577 67,577"/><polygon points="135,587 186,587 210,577 162,577"/><polygon points="236,587 287,587 305,577 258,577"/><polygon points="337,587 388,587 401,577 353,577"/><polygon points="438,587 489,587 497,577 449,577"/><polygon points="539,587 590,587 592,577 544,577"/><polygon points="640,587 690,587 688,577 640,577"/><polygon points="741,587 791,587 783,577 736,577"/><polygon points="842,587 892,587 879,577 831,577"/><polygon points="943,587 993,587 975,577 927,577"/><polygon points="1044,587 1094,587 1070,577 1022,577"/><polygon points="1145,587 1195,587 1166,577 1118,577"/><polygon points="1246,587 1296,587 1261,577 1213,577"/></g></g><ellipse cx="640" cy="990" rx="1500" ry="400" fill="none" stroke="#FFE7C2" stroke-opacity=".7" stroke-width="2"/></svg>
+  </div>
+</main>
+<footer class="alt"><p style="margin:0;font-size:40px">[ortak imzalı footer]</p></footer>
+<script>
+(function () {
+  /* ================= VERİ (ICERIK.md'den) ================= */
+  var EGITIM = [
+    { yil: '[YIL – YIL]', okul: '[İLKOKUL / ORTAOKUL]', bolum: '[şehir]' },
+    { yil: '[YIL – YIL]', okul: '[LİSE ADI]', bolum: '[alan]' },
+    { yil: '[YIL – …]', okul: '[ÜNİVERSİTE ADI]', bolum: '[bölüm]' }
+  ];
+  var YETENEK = [['[YETENEK 1]', 9], ['[YETENEK 2]', 8], ['[YETENEK 3]', 7], ['[YETENEK 4]', 6], ['[YETENEK 5]', 4]]; // ad, 1–10
+  var ILGI = ['[İLGİ 1]', '[İLGİ 2]', '[İLGİ 3]', '[İLGİ 4]', '[İLGİ 5]', '[İLGİ 6]'];
+  var TOP_RENK = [['#FF5A6E', '#FFF3DD'], ['#FFC24B', '#2A0D45'], ['#7FE7FF', '#1A0B33'], ['#B98CFF', '#1A0B33'], ['#FF8A3D', '#2A0D45'], ['#FFB0C8', '#2A0D45']];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var az = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var esc = function (t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+
+  /* ---------- 1. Cambaz ipi ---------- */
+  var ipKutu = $('ip'), cambaz = $('cambaz'), M = EGITIM.length;
+  var pt = function (t) { return { x: (1 - t) * (1 - t) * 29 + 2 * t * (1 - t) * 540 + t * t * 1051, y: (1 - t) * (1 - t) * 60 + 2 * t * (1 - t) * 170 + t * t * 60 }; };
+  var T0 = 0.18, T1 = 0.82;
+  var ts = EGITIM.map(function (e, i) { return M === 1 ? 0.5 : T0 + (T1 - T0) * i / (M - 1); });
+  var duraklar = EGITIM.map(function (e, i) {
+    var p = pt(ts[i]), d = document.createElement('div');
+    d.className = 'durak'; d.style.left = (p.x / 1080 * 100).toFixed(2) + '%'; d.style.top = p.y + 'px';
+    d.innerHTML = '<span class="durak-nokta"></span><span class="durak-ip" style="height:' + (210 - p.y) + 'px"></span>' +
+      '<div class="cam durak-kart" style="top:' + (216 - p.y) + 'px"><span class="durak-yil">' + esc(e.yil) + '</span>' +
+      '<span class="durak-okul">' + esc(e.okul) + '</span><span class="durak-bolum">' + esc(e.bolum) + '</span></div>';
+    ipKutu.appendChild(d); return d;
+  });
+  // telefon: dikey ip
+  var dikey = $('ip-dikey');
+  var dKartlar = EGITIM.map(function (e) {
+    var d = document.createElement('div'); d.className = 'cam dikey-kart';
+    d.innerHTML = '<span class="durak-yil">' + esc(e.yil) + '</span><span class="durak-okul">' + esc(e.okul) + '</span><span class="durak-bolum">' + esc(e.bolum) + '</span>';
+    dikey.appendChild(d); return d;
+  });
+  var cambazD = $('cambaz-dikey'), aktifD = -1;
+  function ipGuncelle() {
+    var sec = $('egitim'), r = sec.getBoundingClientRect();
+    // bölüm ekranın altından girip ortasına gelene kadar cambaz ipte ilerler
+    var p = Math.min(1, Math.max(0, (innerHeight * 0.85 - r.top) / (r.height * 0.75)));
+    var t = T0 - 0.08 + (T1 - T0 + 0.16) * p;
+    t = Math.min(T1, Math.max(T0, t));
+    var c = pt(t);
+    cambaz.style.left = (c.x / 1080 * 100).toFixed(2) + '%'; cambaz.style.top = c.y + 'px';
+    var en = 0, ed = 9; ts.forEach(function (x, i) { var dd = Math.abs(x - t); if (dd < ed) { ed = dd; en = i; } });
+    duraklar.forEach(function (d, i) { d.classList.toggle('aktif', i === en); d.classList.toggle('gecti', i < en); });
+    // dikey
+    var dr = dikey.getBoundingClientRect(), pd = Math.min(1, Math.max(0, (innerHeight * 0.6 - dr.top) / dr.height));
+    cambazD.style.top = (pd * 100).toFixed(1) + '%';
+    var a = Math.min(M - 1, Math.floor(pd * M));
+    if (a !== aktifD) { aktifD = a; dKartlar.forEach(function (k, i) { k.classList.toggle('aktif', i === a); }); }
+  }
+  addEventListener('scroll', ipGuncelle, { passive: true }); addEventListener('resize', ipGuncelle); ipGuncelle();
+
+  /* ---------- 2. Güç ölçer ---------- */
+  var kuleler = $('kuleler');
+  kuleler.innerHTML = YETENEK.map(function (y, i) {
+    var v = Math.max(0, Math.min(10, y[1])), zil = v >= 9;
+    return '<div class="kule' + (zil ? ' zilli' : '') + '" style="--sv:' + v + ';--gecikme:' + (i * 0.18).toFixed(2) + 's">' +
+      '<div class="zil"><svg width="46" height="40" viewBox="0 0 46 40" aria-hidden="true"><path d="M23 4 C8 4 6 22 4 32 L42 32 C40 22 38 4 23 4Z" fill="url(#zg)"/><rect x="2" y="31" width="42" height="5" rx="2" fill="#C98A2B"/><circle cx="23" cy="38" r="3" fill="#8A5A14"/></svg><span class="zil-isik" aria-hidden="true"></span></div>' +
+      '<div class="tup" role="meter" aria-valuemin="0" aria-valuemax="10" aria-valuenow="' + v + '" aria-label="' + esc(y[0]) + '"><div class="cizgiler" aria-hidden="true">' + '<span></span>'.repeat(11) + '</div><div class="sivi"><span class="pul"></span></div></div>' +
+      '<div class="kaide"></div><span class="kule-deger">' + v + '/10</span><span class="kule-ad">' + esc(y[0]) + '</span></div>';
+  }).join('');
+  if ('IntersectionObserver' in window && !az) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { kuleler.classList.add('gorundu'); io.disconnect(); } }); }, { threshold: 0.35 });
+    io.observe(kuleler);
+  } else kuleler.classList.add('gorundu');
+
+  /* ---------- 3. Hokkabaz topları ---------- */
+  var sahne = $('toplar'), N = ILGI.length;
+  sahne.innerHTML = ILGI.map(function (ad, i) {
+    var c = TOP_RENK[i % TOP_RENK.length];
+    return '<button type="button" class="top" style="--renk:' + c[0] + ';color:' + c[1] + ';animation-delay:' + (-i * 9 / N).toFixed(2) + 's">' + esc(ad) + '</button>';
+  }).join('');
+  var toplar = [].slice.call(sahne.children);
+  toplar.forEach(function (b) {
+    var sec = function () { sahne.classList.add('durdu'); toplar.forEach(function (x) { x.classList.toggle('secili', x === b); }); };
+    b.addEventListener('mouseenter', sec); b.addEventListener('focus', sec);
+  });
+  var birak = function () { sahne.classList.remove('durdu'); toplar.forEach(function (x) { x.classList.remove('secili'); }); };
+  sahne.addEventListener('mouseleave', birak);
+  sahne.addEventListener('focusout', function (e) { if (!sahne.contains(e.relatedTarget)) birak(); });
+  function topOlc() { var k = Math.min(1, sahne.parentNode.clientWidth / 640); sahne.style.transform = 'scale(' + k + ')'; sahne.parentNode.style.height = (380 * k) + 'px'; }
+  addEventListener('resize', topOlc); topOlc();
+})();
+</script>
+</body>
+</html>

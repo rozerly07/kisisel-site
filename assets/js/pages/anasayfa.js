@@ -72,70 +72,9 @@
     });
   }
 
-  /* ---------- 5. Karo duvar: baklava kafes, camgöz, imleçle büyüyen karo ---------- */
-  // Fotoğraf eklemek için bu listeye bir satır ekle. İlk fotoğraf alt-ortaya gelir, sonrakiler dışa doğru dizilir.
-  var GALERI = [
-    { src: '../assets/img/gallery/galeripic1.webp', alt: "minik dostlardan biriyle gezi", renk: 'linear-gradient(150deg,#3A1260,#C6306E)' },
-    { src: '../assets/img/gallery/galeripic2.webp', alt: "dostlarla geçirilen kaliteli vakit", renk: 'linear-gradient(150deg,#FFC66B,#FF5A6E)' },
-    { src: '../assets/img/gallery/galeripic3.webp', alt: "hazırlanıp dışarı çıkmak için harika bir gün", renk: 'linear-gradient(150deg,#2A0D57,#7FA8FF)' },
-    { src: '../assets/img/gallery/galeripic4.webp', alt: "çocukluğa dönüş", renk: 'linear-gradient(150deg,#FF8A3D,#6A1B7A)' },
-    { src: '../assets/img/gallery/galeripic5.webp', alt: "miniminnacık yumuşacık bir arkadaş", renk: 'linear-gradient(150deg,#5B1E6E,#FFB0C8)' },
-    { src: '../assets/img/gallery/galeripic6.webp', alt: "gökyüzüne hayranlık", renk: 'linear-gradient(150deg,#1E0838,#FF8A3D)' },
-    { src: '../assets/img/gallery/galeripic7.webp', alt: "yağmurlu bir günde yürüyüş", renk: 'linear-gradient(150deg,#C6306E,#FFC66B)' },
-    { src: '../assets/img/gallery/galeripic8.webp', alt: "manzara tadını çıkarmak için vardır", renk: 'linear-gradient(150deg,#0E3A6E,#FF5A8A)' },
-    { src: '../assets/img/gallery/galeripic9.webp', alt: "arkadaşları beklerken sınıfın sessizliği", renk: 'linear-gradient(150deg,#6A1B7A,#FFC66B)' }
-  ];
-  var duvar = document.getElementById('karo-duvar');
-  // Baklava kafes: satır r=0 en altta. Çift satırlarda x = 0, ±1, ±2… ; tek satırlarda x = ±0.5, ±1.5…
-  var yuvalar = [];
-  for (var r = 0; r < 30; r++) for (var x = -1.5; x <= 1.5; x += 0.5) if ((Math.abs(x * 2) % 2 === 0) === (r % 2 === 0)) yuvalar.push({ r: r, x: x, d: Math.hypot(x, r / 2) });
-  yuvalar.sort(function (a, b) { return a.d - b.d || a.r - b.r || a.x - b.x; });
-  var N = GALERI.length, D = 26, KOSEGEN = 21.8; // genişliğe göre %: kafes adımı, karo köşegeni
-  var enUstSira = Math.max.apply(null, yuvalar.slice(0, N).map(function (q) { return q.r; }));
-  var H = Math.max(60, KOSEGEN + 10 + enUstSira * D / 2 * 1.05 + 8); // kutu yüksekliği: fotoğraf arttıkça duvar yukarı doğru uzar
-  duvar.style.aspectRatio = '1 / ' + (H / 100).toFixed(3);
-  var taban = yuvalar.slice(0, N).map(function (q) { return { cx: 50 + q.x * D, cy: H - KOSEGEN / 2 - 4 - q.r * D / 2 * 1.05 }; });
-  // Camgöz: ortadakiler büyür ve öne çıkar, kenarlara doğru küçülür; aralar açılarak boşluk korunur
-  var ox = taban.reduce(function (a, q) { return a + q.cx; }, 0) / N, oy = taban.reduce(function (a, q) { return a + q.cy; }, 0) / N;
-  var dmax = Math.max.apply(null, taban.map(function (q) { return Math.hypot(q.cx - ox, q.cy - oy); })) || 1;
-  var yer = taban.map(function (q) {
-    var vx = q.cx - ox, vy = q.cy - oy, u = Math.hypot(vx, vy) / dmax, b = 1 + 0.16 * (1 - u);
-    return { cx: ox + vx * b, cy: oy + vy * b, mercek: 1.22 - 0.34 * u };
-  });
-  var CAM = 'linear-gradient(135deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.12) 28%,rgba(255,255,255,0) 45%),radial-gradient(circle at 28% 28%,rgba(255,255,255,.75) 0 4%,transparent 9%),radial-gradient(circle at 50% 50%,transparent 55%,rgba(20,0,40,.45) 100%)';
-  var karolar = GALERI.map(function (g, i) {
-    var q = yer[i], b = document.createElement('button');
-    b.type = 'button'; b.setAttribute('aria-label', g.alt);
-    b.style.cssText = 'position:absolute;left:' + (q.cx - 7.7).toFixed(2) + '%;top:' + ((q.cy - 7.7) / H * 100).toFixed(2) + '%;width:15.4%;aspect-ratio:1;padding:0;border:0;cursor:pointer;background:none;transition:transform 1.1s cubic-bezier(.22,1,.36,1)';
-    var icerik = g.src
-      ? '<img src="' + g.src + '" alt="' + g.alt + '" loading="lazy" style="position:absolute;left:50%;top:50%;width:142%;height:142%;object-fit:cover;transform:translate(-50%,-50%) rotate(-45deg)">'
-      : '<span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transform:rotate(-45deg);font-size:13px;font-weight:700;color:#FFF3DD">[FOTO ' + (i + 1) + ']</span>';
-    b.innerHTML = '<span class="karo-yuz" style="position:absolute;inset:0;border-radius:16px;overflow:hidden;background:' + g.renk + ';transition:box-shadow 1.1s ease">' + icerik +
-      '<span style="position:absolute;inset:0;border-radius:16px;background:' + CAM + ';box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55),inset 0 -10px 22px rgba(20,0,40,.35)"></span></span>';
-    duvar.appendChild(b);
-    return b;
-  });
-  var secili = null, ht;
-  function duvarCiz() {
-    karolar.forEach(function (b, i) {
-      var q = yer[i], dx = 0, dy = 0, sc = q.mercek, z = q.mercek > 1.1 ? 2 : 1;
-      if (secili !== null) {
-        var o = yer[secili];
-        if (i === secili) { sc = 1.5; z = 5; }
-        else {
-          var vx = q.cx - o.cx, vy = q.cy - o.cy, len = Math.hypot(vx, vy) || 1, it = 6 / Math.max(1, len / D);
-          dx = vx / len * it; dy = vy / len * it; sc = q.mercek * (len < D * 1.1 ? 0.82 : 0.9);
-        }
-      }
-      b.style.zIndex = z;
-      b.style.transform = 'translate(' + dx.toFixed(2) + 'cqw,' + dy.toFixed(2) + 'cqw) rotate(45deg) scale(' + sc + ')';
-      b.firstChild.style.boxShadow = i === secili ? '0 40px 50px rgba(5,0,20,.7),0 0 40px rgba(255,190,110,.55)' : '0 12px 24px rgba(5,0,20,.45)';
-    });
-  }
-  karolar.forEach(function (b, i) {
-    var sec = function () { clearTimeout(ht); ht = setTimeout(function () { if (secili !== i) { secili = i; duvarCiz(); } }, 120); };
-    b.addEventListener('mouseenter', sec); b.addEventListener('focus', sec);
-  });
-  duvar.addEventListener('mouseleave', function () { clearTimeout(ht); secili = null; duvarCiz(); });
-  duvarCiz();
+  /* ---------- 5. Karo duvar: ortak assets/js/karo-duvar.js · fotoğraflar assets/js/galeri-veri.js (galeri ile aynı liste) ---------- */
+  // Anasayfa ayarları: keskin köşe, cam yok, küçük lila-camgöbeği parıltılar; karoya tıklayınca galeri o fotoğraf açık gelir
+  KaroDuvar(document.getElementById('karo-duvar'), { fotolar: GALERI, adim: 26, kosegen: 21.8, xMax: 1.5,
+    yildiz: { boyutYatay: 1.6, boyutCapraz: 1.1, renk: '#D9C2FF', parilti: 'rgba(127,231,255,.85)' },
+    tikla: function (i) { location.href = 'gallery.html#foto-' + (i + 1); } });
 })();

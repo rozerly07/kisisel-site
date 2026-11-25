@@ -1,0 +1,43 @@
+/* ==========================================================================
+   galeri.css — tr/gallery.html (referans/galeri.html'den BİREBİR)
+   Renk, ölçü, açı, koordinat, süre ve easing değerlerine DOKUNMA.
+   Navbar/maskot/mobil menü: giris.css + menu-perde.css · footer: footer.css · fontlar: tokens.css
+   Karo duvar stilleri assets/js/karo-duvar.js içinde (ortak).
+   Site geneli imleç → tokens.css (ortak).
+   Not: giris.css ile çakışan keyframe önekli (flick → gl-flick).
+   ========================================================================== */
+html{background:#140629}
+body{margin:0;color:#FFF3DD;font-family:"Space Grotesk",system-ui,sans-serif}
+body.bg-acik{overflow:hidden}
+[hidden]{display:none!important}
+a:focus-visible,button:focus-visible{outline:3px solid #7FE7FF;outline-offset:3px}
+@keyframes gl-flick{0%,100%{opacity:1}12%{opacity:.25}17%{opacity:1}46%{opacity:.85}52%{opacity:.15}58%{opacity:1}83%{opacity:.4}88%{opacity:1}}
+@keyframes swayG{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+@keyframes swayG2{0%,100%{transform:rotate(10deg)}50%{transform:rotate(-14deg)}}
+.gt{font-family:"Abril Fatface",Didot,Georgia,serif;font-weight:400;background:linear-gradient(180deg,#FFF6D6 10%,#FFC24B 50%,#FF5A6E 95%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 4px 0 #3A0B52) drop-shadow(0 0 22px rgba(255,170,80,.45))}
+.lb{font-family:Bungee,Impact,sans-serif;letter-spacing:6px;color:#FFE7C2;text-shadow:0 0 16px rgba(255,120,160,.7)}
+/* navbar: sitenin ortak .giris-bar'ı (konum giris.css'te); referanstaki .ust-bar link rengi */
+.giris-bar a{color:#FFF3DD;text-decoration:none}
+#galeri{position:relative;overflow:hidden;background:radial-gradient(ellipse 80% 40% at 50% 0%,#5B1E6E 0%,#2A0D45 50%,#140629 100%)}
+.g-ust{position:relative;max-width:1180px;margin:0 auto;padding:230px 32px 60px;display:flex;flex-direction:column;align-items:center;gap:26px}
+.g-ust h1{margin:0;font-size:96px;line-height:1}
+.g-ust p{margin:0;max-width:520px;text-align:center;font-size:17px;line-height:1.6;color:#E3D2F4}
+#galeri-duvar{width:100%;max-width:1100px;margin-top:30px}
+@media (max-width:760px){.g-ust{padding:150px 14px 40px;gap:16px}.g-ust h1{font-size:62px}.g-ust p{font-size:15px}#galeri-duvar{margin-top:10px}}
+/* büyük görünüm */
+#bg-perde{position:fixed;inset:0;z-index:40;background:radial-gradient(ellipse at 50% 45%,rgba(42,13,69,.75),rgba(8,2,18,.95))}
+#bg{position:fixed;left:50%;top:50%;z-index:41;width:min(760px,86vw);display:flex;flex-direction:column;align-items:center;gap:18px;transform:translate(-50%,-50%)}
+.bg-cerceve{position:relative;width:100%;aspect-ratio:4 / 3;max-height:68vh;padding:10px;box-sizing:border-box;border-radius:14px;background:linear-gradient(160deg,#FFF1B8,#C98A2B 45%,#FFE7A3 70%,#8A5A14);box-shadow:0 0 60px rgba(255,180,90,.35),0 40px 80px rgba(5,0,20,.7)}
+#bg-resim{width:100%;height:100%;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px}
+#bg-resim img{width:100%;height:100%;object-fit:contain;display:block;background:#140629}
+.bg-ampul{position:absolute;inset:-22px;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none}
+.bg-ampul div{display:flex;justify-content:space-between;padding:0 8px}
+.bg-ampul span{width:9px;height:9px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 10px 3px #FFB84D;animation-name:gl-flick;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
+.bg-alt{display:flex;align-items:center;gap:22px;width:100%;justify-content:space-between}
+.bg-bilgi{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+#bg-sayac{font-family:VT323,monospace;font-size:22px;color:#FFD36B;letter-spacing:2px}
+#bg-aciklama{font-size:17px;color:#F1E4FF}
+.okbtn{flex:none;width:56px;height:56px;border-radius:50%;color:#FFF3DD;font-size:22px;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.35),rgba(255,255,255,.06) 60%);border:1px solid rgba(255,231,194,.5);backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(5,0,20,.5)}
+#bg-kapat{position:absolute;right:-14px;top:-62px;padding:8px 16px;border-radius:999px;color:#FFE7C2;font-weight:700;background:rgba(20,6,41,.7);border:1px solid rgba(255,231,194,.5);font-family:inherit;font-size:15px}
+@media (max-width:760px){#bg{width:94vw}#bg-kapat{right:0;top:-54px}.okbtn{width:48px;height:48px}}
+@media (prefers-reduced-motion:reduce){#galeri *,.bg-ampul span{animation:none!important}}

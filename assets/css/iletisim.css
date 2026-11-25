@@ -40,3 +40,6 @@ button[type=submit]{transition:transform .4s cubic-bezier(.22,1,.36,1),opacity .
 @media (prefers-reduced-motion:reduce){#iletisim *{animation:none!important;transition:none!important}#bilet.gonderildi .damga{opacity:1;transform:rotate(-12deg)}#bilet.gonderildi .kocan{opacity:.3}}
 /* navbar: sitenin ortak .giris-bar'ı (konum giris.css'te); referanstaki .ust-bar link rengi */
 .giris-bar a{color:#FFF3DD;text-decoration:none}
+
+/* Erişilebilirlik: form alanlarında belirgin odak çerçevesi (mevcut odak rengi #C6306E, krem zeminde AA) */
+.alan input:focus-visible,.alan textarea:focus-visible{outline:2px solid #C6306E;outline-offset:2px}

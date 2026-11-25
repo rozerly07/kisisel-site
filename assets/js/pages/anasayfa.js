@@ -77,4 +77,5 @@
   KaroDuvar(document.getElementById('karo-duvar'), { fotolar: GALERI, adim: 26, kosegen: 21.8, xMax: 1.5,
     yildiz: { boyutYatay: 1.6, boyutCapraz: 1.1, renk: '#D9C2FF', parilti: 'rgba(127,231,255,.85)' },
     tikla: function (i) { location.href = 'gallery.html#foto-' + (i + 1); } });
+  if (window.GALERI_METIN) window.GALERI_METIN.etiketle(document.getElementById('karo-duvar')); // en/: karo etiketleri İngilizce
 })();

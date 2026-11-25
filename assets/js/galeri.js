@@ -13,6 +13,7 @@
     yildiz: { boyutYatay: 2.6, boyutCapraz: 1.7, renk: '#FFF3C4', parilti: 'rgba(255,220,140,.9)' },
     tikla: function (i, dugme) { ac(i, dugme); }
   });
+  if (window.GALERI_METIN) window.GALERI_METIN.etiketle($('galeri-duvar')); // en/: karo etiketleri İngilizce
 
   function goster(i) {
     su = (i + N) % N; var f = GALERI[su];
@@ -20,7 +21,7 @@
     resim.innerHTML = f.src ? '<img src="' + f.src + '" alt="' + (f.alt || '').replace(/"/g, '&quot;') + '">' : '<span>[FOTO ' + (su + 1) + ']</span>';
     $('bg-sayac').textContent = String(su + 1).padStart(2, '0') + ' / ' + String(N).padStart(2, '0');
     $('bg-aciklama').textContent = f.aciklama || '';
-    bg.setAttribute('aria-label', f.alt || ('Fotoğraf ' + (su + 1)));
+    bg.setAttribute('aria-label', f.alt || (((window.GALERI_METIN && window.GALERI_METIN.foto) || 'Fotoğraf') + ' ' + (su + 1)));
   }
   // Karo havaya kalkar: büyük görünüm tıklanan karonun yerinden 45° dönük ve küçük başlar, düzleşerek ortaya büyür
   function ac(i, dugme) {

@@ -13,6 +13,8 @@
   ];
   var YETENEK = [['Resim çizebiliyor', 9], ['Hızlı öğreniyor', 8], ['Rol yapabiliyor', 7]]; // ad, 1–10
   var ILGI = ['Dünya sineması', 'Animeler', 'Moda', 'Tarih', 'Felsefe', 'Edebiyat', 'Seyahat', 'Dövüş sporları', 'Havacılık'];
+  // en/about.html: hakkimda.en.js yüklüyse listeler İngilizce
+  if (window.HAKKIMDA_EN) { EGITIM = window.HAKKIMDA_EN.egitim; YETENEK = window.HAKKIMDA_EN.yetenek; ILGI = window.HAKKIMDA_EN.ilgi; }
   var TOP_RENK = [['#FF5A6E', '#FFF3DD'], ['#FFC24B', '#2A0D45'], ['#7FE7FF', '#1A0B33'], ['#B98CFF', '#1A0B33'], ['#FF8A3D', '#2A0D45'], ['#FFB0C8', '#2A0D45']];
 
   var $ = function (id) { return document.getElementById(id); };

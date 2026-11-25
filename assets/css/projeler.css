@@ -105,3 +105,7 @@ a{color:#FFF3DD}a:hover{color:#FFD36B}
 /* Telefonda sola-sağa kaydırma karuseli çevirir: yatay hareket tarayıcının
    "geri git" hareketine gitmesin (dikey kaydırma tarayıcıda kalır) */
 #proje-sahne{touch-action:pan-y}
+
+/* Erişilebilirlik: SES düğmesinin dokunma alanı en az 44x44px (görünmez katman; görünüş değişmez) */
+.ses-dugme{position:relative}
+.ses-dugme::before{content:"";position:absolute;left:50%;top:50%;width:100%;height:100%;min-width:44px;min-height:44px;transform:translate(-50%,-50%)}

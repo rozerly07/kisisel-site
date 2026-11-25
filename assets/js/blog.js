@@ -1,6 +1,9 @@
 /* blog.js — tr/blog.html panosu (referans/blog.html'den BİREBİR). Veri: assets/js/blog-veri.js */
 (function () {
   var Y = window.YAZILAR || [], $ = function (id) { return document.getElementById(id); };
+  // en/: blog-veri.en.js BLOG_METIN'i tanımlar
+  var BM = window.BLOG_METIN || { tumu: 'TÜMÜ', dk: 'dk', oku: 'OKU →',
+    hepsi: function (n) { return n + ' yazı gösteriliyor'; }, sayi: function (n) { return n + ' yazı'; } };
   var esc = function (t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var R = ['-2.2deg', '1.6deg', '-1deg'], B = ['-4deg', '3deg', '-2deg'];
 
@@ -12,35 +15,35 @@
       '<div class="afis-egim"><div class="afis-salla"><div class="afis-suzul"><div class="afis-nefes"><span class="bant" style="transform:translateX(-50%) rotate(' + B[i % 3] + ')" aria-hidden="true"></span>' +
       '<div class="kagit"><div class="kapak" style="background:' + y.yedek + '">' + kapak + '</div>' +
       '<span class="damga" style="border-color:' + y.renk + ';color:' + y.renk + '">' + esc(y.kategori) + '</span>' +
-      '<span class="meta">' + esc(y.tarih) + ' · ' + y.sure + ' dk</span>' +
+      '<span class="meta">' + esc(y.tarih) + ' · ' + y.sure + ' ' + BM.dk + '</span>' +
       '<span class="afis-baslik">' + esc(y.baslik) + '</span>' +
       '<span class="ozet">' + esc(y.ozet) + '</span>' +
       '<span class="etiketler">' + y.etiketler.map(function (e) { return '<span class="etk">#' + esc(e) + '</span>'; }).join('') + '</span>' +
-      '<span class="oku">OKU →</span><span class="kivrim" aria-hidden="true"></span></div></div></div></div></div></a>';
+      '<span class="oku">' + BM.oku + '</span><span class="kivrim" aria-hidden="true"></span></div></div></div></div></div></a>';
   }).join('');
   var afisler = [].slice.call(pano.children);
 
   /* kategori filtreleri (bilet) */
-  var kats = ['TÜMÜ'];
+  var kats = [BM.tumu];
   Y.forEach(function (y) { if (kats.indexOf(y.kategori) < 0) kats.push(y.kategori); });
   var fk = $('filtreler');
   fk.innerHTML = kats.map(function (k) {
-    var n = k === 'TÜMÜ' ? Y.length : Y.filter(function (y) { return y.kategori === k; }).length;
+    var n = k === BM.tumu ? Y.length : Y.filter(function (y) { return y.kategori === k; }).length;
     return '<button type="button" class="bilet" aria-pressed="false" data-kat="' + esc(k) + '">' + esc(k) + ' <span>· ' + n + '</span></button>';
   }).join('');
   var btn = [].slice.call(fk.children);
   function sec(k) {
     btn.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.kat === k ? 'true' : 'false'); });
     afisler.forEach(function (a) {
-      var gor = k === 'TÜMÜ' || a.dataset.kat === k;
+      var gor = k === BM.tumu || a.dataset.kat === k;
       a.classList.toggle('sonuk', !gor);
       a.setAttribute('aria-hidden', gor ? 'false' : 'true');
       a.tabIndex = gor ? 0 : -1;
     });
-    $('sonuc').textContent = k === 'TÜMÜ' ? Y.length + ' yazı gösteriliyor' : k + ': ' + afisler.filter(function (a) { return !a.classList.contains('sonuk'); }).length + ' yazı';
-    try { history.replaceState(null, '', k === 'TÜMÜ' ? location.pathname : '?kategori=' + encodeURIComponent(k)); } catch (e) {}
+    $('sonuc').textContent = k === BM.tumu ? BM.hepsi(Y.length) : k + ': ' + BM.sayi(afisler.filter(function (a) { return !a.classList.contains('sonuk'); }).length);
+    try { history.replaceState(null, '', k === BM.tumu ? location.pathname : '?kategori=' + encodeURIComponent(k)); } catch (e) {}
   }
   btn.forEach(function (b) { b.addEventListener('click', function () { sec(b.dataset.kat); }); });
   var q = new URLSearchParams(location.search).get('kategori');
-  sec(q && kats.indexOf(q) > -1 ? q : 'TÜMÜ');
+  sec(q && kats.indexOf(q) > -1 ? q : BM.tumu);
 })();

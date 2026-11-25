@@ -165,7 +165,7 @@
   /* ==========================================================================
      Yazı yeme — yalnızca navbar modunda, yalnızca Anasayfa / Hakkımda / Projeler
      ========================================================================== */
-  var HEDEF = ['Anasayfa', 'Hakkımda', 'Projeler'];
+  var HEDEF = ['Anasayfa', 'Hakkımda', 'Projeler', 'Home', 'About', 'Projects']; // tr/ + en/
   var linkler = [], yeme = null, yemeZaman, ustZaman;
 
   function harfle() {

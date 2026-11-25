@@ -840,9 +840,20 @@
   /* ==========================================================================
      Kurulum
      ========================================================================== */
+  // "İçeriğe geç" linki: klavyeyle navbarı atlayıp <main>'e odaklanır
+  function atlaLinkKur() {
+    var ana = document.querySelector('main');
+    if (!ana || document.querySelector('.atla-link')) return;
+    if (!ana.id) ana.id = 'icerik';
+    if (!ana.hasAttribute('tabindex')) ana.setAttribute('tabindex', '-1');
+    document.body.insertAdjacentHTML('afterbegin', '<a class="atla-link" href="#' + ana.id + '">' +
+      METIN[dil()].atla + '</a>');
+  }
+
   function kur() {
     var body = document.body;
     var sayfa = body.getAttribute('data-sayfa') || '';
+    atlaLinkKur();
 
     /* Yalnızca mobil menü + perde (giriş sahnesi ve anasayfa: kendi navbar,
        maskot ve footer'ları referans koddan gelir).

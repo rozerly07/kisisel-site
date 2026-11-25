@@ -323,3 +323,12 @@
 html,body{cursor:url(../img/imlec/imlec.svg) 16 16,auto}
 a,button,[role=button],label,select,summary,#maskot{cursor:url(../img/imlec/imlec-el.svg) 16 16,pointer!important}
 :disabled,[aria-disabled=true]{cursor:not-allowed!important}
+
+/* ---------- SİTE GENELİ ERİŞİLEBİLİRLİK (base.css hiçbir sayfada yüklenmediği için burada) ----------
+   :where → özgüllük 0; sayfa CSS'indeki kendi focus kuralları her zaman kazanır. */
+:where(:focus-visible){outline:2px solid var(--odak);outline-offset:3px}
+main[tabindex="-1"]:focus{outline:none}
+/* İçeriğe geç linki (components.js basar) */
+.atla-link{position:fixed;top:var(--b-3);left:var(--b-3);z-index:calc(var(--z-perde) + 1);padding:var(--b-2) var(--b-4);font:700 var(--fs-sm) 'Space Grotesk',system-ui,sans-serif;color:var(--gece-mor);background:var(--g-hap);border-radius:var(--kose-hap);box-shadow:var(--golge-2);text-decoration:none;transform:translateY(-200%);transition:transform var(--d-ui) var(--ease-cikis)}
+.atla-link:focus{transform:none;color:var(--gece-mor)}
+@media (prefers-reduced-motion:reduce){.atla-link{transition:none}}

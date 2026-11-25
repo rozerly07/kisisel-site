@@ -8,7 +8,7 @@
   if (y) {
     $('y-kategori').textContent = y.kategori;
     $('y-kategori').href = 'blog.html?kategori=' + encodeURIComponent(y.kategori);
-    $('y-meta').textContent = y.tarih + ' · ' + y.sure + ' dk okuma';
+    $('y-meta').textContent = y.tarih + ' · ' + y.sure + ' ' + ((window.BLOG_METIN && window.BLOG_METIN.dkOkuma) || 'dk okuma');
     $('y-etiketler').innerHTML = y.etiketler.map(function (e) { return '<span class="etk">#' + esc(e) + '</span>'; }).join('');
     var k = $('y-kapak'); k.style.background = y.yedek; if (y.kapak) k.innerHTML = '<img src="' + esc(y.kapak) + '" alt="">';
     // önceki / sonraki (döngüsel)

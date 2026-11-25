@@ -9,8 +9,8 @@ Yöntem: Her sayfa önce Claude sohbetinde önizlemeyle tasarlanır, onaylanınc
 | 3 | Projeler | ✅ |
 | 4 | Galeri + ortak karo duvar + imleç | ✅ |
 | 5 | Hakkımda | ✅ |
-| 6 | Blog + 3 yazı | ⏳ referans hazır, komut aşağıda |
-| 7 | İletişim | önizleme bekliyor |
+| 6 | Blog + 3 yazı | ✅ |
+| 7 | İletişim | ⏳ referans hazır, komut aşağıda |
 | 8 | Impeccable denetimi | sonda |
 | 9 | İngilizce sürüm | sonda |
 | 10 | Teslim hazırlığı | sonda |
@@ -80,8 +80,20 @@ referans/blog.html (pano) ve referans/blog-yazi.html (yazı sayfası şablonu) o
 Bitince sayfaları açıp sadece konsol hatası kontrol et. ICERIK.md'de eksik olan bir şey varsa uydurma, listele. En fazla 5 maddede özetle.
 ```
 
-## Görev 7
-Önizleme onaylanınca buraya "kopyala" komutu olarak yazılacak.
+## Görev 7 — İletişim (kopyala)
+`referans/iletisim.html` dosyasını `referans/` klasörüne koy, sonra:
+```
+referans/iletisim.html onaylı İletişim sayfasının BİREBİR kodu (gişe tabelası, ampullü bilgi panosu, ampullü çerçevede harita, bilet form + GÖNDERİLDİ damgası + kopan koçan, neon tabelalar). Yeniden çizme, KOPYALA.
+1. tr/contact.html'i bu dosyanın kopyası yap. Stiller assets/css/iletisim.css, script assets/js/iletisim.js. Hiçbir renk, ölçü, açı, süre veya easing değerini değiştirme; çakışmada sadece önek ekle.
+2. Yer tutucu navbar ve footer yerine sitenin ortak navbar, logo, mobil menü, perde geçişi, maskot, imleç ve imzalı footer'ı gelsin. "İletişim" linki aktif. TR · EN → ../en/contact.html.
+3. @content/ICERIK.md'den doldur:
+   - Adres (görünen metin + Google Haritalar linki), telefon (tel: linki, boşluksuz +90...), e-posta (mailto: linki).
+   - Harita iframe'inin src'si: ICERIK'teki Google Maps embed linki. Yoksa https://www.google.com/maps?q=ADRES&output=embed kullan (adres URL-encode edilmiş).
+   - Letterboxd ve Instagram neon tabelalarının href'leri.
+   - iletisim.js'teki FORMSPREE değişkeni: ICERIK'teki Formspree adresi (https://formspree.io/f/...). Form action'ı da aynı adres olsun. ICERIK'te yoksa boş bırak ve bana söyle (form o zaman sadece animasyonu gösterir).
+4. CLAUDE.md'ye İletişim bilgisini ekle.
+Bitince sayfayı açıp sadece konsol hatası kontrol et. ICERIK'te eksik olanı uydurma, listele. En fazla 4 maddede özetle.
+```
 
 ## Görev 8 — Tasarım denetimi (Impeccable)
 Her sayfa için sırayla (gerekirse ayrı oturumlarda):

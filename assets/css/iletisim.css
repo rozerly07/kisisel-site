@@ -1,0 +1,42 @@
+/* ==========================================================================
+   iletisim.css — tr/contact.html (referans/iletisim.html'den BİREBİR)
+   Renk, ölçü, açı, süre ve easing değerlerine DOKUNMA.
+   Navbar/maskot/mobil menü: giris.css + menu-perde.css · footer: footer.css · fontlar: tokens.css (Monoton dahil)
+   Site geneli imleç → tokens.css (ortak).
+   Not: giris.css ile çakışan keyframe önekli (flick → il-flick). Referanstaki yer tutucu
+   .ust-bar / .alt kuralları ve footer'a ait imza/kuyruk keyframe'leri ortak bileşenlere bırakıldı.
+   ========================================================================== */
+html{background:#140629}
+body{margin:0;color:#FFF3DD;font-family:"Space Grotesk",system-ui,sans-serif}
+[hidden]{display:none!important}
+a:focus-visible,button:focus-visible{outline:3px solid #7FE7FF;outline-offset:3px}
+@keyframes il-flick{0%,100%{opacity:1}12%{opacity:.25}17%{opacity:1}46%{opacity:.85}52%{opacity:.15}58%{opacity:1}83%{opacity:.4}88%{opacity:1}}
+@keyframes swayI{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+@keyframes swayI2{0%,100%{transform:rotate(10deg)}50%{transform:rotate(-14deg)}}
+@keyframes neon{0%,18%,22%,25%,53%,57%,100%{opacity:1}20%,24%,55%{opacity:.35}}
+@keyframes damga{0%{transform:rotate(-14deg) scale(2.4);opacity:0}60%{transform:rotate(-14deg) scale(.92);opacity:1}100%{transform:rotate(-12deg) scale(1);opacity:1}}
+@keyframes kopus{0%{transform:none}40%{transform:rotate(-4deg)}100%{transform:translate(-30px,60px) rotate(-18deg);opacity:0}}
+.gt{font-family:'Abril Fatface',Didot,Georgia,serif;font-weight:400;background:linear-gradient(180deg,#FFF6D6 10%,#FFC24B 50%,#FF5A6E 95%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 4px 0 #3A0B52) drop-shadow(0 0 22px rgba(255,170,80,.45))}
+.lb{font-family:Bungee,Impact,sans-serif;letter-spacing:6px;color:#FFE7C2;text-shadow:0 0 16px rgba(255,120,160,.7);font-size:14px}
+.cam{border-radius:22px;background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.03));border:1px solid rgba(255,231,194,.35);backdrop-filter:blur(12px);box-shadow:0 24px 60px rgba(10,0,30,.5)}
+.alan{display:flex;flex-direction:column;gap:6px}
+.alan label{font-family:Bungee,Impact,sans-serif;font-size:12px;letter-spacing:2px;color:#8A3A6A}
+.alan input,.alan textarea{font:500 16px 'Space Grotesk',sans-serif;color:#2A0D45;background:rgba(255,255,255,.55);border:0;border-bottom:2px dashed rgba(138,58,106,.45);padding:10px 12px;border-radius:6px 6px 0 0;outline:none}
+.alan input:focus,.alan textarea:focus{background:#FFFFFF;border-bottom-color:#C6306E;box-shadow:0 0 0 3px rgba(255,194,75,.35)}
+.neon{font-family:Monoton,Bungee,cursive;font-size:44px;letter-spacing:4px;text-decoration:none;padding:18px 26px;border-radius:16px;background:rgba(10,2,24,.6);border:1px solid rgba(255,255,255,.08);transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.neon:hover{transform:scale(1.05)}
+
+#iletisim{position:relative;overflow:hidden;background:radial-gradient(ellipse 80% 30% at 50% 0%,#5B1E6E 0%,#2A0D45 50%,#140629 100%)}
+.isin{position:absolute;top:280px;width:160px;height:1500px;transform-origin:50% 100%;clip-path:polygon(45% 100%,55% 100%,100% 0,0 0);mix-blend-mode:screen;filter:blur(8px);pointer-events:none}
+.harita{display:block;width:100%;height:300px;border:0;border-radius:10px;filter:saturate(.85) contrast(1.05)}
+.alan .hata{min-height:18px;font-size:13px;font-weight:600;color:#B0174E}
+.alan.hatali input,.alan.hatali textarea{border-bottom-color:#C6306E;background:rgba(255,220,230,.7)}
+.form-durum{margin:0;font-size:14px;color:#CDB8E6;text-align:center}.form-durum.iyi{color:#9CF2C8}.form-durum.kotu{color:#FFB0C8}
+button[type=submit]{transition:transform .4s cubic-bezier(.22,1,.36,1),opacity .4s}button[type=submit]:hover{transform:translateY(-2px) scale(1.03)}button[type=submit]:disabled{opacity:.5}
+.damga{opacity:0}
+#bilet.gonderildi .damga{animation:damga .55s cubic-bezier(.2,1.4,.4,1) both}
+#bilet.gonderildi .kocan{animation:kopus 1.1s cubic-bezier(.5,0,.75,0) .5s both}
+@media (max-width:760px){.i-ic{padding:140px 14px 60px!important}.i-ic h1{font-size:64px!important}#bilet{transform:none!important}.kocan{width:54px!important}.kocan span{font-size:12px!important}#bilet-form{padding:26px 20px 24px!important}.damga{right:14px!important;top:90px!important;font-size:24px!important}.neon{font-size:28px!important}}
+@media (prefers-reduced-motion:reduce){#iletisim *{animation:none!important;transition:none!important}#bilet.gonderildi .damga{opacity:1;transform:rotate(-12deg)}#bilet.gonderildi .kocan{opacity:.3}}
+/* navbar: sitenin ortak .giris-bar'ı (konum giris.css'te); referanstaki .ust-bar link rengi */
+.giris-bar a{color:#FFF3DD;text-decoration:none}
